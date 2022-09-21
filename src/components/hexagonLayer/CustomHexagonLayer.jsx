@@ -1,13 +1,7 @@
-import {
-  AmbientLight,
-  DeckGL,
-  HexagonLayer,
-  LightingEffect,
-  PointLight,
-} from "deck.gl";
-import { StaticMap } from "react-map-gl";
-import React from "react";
-import { sampleDataWithTime } from "./sampleData";
+import { DeckGL, HexagonLayer } from "deck.gl";
+import MapGL from "react-map-gl";
+import React, { useMemo } from "react";
+import { createSampleDataWithTime } from "./sampleData";
 
 const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
@@ -26,12 +20,15 @@ const getTooltip = ({ object }) =>
   `${object.position.join(", ")}
 Count: ${object.points.length}`;
 
-const CustomHexagonLayer = ({ timeValue }) => {
-  const sampleData = timeValue ? sampleDataWithTime[timeValue] : [];
+const CustomHexagonLayer = ({ timeValue = 0 }) => {
+  const sampleDataWithTime = useMemo(
+    () => createSampleDataWithTime(),
+    [createSampleDataWithTime]
+  );
 
   const layer = new HexagonLayer({
     id: "HexagonLayer",
-    data: sampleData,
+    data: sampleDataWithTime[timeValue],
 
     /* props from HexagonLayer class */
 
@@ -81,7 +78,7 @@ const CustomHexagonLayer = ({ timeValue }) => {
       controller={true}
       getTooltip={getTooltip}
     >
-      <StaticMap mapStyle={MAP_STYLE} />
+      <MapGL height="100vh" width="100vw" mapStyle={MAP_STYLE} />
     </DeckGL>
   );
 };

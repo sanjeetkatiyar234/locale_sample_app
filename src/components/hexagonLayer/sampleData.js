@@ -15121,7 +15121,7 @@ const sampleData = [
   },
 ];
 
-const createSampleDataWithTime = () => {
+export const createSampleDataWithTime = () => {
   let object = {};
   const length = sampleData.length;
 
@@ -15138,5 +15138,3 @@ const createSampleDataWithTime = () => {
   }
   return object;
 };
-
-export const sampleDataWithTime = createSampleDataWithTime();

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import RangeSlider from "react-bootstrap-range-slider";
+import "./TimeRangeSlider.css";
 
 const TimeRangeSlider = ({ timeValue, setTimeValue }) => {
   return (
-    <div className="rangeSlider">
+    <div className="container">
       <label className="label">Select Time Range:</label>
       <RangeSlider
         value={timeValue}
