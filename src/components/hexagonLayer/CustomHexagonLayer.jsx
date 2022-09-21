@@ -1,14 +1,15 @@
 import { DeckGL, HexagonLayer } from "deck.gl";
 import MapGL from "react-map-gl";
 import React, { useMemo } from "react";
-import { createSampleDataWithTime } from "./sampleData";
+import useCsvData from "./useCsvData";
+import createDataWithTime from "../../utils/createDateWithTime";
 
 const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
 
 const INITIAL_VIEW_STATE = {
-  longitude: -122.4,
-  latitude: 37.74,
+  longitude: 24.49,
+  latitude: 54.4,
   zoom: 11,
   maxZoom: 20,
   pitch: 30,
@@ -21,9 +22,10 @@ const getTooltip = ({ object }) =>
 Count: ${object.points.length}`;
 
 const CustomHexagonLayer = ({ timeValue = 0 }) => {
+  const { sampleData } = useCsvData();
   const sampleDataWithTime = useMemo(
-    () => createSampleDataWithTime(),
-    [createSampleDataWithTime]
+    () => createDataWithTime(sampleData),
+    [createDataWithTime, sampleData]
   );
 
   const layer = new HexagonLayer({
@@ -49,7 +51,7 @@ const CustomHexagonLayer = ({ timeValue = 0 }) => {
     // getColorWeight: 1,
     // getElevationValue: null,
     // getElevationWeight: 1,
-    getPosition: (d) => d.COORDINATES,
+    getPosition: (d) => d.startPosition,
     // hexagonAggregator: null,
     // lowerPercentile: 0,
     // material: true,
