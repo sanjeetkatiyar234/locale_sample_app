@@ -1,0 +1,15 @@
+.layout {
+    height: 100%;
+}
+
+.contentWrapper {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.navigation {
+    height: 100%;
+}

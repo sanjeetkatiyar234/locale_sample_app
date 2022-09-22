@@ -25,7 +25,7 @@ const CustomHexagonLayer = ({ timeValue = 0 }) => {
   const { sampleData } = useCsvData();
   const sampleDataWithTime = useMemo(
     () => createDataWithTime(sampleData),
-    [createDataWithTime, sampleData]
+    [sampleData]
   );
 
   const layer = new HexagonLayer({

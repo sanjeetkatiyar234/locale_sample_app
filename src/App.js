@@ -1,15 +1,8 @@
-import React, { useState } from "react";
-import CustomHexagonLayer from "./components/hexagonLayer/CustomHexagonLayer";
-import TimeRangeSlider from "./components/TimeRangeSlider";
+import React from "react";
+import AppRoutes from "./navigation/AppRoutes";
 
 function App() {
-  const [timeValue, setTimeValue] = useState(0);
-  return (
-    <div>
-      <TimeRangeSlider timeValue={timeValue} setTimeValue={setTimeValue} />
-      <CustomHexagonLayer timeValue={timeValue} />
-    </div>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
