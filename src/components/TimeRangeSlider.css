@@ -10,3 +10,9 @@
     width: 300px;
     border: 1px solid gray;
 }
+
+.rangeSelector {
+    display: flex;
+    flex-direction: column;
+    margin-left: 38px;
+}
