@@ -5,7 +5,6 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -14,7 +13,7 @@ import MapIcon from "@mui/icons-material/Map";
 import HomeIcon from "@mui/icons-material/Home";
 import { NavLink } from "react-router-dom";
 
-const drawerWidth = 240;
+export const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -63,27 +62,13 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const SideBar = () => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
+const SideBar = ({ open, handleDrawerClose }) => {
   return (
     <Drawer variant="permanent" open={open}>
       <DrawerHeader>
-        {open ? (
+        {open && (
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
-          </IconButton>
-        ) : (
-          <IconButton onClick={handleDrawerOpen}>
-            <ChevronRightIcon />
           </IconButton>
         )}
       </DrawerHeader>
@@ -109,12 +94,12 @@ const SideBar = () => {
               </ListItemIcon>
               <ListItemText
                 primary="Home"
-                sx={{ opacity: open ? 1 : 0, listStyle: "none" }}
+                sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
               />
             </ListItemButton>
           </ListItem>
         </NavLink>
-        <NavLink to="map">
+        <NavLink to="/map">
           <ListItem disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{
@@ -132,7 +117,10 @@ const SideBar = () => {
               >
                 <MapIcon />
               </ListItemIcon>
-              <ListItemText primary="Map" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary="Map"
+                sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
+              />
             </ListItemButton>
           </ListItem>
         </NavLink>

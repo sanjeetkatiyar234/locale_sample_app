@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.css"; // or include from a CDN
-import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

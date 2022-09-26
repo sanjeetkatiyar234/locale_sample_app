@@ -1,18 +1,95 @@
 .container {
     position: absolute;
     z-index: 10000;
-    padding: 5px;
+    padding: 10px;
     bottom: 25px;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
-    border: 1px solid gray;
+    max-width: 50vw;
+    /* border: 1px solid gray; */
 }
 
 .rangeSelector {
     display: flex;
     flex-direction: column;
-    margin-left: 38px;
+}
+
+.horizontal-slider {
+    position: relative;
+    width: 100%;
+    /* max-width: 500px; */
+    height: 50px;
+}
+
+.thumb {
+    font-size: 0.9em;
+    text-align: center;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border: 5px solid gray;
+    box-sizing: border-box;
+}
+
+.thumb.active {
+    background-color: grey;
+}
+
+.track {
+    position: relative;
+    background: #ddd;
+}
+
+.track.track-1 {
+    background: #f00;
+}
+
+.track.track-2 {
+    background: #0f0;
+}
+
+.mark {
+    width: 8px;
+    height: 8px;
+    border: 2px solid #000;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.horizontal-slider .track {
+    top: 20px;
+    height: 29px;
+}
+
+.horizontal-slider .thumb {
+    top: 20px;
+    width: 50px;
+    height: 29px;
+    line-height: 21px;
+}
+
+.horizontal-slider .mark {
+    margin: 0 calc(25px - 6px);
+    bottom: calc(50% - 6px);
+}
+
+.vertical-slider .thumb {
+    left: 1px;
+    width: 48px;
+    line-height: 40px;
+    height: 50px;
+}
+
+.vertical-slider .track {
+    left: 20px;
+    width: 10px;
+}
+
+.vertical-slider .mark {
+    margin: calc(25px - 6px) 0;
+    left: calc(50% - 6px);
 }

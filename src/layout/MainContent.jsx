@@ -1,12 +1,9 @@
 import React from "react";
 import Map from "../pages/Map";
+import style from "./MainContent.css";
 
 const MainContent = ({ children }) => {
-  return (
-    <div>
-      <Map />
-    </div>
-  );
+  return <div className="mainContent">{children}</div>;
 };
 
 export default MainContent;

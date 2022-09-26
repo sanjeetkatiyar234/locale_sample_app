@@ -11,15 +11,16 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "bootstrap": "^5.2.1",
+    "classnames": "^2.3.2",
     "d3": "^7.6.1",
     "deck.gl": "^8.8.11",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
-    "react-bootstrap-range-slider": "^3.0.8",
     "react-dom": "^18.2.0",
     "react-map-gl": "^5.0.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
+    "react-slider": "^2.0.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
