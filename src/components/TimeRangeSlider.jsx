@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import React from "react";
 import ReactSlider from "react-slider";
 import "./TimeRangeSlider.css";
@@ -17,7 +18,11 @@ const TimeRangeSlider = ({ timeValue, setTimeValue }) => {
           defaultValue={[0, 100]}
           ariaLabel={["Lower thumb", "Upper thumb"]}
           ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
-          renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+          renderThumb={(props, state) => (
+            <Tooltip {...props} title={state.valueNow} arrow>
+              <div>{state.valueNow}</div>
+            </Tooltip>
+          )}
           pearling
           minDistance={10}
         />
