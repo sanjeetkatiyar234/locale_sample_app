@@ -21,7 +21,7 @@ const chartLoad = () => {
   return data;
 };
 
-const RangeSlider = ({ setDateRange }) => {
+const RangeSlider = ({ dataSource = [], setDateRange }) => {
   return (
     <RangeNavigatorComponent
       id="charts"
@@ -31,16 +31,13 @@ const RangeSlider = ({ setDateRange }) => {
       changed={(value) => {
         setDateRange(value);
       }}
-      minimum={new Date("2022-01-01")}
-      maximum={new Date("2022-02-01")}
-      name="timeSelector"
       allowIntervalData
     >
-      <Inject services={[LineSeries, DateTime, RangeTooltip]} />
+      <Inject services={[DateTime, RangeTooltip]} />
       <RangenavigatorSeriesCollectionDirective>
         <RangenavigatorSeriesDirective
-          dataSource={[]}
-          xName="x"
+          dataSource={dataSource}
+          xName="dateTime"
           yName="y"
           type="Line"
           width={2}

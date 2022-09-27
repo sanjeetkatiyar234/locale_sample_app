@@ -23,6 +23,7 @@ const Map = () => {
     <div>
       <TimeRangeSlider
         selectedDateRange={dateRange}
+        dataSource={sampleData}
         setDateRange={setDateRange}
       />
       <CustomHexagonLayer data={filterData} />
