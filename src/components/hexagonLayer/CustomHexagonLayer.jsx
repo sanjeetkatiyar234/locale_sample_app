@@ -1,8 +1,6 @@
 import { DeckGL, HexagonLayer } from "deck.gl";
 import MapGL from "react-map-gl";
-import React, { useMemo } from "react";
-import useCsvData from "./useCsvData";
-import createDataWithTime from "../../utils/createDateWithTime";
+import React from "react";
 
 const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
@@ -21,16 +19,10 @@ const getTooltip = ({ object }) =>
   `${object.position.join(", ")}
 Count: ${object.points.length}`;
 
-const CustomHexagonLayer = ({ timeValue = 0 }) => {
-  const { sampleData } = useCsvData();
-  const sampleDataWithTime = useMemo(
-    () => createDataWithTime(sampleData),
-    [sampleData]
-  );
-
+const CustomHexagonLayer = ({ data = [] }) => {
   const layer = new HexagonLayer({
     id: "HexagonLayer",
-    data: sampleDataWithTime[timeValue],
+    data: data,
 
     /* props from HexagonLayer class */
 

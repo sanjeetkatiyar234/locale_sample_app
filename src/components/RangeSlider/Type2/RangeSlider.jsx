@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   LineSeries,
   DateTime,
@@ -12,7 +12,7 @@ import {
 const chartLoad = () => {
   let data = [];
   let i;
-  for (i = 0; i < 100; i++) {
+  for (i = 0; i < 150; i++) {
     data.push({
       x: Math.pow(10, i * 0.1),
       y: Math.floor(Math.random() * (80 - 30 + 1)) + 30,
@@ -21,23 +21,25 @@ const chartLoad = () => {
   return data;
 };
 
-const RangeSlider = () => {
+const RangeSlider = ({ setDateRange }) => {
   return (
     <RangeNavigatorComponent
       id="charts"
       valueType="DateTime"
-      labelFormat="MMM-yy"
-      value={[new Date("2017-09-01"), new Date("2018-02-01")]}
-      tooltip={{ enable: true }}
-      onPropertyChanged={(value) => {
-        console.log(value);
+      value={[new Date("2022-01-01"), new Date("2022-02-01")]}
+      tooltip={{ enable: true, displayMode: "Always" }}
+      changed={(value) => {
+        setDateRange(value);
       }}
+      minimum={new Date("2022-01-01")}
+      maximum={new Date("2022-02-01")}
+      name="timeSelector"
       allowIntervalData
     >
       <Inject services={[LineSeries, DateTime, RangeTooltip]} />
       <RangenavigatorSeriesCollectionDirective>
         <RangenavigatorSeriesDirective
-          dataSource={chartLoad()}
+          dataSource={[]}
           xName="x"
           yName="y"
           type="Line"

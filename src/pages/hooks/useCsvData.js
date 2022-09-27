@@ -7,6 +7,7 @@ const useCsvData = () => {
     csv("/data/query-hive.csv", (row, id) => ({
       id,
       ...row,
+      dateTime: new Date(row["_c0"]),
       startPosition: [+row["first_lon"], +row["first_lat"]],
       endPosition: [+row["end_lon"], +row["end_lat"]],
     }))
