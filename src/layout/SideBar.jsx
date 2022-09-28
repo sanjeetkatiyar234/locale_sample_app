@@ -13,7 +13,7 @@ import ArchitectureIcon from "@mui/icons-material/Architecture";
 import MapIcon from "@mui/icons-material/Map";
 import HomeIcon from "@mui/icons-material/Home";
 import { NavLink } from "react-router-dom";
-import { Tooltip } from "@mui/material";
+import CustomTooltip from "../components/ToolTip/CustomTooltip";
 
 export const drawerWidth = 240;
 
@@ -78,7 +78,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
       <List>
         <NavLink to="/">
           <ListItem disablePadding sx={{ display: "block" }}>
-            <Tooltip title="Map">
+            <CustomTooltip disable={open} title="Home" placement="right" arrow>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -101,12 +101,12 @@ const SideBar = ({ open, handleDrawerClose }) => {
                   sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
                 />
               </ListItemButton>
-            </Tooltip>
+            </CustomTooltip>
           </ListItem>
         </NavLink>
         <NavLink to="/map">
           <ListItem disablePadding sx={{ display: "block" }}>
-            <Tooltip title="Map">
+            <CustomTooltip disable={open} title="Map" placement="right" arrow>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -128,12 +128,17 @@ const SideBar = ({ open, handleDrawerClose }) => {
                   sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
                 />
               </ListItemButton>
-            </Tooltip>
+            </CustomTooltip>
           </ListItem>
         </NavLink>
         <NavLink to="/arclayer">
           <ListItem disablePadding sx={{ display: "block" }}>
-            <Tooltip title="Arc Layer">
+            <CustomTooltip
+              disable={open}
+              title="Arc Layer"
+              placement="right"
+              arrow
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -155,7 +160,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
                   sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
                 />
               </ListItemButton>
-            </Tooltip>
+            </CustomTooltip>
           </ListItem>
         </NavLink>
       </List>
