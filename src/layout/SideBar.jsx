@@ -9,9 +9,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import ArchitectureIcon from "@mui/icons-material/Architecture";
 import MapIcon from "@mui/icons-material/Map";
 import HomeIcon from "@mui/icons-material/Home";
 import { NavLink } from "react-router-dom";
+import { Tooltip } from "@mui/material";
 
 export const drawerWidth = 240;
 
@@ -76,52 +78,84 @@ const SideBar = ({ open, handleDrawerClose }) => {
       <List>
         <NavLink to="/">
           <ListItem disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <Tooltip title="Map">
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Home"
-                sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
-              />
-            </ListItemButton>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <HomeIcon />
+                </ListItemIcon>
+
+                <ListItemText
+                  primary="Home"
+                  sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
+                />
+              </ListItemButton>
+            </Tooltip>
           </ListItem>
         </NavLink>
         <NavLink to="/map">
           <ListItem disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <Tooltip title="Map">
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <MapIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Map"
-                sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
-              />
-            </ListItemButton>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <MapIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Map"
+                  sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
+                />
+              </ListItemButton>
+            </Tooltip>
+          </ListItem>
+        </NavLink>
+        <NavLink to="/arclayer">
+          <ListItem disablePadding sx={{ display: "block" }}>
+            <Tooltip title="Arc Layer">
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ArchitectureIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Arc Layer"
+                  sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
+                />
+              </ListItemButton>
+            </Tooltip>
           </ListItem>
         </NavLink>
       </List>
