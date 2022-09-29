@@ -1,6 +1,7 @@
 import { DeckGL, HexagonLayer } from "deck.gl";
 import MapGL from "react-map-gl";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
@@ -20,6 +21,7 @@ const getTooltip = ({ object }) =>
 Count: ${object.points.length}`;
 
 const CustomHexagonLayer = ({ data = [] }) => {
+  const navigate = useNavigate();
   const layer = new HexagonLayer({
     id: "HexagonLayer",
     data: data,
@@ -39,7 +41,7 @@ const CustomHexagonLayer = ({ data = [] }) => {
     // elevationScaleType: 'linear',
     // elevationUpperPercentile: 100,
     extruded: true,
-    // getColorValue: null,
+    getColorValue: (points) => points.length,
     // getColorWeight: 1,
     // getElevationValue: null,
     // getElevationWeight: 1,
@@ -71,6 +73,13 @@ const CustomHexagonLayer = ({ data = [] }) => {
       initialViewState={INITIAL_VIEW_STATE}
       controller={true}
       getTooltip={getTooltip}
+      onClick={({ object }) => {
+        if (object) {
+          navigate("/arclayer", {
+            state: { hexagonLayerData: object },
+          });
+        }
+      }}
     >
       <MapGL height="100vh" width="100vw" mapStyle={MAP_STYLE} />
     </DeckGL>
