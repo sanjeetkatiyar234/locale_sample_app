@@ -17,7 +17,8 @@ const useCsvData = () => {
             d.startPosition[0] != null &&
             d.startPosition[1] != null &&
             d.endPosition[0] != null &&
-            d.endPosition[1] != null
+            d.endPosition[1] != null &&
+            d.start_hex
         )
       )
       .then(setSampleData);
