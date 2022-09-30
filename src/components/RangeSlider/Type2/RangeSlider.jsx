@@ -7,21 +7,22 @@ import {
   RangenavigatorSeriesCollectionDirective,
   RangenavigatorSeriesDirective,
   RangeTooltip,
+  PeriodSelector,
 } from "@syncfusion/ej2-react-charts";
 
-const chartLoad = () => {
-  let data = [];
-  let i;
-  for (i = 0; i < 150; i++) {
-    data.push({
-      x: Math.pow(10, i * 0.1),
-      y: Math.floor(Math.random() * (80 - 30 + 1)) + 30,
-    });
-  }
-  return data;
-};
-
 const RangeSlider = ({ dataSource = [], setDateRange }) => {
+  const periodSelectorSettings = {
+    position: "Top",
+    periods: [
+      { text: "10Min", interval: 10, intervalType: "Minutes" },
+      { text: "30Min", interval: 30, intervalType: "Minutes" },
+      { text: "1Hr", interval: 1, intervalType: "Hours" },
+      { text: "6Hr", interval: 6, intervalType: "Hours" },
+      { text: "12Hr", interval: 12, intervalType: "Hours" },
+      { text: "1D", interval: 1, intervalType: "Days" },
+    ],
+  };
+
   return (
     <RangeNavigatorComponent
       id="charts"
@@ -32,8 +33,9 @@ const RangeSlider = ({ dataSource = [], setDateRange }) => {
         setDateRange(value);
       }}
       allowIntervalData
+      periodSelectorSettings={periodSelectorSettings}
     >
-      <Inject services={[DateTime, RangeTooltip]} />
+      <Inject services={[DateTime, RangeTooltip, PeriodSelector]} />
       <RangenavigatorSeriesCollectionDirective>
         <RangenavigatorSeriesDirective
           dataSource={dataSource}
