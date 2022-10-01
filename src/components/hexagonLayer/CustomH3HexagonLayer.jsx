@@ -1,14 +1,16 @@
 import { DeckGL, H3HexagonLayer } from "deck.gl";
-import MapGL from "react-map-gl";
 import React from "react";
+import MapGL from "react-map-gl";
 import { useNavigate } from "react-router-dom";
 
 const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
 
 const INITIAL_VIEW_STATE = {
-  longitude: 24.49,
-  latitude: 54.4,
+  // longitude: 54.4,
+  // latitude: 24.49,
+  longitude: -122.4,
+  latitude: 37.74,
   zoom: 11,
   maxZoom: 20,
   pitch: 30,
@@ -17,53 +19,25 @@ const INITIAL_VIEW_STATE = {
 
 const getTooltip = ({ object }) =>
   object &&
-  `Start Hex:${object.start_hex}
- Route Id: ${object.route_id}`;
+  `Start Hex:${object.hex}
+  Route Id: ${object.count}`;
 
 const CustomH3HexagonLayer = ({ data = [] }) => {
   const navigate = useNavigate();
   const layer = new H3HexagonLayer({
     id: "H3HexagonLayer",
-    data,
-
+    data: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf.h3cells.json',
     /* props from H3HexagonLayer class */
-
     // centerHexagon: null,
     // coverage: 1,
     elevationScale: 20,
     extruded: true,
     filled: true,
-    getElevation: (d) => d.route_id * 20,
-    getFillColor: (d) => [
-      +d.route_id * 50,
-      +d.route_id * 100,
-      +d.route_id * 10,
-    ],
-    getHexagon: (d) => d.start_hex,
-    // getLineColor: [0, 0, 0, 255],
-    // getLineWidth: 1,
-    // highPrecision: 'auto',
-    // lineJointRounded: false,
-    // lineMiterLimit: 4,
-    // lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
-    // lineWidthMinPixels: 0,
-    // lineWidthScale: 1,
-    // lineWidthUnits: 'meters',
-    // material: true,
-    // stroked: true,
+    getElevation: d => d.count,
+    getFillColor: d => [255, (1 - d.count / 500) * 255, 0],
+    getHexagon: d => d.hex,
     wireframe: false,
-
-    /* props inherited from Layer class */
-
-    // autoHighlight: false,
-    // coordinateOrigin: [0, 0, 0],
-    // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
-    // highlightColor: [0, 0, 128, 128],
-    // modelMatrix: null,
-    // opacity: 1,
     pickable: true,
-    // visible: true,
-    // wrapLongitude: false,
   });
 
   return (

@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
 import { csv } from "d3";
+import { useEffect, useState } from "react";
 
-const useCsvData = () => {
+export const useCsvData = () => {
   const [sampleData, setSampleData] = useState([]);
   useEffect(() => {
     csv("/data/query-hive.csv", (row, id) => ({
       id,
       ...row,
       dateTime: new Date(row["_c0"]),
-      startPosition: [+row["first_lon"], +row["first_lat"]],
-      endPosition: [+row["end_lon"], +row["end_lat"]],
+      startPosition: [+row["first_lat"], +row["first_lon"]],
+      endPosition: [+row["end_lat"], +row["end_lon"]],
     }))
       .then((rows) =>
         rows.filter(
@@ -26,5 +26,3 @@ const useCsvData = () => {
 
   return { sampleData };
 };
-
-export default useCsvData;

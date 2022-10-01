@@ -1,9 +1,13 @@
+import { registerLicense } from '@syncfusion/ej2-base';
+import "bootstrap/dist/css/bootstrap.css"; // or include from a CDN
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "bootstrap/dist/css/bootstrap.css"; // or include from a CDN
-import "./index.css";
 import App from "./App";
+import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+
+const key = "ORg4AjUWIQA/Gnt2VVhjQlFaclhJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxRdkxgWX5edHVWRmlYV0M=";
+registerLicense(key);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

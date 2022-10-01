@@ -1,8 +1,9 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
+import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton, Toolbar, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
-import MenuIcon from "@mui/icons-material/Menu";
+import { styled } from "@mui/material/styles";
+import React from "react";
+import mainLogo from './logo.png';
 import { drawerWidth } from "./SideBar";
 
 const AppBar = styled(MuiAppBar, {
@@ -40,7 +41,7 @@ const Header = ({ open, handleDrawerOpen }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap component="div">
-          App Header
+          <img  src={mainLogo} alt="fireSpot" height="50" />
         </Typography>
       </Toolbar>
     </AppBar>

@@ -1,9 +1,8 @@
 import moment from "moment";
 import React, { useMemo, useState } from "react";
 import CustomH3HexagonLayer from "../components/hexagonLayer/CustomH3HexagonLayer";
-import CustomHexagonLayer from "../components/hexagonLayer/CustomHexagonLayer";
 import TimeRangeSlider from "../components/TimeRangeSlider";
-import useCsvData from "./hooks/useCsvData";
+import { useCsvData } from "./hooks/useCsvData";
 
 const Map = () => {
   const [dateRange, setDateRange] = useState({});
@@ -29,7 +28,6 @@ const Map = () => {
       />
 
       <CustomH3HexagonLayer data={filterData} />
-      {/* <CustomHexagonLayer data={filterData} /> */}
     </div>
   );
 };

@@ -1,14 +1,14 @@
 import { DeckGL, HexagonLayer } from "deck.gl";
-import MapGL from "react-map-gl";
 import React from "react";
+import MapGL from "react-map-gl";
 import { useNavigate } from "react-router-dom";
 
 const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
 
 const INITIAL_VIEW_STATE = {
-  longitude: 24.49,
-  latitude: 54.4,
+  longitude: 54.4,
+  latitude: 24.49,
   zoom: 11,
   maxZoom: 20,
   pitch: 30,
