@@ -1,9 +1,11 @@
 import { ArcLayer, DeckGL } from "deck.gl";
 import React from "react";
 import MapGL from "react-map-gl";
+import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
 
-const MAP_STYLE =
-  "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+// const MAP_STYLE =
+//   "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+// const MAP_STYLE = "mapbox://styles/mapbox/dark-v10";
 
 const INITIAL_VIEW_STATE = {
   longitude: 54.4,
@@ -53,7 +55,12 @@ const CustomArcLayer = ({ data = [] }) => {
         `${object.startPosition.join(",")} to ${object.endPosition.join(",")}`
       }
     >
-      <MapGL height="100vh" width="100vw" mapStyle={MAP_STYLE} />
+      <MapGL
+        height="100vh"
+        width="100vw"
+        mapStyle={MAP_STYLE}
+        mapboxApiAccessToken={MAP_BOX_TOKEN}
+      />
     </DeckGL>
   );
 };
