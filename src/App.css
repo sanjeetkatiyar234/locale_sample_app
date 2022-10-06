@@ -7,3 +7,5 @@
 @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
 @import "../node_modules/@syncfusion/ej2-react-grids/styles/material.css";
+@import url("https://cdn.syncfusion.com/ej2/20.3.47/fluent-dark.css");
+@import url("https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css");

@@ -1,16 +1,16 @@
-import React from "react";
 import {
-  LineSeries,
   DateTime,
   Inject,
+  LineSeries,
+  PeriodSelector,
   RangeNavigatorComponent,
   RangenavigatorSeriesCollectionDirective,
   RangenavigatorSeriesDirective,
   RangeTooltip,
-  PeriodSelector,
 } from "@syncfusion/ej2-react-charts";
+import React from "react";
 
-const RangeSlider = ({ dataSource = [], setDateRange }) => {
+const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
   const periodSelectorSettings = {
     position: "Top",
     periods: [
@@ -34,16 +34,21 @@ const RangeSlider = ({ dataSource = [], setDateRange }) => {
       }}
       allowIntervalData
       periodSelectorSettings={periodSelectorSettings}
+      intervalType="Minutes"
+      // enableRtl={true}
+      enableDeferredUpdate={true}
     >
-      <Inject services={[DateTime, RangeTooltip, PeriodSelector]} />
+      <Inject services={[LineSeries, DateTime, RangeTooltip, PeriodSelector]} />
       <RangenavigatorSeriesCollectionDirective>
-        <RangenavigatorSeriesDirective
-          dataSource={dataSource}
-          xName="dateTime"
-          yName="y"
-          type="Line"
-          width={2}
-        />
+        {xName && (
+          <RangenavigatorSeriesDirective
+            dataSource={dataSource}
+            xName={xName}
+            yName={yName}
+            type="Line"
+            width={2}
+          />
+        )}
       </RangenavigatorSeriesCollectionDirective>
     </RangeNavigatorComponent>
   );
