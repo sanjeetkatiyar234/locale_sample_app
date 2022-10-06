@@ -2,7 +2,6 @@ import { DeckGL, H3HexagonLayer } from "deck.gl";
 import React from "react";
 import MapGL from "react-map-gl";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
-import { h3Data } from "../../utils/h3CustomData";
 
 // const MAP_STYLE = "mapbox://styles/mapbox/dark-v10";
 // const MAP_STYLE =
@@ -27,7 +26,7 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
   const layer = new H3HexagonLayer({
     id: "H3HexagonLayer",
     // data: "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf.h3cells.json",
-    data: h3Data,
+    data: data,
     /* props from H3HexagonLayer class */
     // centerHexagon: null,
     // coverage: 1,

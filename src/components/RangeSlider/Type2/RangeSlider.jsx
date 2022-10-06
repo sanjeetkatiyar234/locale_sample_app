@@ -1,13 +1,16 @@
 import {
   DateTime,
-  Inject, PeriodSelector, RangeNavigatorComponent,
+  Inject,
+  LineSeries,
+  PeriodSelector,
+  RangeNavigatorComponent,
   RangenavigatorSeriesCollectionDirective,
   RangenavigatorSeriesDirective,
-  RangeTooltip
+  RangeTooltip,
 } from "@syncfusion/ej2-react-charts";
 import React from "react";
 
-const RangeSlider = ({ dataSource = [], setDateRange }) => {
+const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
   const periodSelectorSettings = {
     position: "Top",
     periods: [
@@ -22,28 +25,30 @@ const RangeSlider = ({ dataSource = [], setDateRange }) => {
 
   return (
     <RangeNavigatorComponent
-    id="charts"
-    valueType="DateTime"
-    value={[new Date("2022-01-01"), new Date("2022-02-01")]}
-    tooltip={{ enable: true, displayMode: "Always" }}
-    changed={(value) => {
-      setDateRange(value);
-    }}
-    allowIntervalData
-    periodSelectorSettings={periodSelectorSettings}
-    intervalType="Minutes"
-    enableRtl={true}
-    enableDeferredUpdate={true}
+      id="charts"
+      valueType="DateTime"
+      value={[new Date("2022-01-01"), new Date("2022-02-01")]}
+      tooltip={{ enable: true, displayMode: "Always" }}
+      changed={(value) => {
+        setDateRange(value);
+      }}
+      allowIntervalData
+      periodSelectorSettings={periodSelectorSettings}
+      intervalType="Minutes"
+      enableRtl={true}
+      enableDeferredUpdate={true}
     >
-      <Inject services={[DateTime, RangeTooltip, PeriodSelector]} />
+      <Inject services={[LineSeries, DateTime, RangeTooltip, PeriodSelector]} />
       <RangenavigatorSeriesCollectionDirective>
-        <RangenavigatorSeriesDirective
-          dataSource={dataSource}
-          xName="dateTime"
-          yName="y"
-          type="Line"
-          width={2}
-        />
+        {xName && (
+          <RangenavigatorSeriesDirective
+            dataSource={dataSource}
+            xName={xName}
+            yName={yName}
+            type="Line"
+            width={2}
+          />
+        )}
       </RangenavigatorSeriesCollectionDirective>
     </RangeNavigatorComponent>
   );

@@ -25,6 +25,7 @@ const Map = () => {
         selectedDateRange={dateRange}
         dataSource={sampleData}
         setDateRange={setDateRange}
+        xName="dateTime"
       />
       <CustomHexagonLayer data={filterData} />
     </div>

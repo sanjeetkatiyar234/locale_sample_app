@@ -34,6 +34,7 @@ const ArcLayerPage = () => {
         selectedDateRange={dateRange}
         dataSource={arcData ?? sampleData}
         setDateRange={setDateRange}
+        xName="dateTime"
       />
       <CustomArcLayer data={filterData} />
     </div>

@@ -2,31 +2,32 @@ import moment from "moment";
 import React, { useMemo, useState } from "react";
 import CustomH3HexagonLayer from "../components/hexagonLayer/CustomH3HexagonLayer";
 import TimeRangeSlider from "../components/TimeRangeSlider";
-// import { useCsvData } from "./hooks/useCsvData";
-import { h3Data } from "../utils/h3CustomData";
+import { useH3CsvData } from "./hooks/useH3CsvData";
 
 const Map = () => {
   const [dateRange, setDateRange] = useState({});
-  // const { sampleData } = [];
+  const { sampleData } = useH3CsvData();
   const { start, end } = dateRange;
+
   const filterData = useMemo(
     () =>
-    h3Data.filter(
+      sampleData.filter(
         (d) =>
-          moment(new Date(d.start)).isSameOrAfter(start) &&
-          moment(new Date(d.end)).isSameOrBefore(end)
+          moment(d.start).isSameOrAfter(start) &&
+          moment(d.end).isSameOrBefore(end)
       ),
-    [start, end]
+    [sampleData, start, end]
   );
-  console.log('filter data', filterData);
+
   return (
     <div>
       <TimeRangeSlider
         selectedDateRange={dateRange}
-        dataSource={filterData}
+        dataSource={sampleData}
         setDateRange={setDateRange}
+        xName="start"
+        yName="Count"
       />
-
       <CustomH3HexagonLayer data={filterData} />
     </div>
   );
