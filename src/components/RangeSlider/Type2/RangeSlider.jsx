@@ -35,7 +35,7 @@ const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
       allowIntervalData
       periodSelectorSettings={periodSelectorSettings}
       intervalType="Minutes"
-      enableRtl={true}
+      // enableRtl={true}
       enableDeferredUpdate={true}
     >
       <Inject services={[LineSeries, DateTime, RangeTooltip, PeriodSelector]} />
