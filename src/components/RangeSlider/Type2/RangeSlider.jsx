@@ -9,9 +9,12 @@ import {
   RangeTooltip,
 } from "@syncfusion/ej2-react-charts";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
-  const periodSelectorSettings = {
+  const filterTypeValue = useSelector((state) => state.filterType.value);
+
+  const intraDayPeriodSelectorSettings = {
     position: "Top",
     periods: [
       { text: "10Min", interval: 10, intervalType: "Minutes" },
@@ -20,6 +23,16 @@ const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
       { text: "6Hr", interval: 6, intervalType: "Hours" },
       { text: "12Hr", interval: 12, intervalType: "Hours" },
       { text: "1D", interval: 1, intervalType: "Days" },
+    ],
+  };
+
+  const monthlyPeriodSelectorSettings = {
+    position: "Top",
+    periods: [
+      { text: "1M", interval: 1, intervalType: "Months" },
+      { text: "3M", interval: 3, intervalType: "Months" },
+      { text: "6M", interval: 6, intervalType: "Months" },
+      { text: "1Y", interval: 1, intervalType: "Years" },
     ],
   };
 
@@ -33,8 +46,12 @@ const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
         setDateRange(value);
       }}
       allowIntervalData
-      periodSelectorSettings={periodSelectorSettings}
-      intervalType="Minutes"
+      periodSelectorSettings={
+        filterTypeValue === "intraDay"
+          ? intraDayPeriodSelectorSettings
+          : monthlyPeriodSelectorSettings
+      }
+      intervalType={filterTypeValue === "intraDay" ? "Minutes" : "Months"}
       // enableRtl={true}
       enableDeferredUpdate={true}
     >
