@@ -24,9 +24,6 @@ Count: ${object.points.length}`;
 
 const CustomHexagonLayer = ({ data = [] }) => {
   const navigate = useNavigate();
-  if (!data.length) {
-    return null;
-  }
   const layer = new HexagonLayer({
     id: "HexagonLayer",
     data: data,
