@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 
 const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
   const filterTypeValue = useSelector((state) => state.filterType.value);
+
   if (!dataSource.length) {
     return <Skeleton variant="rectangular" height={80} />;
   }
@@ -30,15 +31,15 @@ const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
     ],
   };
 
-  const monthlyPeriodSelectorSettings = {
-    position: "Top",
-    periods: [
-      { text: "1M", interval: 1, intervalType: "Months" },
-      { text: "3M", interval: 3, intervalType: "Months" },
-      { text: "6M", interval: 6, intervalType: "Months" },
-      { text: "1Y", interval: 1, intervalType: "Years" },
-    ],
-  };
+  // const monthlyPeriodSelectorSettings = {
+  //   position: "Top",
+  //   periods: [
+  //     { text: "1M", interval: 1, intervalType: "Months" },
+  //     { text: "3M", interval: 3, intervalType: "Months" },
+  //     { text: "6M", interval: 6, intervalType: "Months" },
+  //     { text: "1Y", interval: 1, intervalType: "Years" },
+  //   ],
+  // };
 
   return (
     <RangeNavigatorComponent
@@ -53,9 +54,9 @@ const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
       periodSelectorSettings={
         filterTypeValue === "intraDay"
           ? intraDayPeriodSelectorSettings
-          : monthlyPeriodSelectorSettings
+          : undefined
       }
-      intervalType={filterTypeValue === "intraDay" ? "Minutes" : "Months"}
+      intervalType={filterTypeValue === "intraDay" ? "Minutes" : "Days"}
       // enableRtl={true}
       enableDeferredUpdate={true}
     >

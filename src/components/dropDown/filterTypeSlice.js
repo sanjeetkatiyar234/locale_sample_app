@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const filterTypeSlice = createSlice({
   name: "filterType",
   initialState: {
-    value: "intraDay",
+    value: "monthly",
   },
   reducers: {
     handleChange: (state, action) => {
