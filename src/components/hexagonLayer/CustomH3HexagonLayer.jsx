@@ -22,6 +22,9 @@ const getTooltip = ({ object }) =>
   Count: ${object.Count}`;
 
 const CustomH3HexagonLayer = ({ data = [] }) => {
+  if (!data.length) {
+    return null;
+  }
   // const navigate = useNavigate();
   const layer = new H3HexagonLayer({
     id: "H3HexagonLayer",

@@ -9,10 +9,14 @@ import {
   RangeTooltip,
 } from "@syncfusion/ej2-react-charts";
 import React from "react";
+import { Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
   const filterTypeValue = useSelector((state) => state.filterType.value);
+  if (!dataSource.length) {
+    return <Skeleton variant="rectangular" height={80} />;
+  }
 
   const intraDayPeriodSelectorSettings = {
     position: "Top",
