@@ -66,8 +66,12 @@ const Drawer = styled(MuiDrawer, {
 
 const SideBar = ({ open, handleDrawerClose }) => {
   return (
-    <Drawer variant="permanent" open={open} style={{backgroundColor: 'rgb(42, 42, 42)'}}>
-      <DrawerHeader style={{backgroundColor: 'rgb(42, 42, 42)'}}>
+    <Drawer
+      variant="permanent"
+      open={open}
+      style={{ backgroundColor: "rgb(42, 42, 42)" }}
+    >
+      <DrawerHeader style={{ backgroundColor: "rgb(42, 42, 42)" }}>
         {open && (
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
@@ -75,7 +79,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
         )}
       </DrawerHeader>
       <Divider />
-      <List style={{backgroundColor: 'rgb(42, 42, 42)'}}>
+      <List style={{ backgroundColor: "rgb(42, 42, 42)" }}>
         <NavLink to="/">
           <ListItem disablePadding sx={{ display: "block" }}>
             <CustomTooltip disable={open} title="Home" placement="right" arrow>
@@ -104,9 +108,14 @@ const SideBar = ({ open, handleDrawerClose }) => {
             </CustomTooltip>
           </ListItem>
         </NavLink>
-        <NavLink to="/map">
+        <NavLink to="/origin-destination">
           <ListItem disablePadding sx={{ display: "block" }}>
-            <CustomTooltip disable={open} title="Map" placement="right" arrow>
+            <CustomTooltip
+              disable={open}
+              title="Origin destination"
+              placement="right"
+              arrow
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -124,18 +133,18 @@ const SideBar = ({ open, handleDrawerClose }) => {
                   <MapIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Map"
+                  primary="Origin destination"
                   sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
                 />
               </ListItemButton>
             </CustomTooltip>
           </ListItem>
         </NavLink>
-        <NavLink to="/arclayer">
+        <NavLink to="/ride-share-demand">
           <ListItem disablePadding sx={{ display: "block" }}>
             <CustomTooltip
               disable={open}
-              title="Arc Layer"
+              title="Ride share demand"
               placement="right"
               arrow
             >
@@ -156,7 +165,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
                   <ArchitectureIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Arc Layer"
+                  primary="Ride share demand"
                   sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
                 />
               </ListItemButton>

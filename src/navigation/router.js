@@ -12,8 +12,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path="map" element={<Map />} />
-      <Route path="arclayer" element={<ArcLayerPage />} />
+      <Route path="origin-destination" element={<Map />} />
+      <Route path="ride-share-demand" element={<ArcLayerPage />} />
     </Route>
   )
 );
