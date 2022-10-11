@@ -1,7 +1,10 @@
 import { csv } from "d3";
-import { useEffect, useState } from "react";
+import moment from "moment";
+import { useEffect, useState, useMemo } from "react";
+import { useSelector } from "react-redux";
 
 export const useCsvData = () => {
+  const filterTypeValue = useSelector((state) => state.filterType.value);
   const [sampleData, setSampleData] = useState([]);
   useEffect(() => {
     csv("/data/query-hive.csv", (row, id) => ({
@@ -24,5 +27,12 @@ export const useCsvData = () => {
       .then(setSampleData);
   }, []);
 
-  return { sampleData };
+  const filterSampleData = useMemo(() => {
+    const todayDate = moment().subtract(9, "M");
+    return filterTypeValue === "intraDay"
+      ? sampleData.filter((d) => moment(d.dateTime).isSameOrAfter(todayDate))
+      : sampleData;
+  }, [filterTypeValue, sampleData]);
+
+  return { sampleData: filterSampleData };
 };

@@ -34,6 +34,7 @@ const CustomArcLayer = ({ data = [] }) => {
    *   ...
    * ]
    */
+
   const layer = new ArcLayer({
     id: "arc-layer",
     data,
