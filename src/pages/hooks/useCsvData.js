@@ -2,10 +2,13 @@ import { csv } from "d3";
 import moment from "moment";
 import { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
+import useToast from "hooks/useToast";
 
 export const useCsvData = () => {
   const filterTypeValue = useSelector((state) => state.filterType.value);
   const [sampleData, setSampleData] = useState([]);
+  const toast = useToast();
+
   useEffect(() => {
     csv("/data/query-hive.csv", (row, id) => ({
       id,
@@ -24,7 +27,12 @@ export const useCsvData = () => {
             d.start_hex
         )
       )
-      .then(setSampleData);
+      .then((data) => {
+        if (data.length) {
+          toast.success("Data Loaded");
+        }
+        setSampleData(data);
+      });
   }, []);
 
   const filterSampleData = useMemo(() => {

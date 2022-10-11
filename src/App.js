@@ -5,6 +5,7 @@ import router from "./navigation/router";
 import { Provider } from "react-redux";
 import store from "./store";
 import "./App.css";
+import { ToastProvider } from "./hooks/ToastContext";
 
 const darkTheme = createTheme({
   palette: {
@@ -15,9 +16,11 @@ const darkTheme = createTheme({
 function App() {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={darkTheme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <ToastProvider>
+        <ThemeProvider theme={darkTheme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </ToastProvider>
     </Provider>
   );
 }
