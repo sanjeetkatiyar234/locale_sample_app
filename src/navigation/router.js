@@ -3,10 +3,10 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import Layout from "../layout/Layout";
-import ArcLayerPage from "../pages/ArcLayerPage";
-import Home from "../pages/Home";
-import Map from "../pages/Map";
+import Layout from "layout/Layout";
+import ArcLayerPage from "pages/rideShareDemand/ArcLayerPage";
+import Home from "pages/home/Home";
+import Map from "pages/originDestination/Map";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

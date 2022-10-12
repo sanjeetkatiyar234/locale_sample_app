@@ -8,28 +8,31 @@ import {
   RangenavigatorSeriesDirective,
   RangeTooltip,
 } from "@syncfusion/ej2-react-charts";
-import React from "react";
+import React, { useMemo } from "react";
 import { Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
   const filterTypeValue = useSelector((state) => state.filterType.value);
+  const periodSelectorSettings = useMemo(() => {
+    return filterTypeValue === "intraDay"
+      ? {
+          position: "Top",
+          periods: [
+            { text: "10Min", interval: 10, intervalType: "Minutes" },
+            { text: "30Min", interval: 30, intervalType: "Minutes" },
+            { text: "1Hr", interval: 1, intervalType: "Hours" },
+            { text: "6Hr", interval: 6, intervalType: "Hours" },
+            { text: "12Hr", interval: 12, intervalType: "Hours" },
+            { text: "1D", interval: 1, intervalType: "Days" },
+          ],
+        }
+      : undefined;
+  }, [filterTypeValue]);
 
   if (!dataSource.length) {
     return <Skeleton variant="rectangular" height={80} />;
   }
-
-  const intraDayPeriodSelectorSettings = {
-    position: "Top",
-    periods: [
-      { text: "10Min", interval: 10, intervalType: "Minutes" },
-      { text: "30Min", interval: 30, intervalType: "Minutes" },
-      { text: "1Hr", interval: 1, intervalType: "Hours" },
-      { text: "6Hr", interval: 6, intervalType: "Hours" },
-      { text: "12Hr", interval: 12, intervalType: "Hours" },
-      { text: "1D", interval: 1, intervalType: "Days" },
-    ],
-  };
 
   // const monthlyPeriodSelectorSettings = {
   //   position: "Top",
@@ -51,11 +54,7 @@ const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
         setDateRange(value);
       }}
       allowIntervalData
-      periodSelectorSettings={
-        filterTypeValue === "intraDay"
-          ? intraDayPeriodSelectorSettings
-          : undefined
-      }
+      periodSelectorSettings={periodSelectorSettings}
       intervalType={filterTypeValue === "intraDay" ? "Minutes" : "Days"}
       // enableRtl={true}
       enableDeferredUpdate={true}
