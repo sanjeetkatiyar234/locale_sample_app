@@ -1,13 +1,10 @@
 import moment from "moment";
 import React, { useMemo, useState } from "react";
-import CustomH3HexagonLayer from "../../components/hexagonLayer/CustomH3HexagonLayer";
-import TimeRangeSlider from "../../components/TimeRangeSlider";
-import { useH3CsvData } from "../hooks/useH3CsvData";
-import PageHeader from "./PageHeader";
+import CustomH3HexagonLayer from "components/hexagonLayer/CustomH3HexagonLayer";
+import TimeRangeSlider from "components/TimeRangeSlider";
 
-const Map = () => {
+const H3HexagonLayerWithSlider = ({ sampleData }) => {
   const [dateRange, setDateRange] = useState({});
-  const { sampleData } = useH3CsvData();
   const { start, end } = dateRange;
 
   const filterData = useMemo(
@@ -19,10 +16,8 @@ const Map = () => {
       ),
     [sampleData, start, end]
   );
-
   return (
-    <div>
-      <PageHeader />
+    <>
       <TimeRangeSlider
         selectedDateRange={dateRange}
         dataSource={sampleData}
@@ -31,8 +26,8 @@ const Map = () => {
         yName="Count"
       />
       <CustomH3HexagonLayer data={filterData} />
-    </div>
+    </>
   );
 };
 
-export default Map;
+export default H3HexagonLayerWithSlider;

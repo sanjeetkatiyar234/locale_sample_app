@@ -1,37 +1,17 @@
-import moment from "moment";
-import React, { useMemo, useState } from "react";
-import CustomHexagonLayer from "components/hexagonLayer/CustomHexagonLayer";
-import TimeRangeSlider from "components/TimeRangeSlider";
-import { useCsvData } from "../hooks/useCsvData";
+import React from "react";
 import PageHeader from "./PageHeader";
+import HexagonalLayerWithSlider from "./HexagonalLayerWithSlider";
+import { useCsvData } from "../hooks/useCsvData";
 
-const Map = () => {
-  const [dateRange, setDateRange] = useState({});
+const Home = () => {
   const { sampleData } = useCsvData();
-  const { start, end } = dateRange;
-
-  const filterData = useMemo(
-    () =>
-      sampleData.filter(
-        (d) =>
-          moment(d.dateTime).isSameOrAfter(start) &&
-          moment(d.dateTime).isSameOrBefore(end)
-      ),
-    [sampleData, start, end]
-  );
 
   return (
     <div>
       <PageHeader />
-      <TimeRangeSlider
-        selectedDateRange={dateRange}
-        dataSource={sampleData}
-        setDateRange={setDateRange}
-        xName="dateTime"
-      />
-      <CustomHexagonLayer data={filterData} />
+      <HexagonalLayerWithSlider sampleData={sampleData} />
     </div>
   );
 };
 
-export default Map;
+export default Home;
