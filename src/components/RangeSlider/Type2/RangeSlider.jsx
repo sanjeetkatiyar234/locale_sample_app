@@ -1,77 +1,20 @@
-import {
-  DateTime,
-  Inject,
-  LineSeries,
-  PeriodSelector,
-  RangeNavigatorComponent,
-  RangenavigatorSeriesCollectionDirective,
-  RangenavigatorSeriesDirective,
-  RangeTooltip,
-} from "@syncfusion/ej2-react-charts";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useReducer } from "react";
 import { Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
+import RangeSliderWithPeriodSelector from "./RangeSliderWithPeriodSelector";
+import RangeSliderWithoutPeriodSelector from "./RangeSliderWithoutPeriodSelector";
 
-const RangeSlider = ({ dataSource = [], setDateRange, xName, yName = "y" }) => {
+const RangeSlider = ({ dataSource = [], ...props }) => {
   const filterTypeValue = useSelector((state) => state.filterType.value);
-  const periodSelectorSettings = useMemo(() => {
-    return filterTypeValue === "intraDay"
-      ? {
-          position: "Top",
-          periods: [
-            { text: "10Min", interval: 10, intervalType: "Minutes" },
-            { text: "30Min", interval: 30, intervalType: "Minutes" },
-            { text: "1Hr", interval: 1, intervalType: "Hours" },
-            { text: "6Hr", interval: 6, intervalType: "Hours" },
-            { text: "12Hr", interval: 12, intervalType: "Hours" },
-            { text: "1D", interval: 1, intervalType: "Days" },
-          ],
-        }
-      : undefined;
-  }, [filterTypeValue]);
 
   if (!dataSource.length) {
     return <Skeleton variant="rectangular" height={80} />;
   }
 
-  // const monthlyPeriodSelectorSettings = {
-  //   position: "Top",
-  //   periods: [
-  //     { text: "1M", interval: 1, intervalType: "Months" },
-  //     { text: "3M", interval: 3, intervalType: "Months" },
-  //     { text: "6M", interval: 6, intervalType: "Months" },
-  //     { text: "1Y", interval: 1, intervalType: "Years" },
-  //   ],
-  // };
-
-  return (
-    <RangeNavigatorComponent
-      id="charts"
-      valueType="DateTime"
-      value={[new Date("2022-01-01"), new Date("2022-02-01")]}
-      tooltip={{ enable: true, displayMode: "Always" }}
-      changed={(value) => {
-        setDateRange(value);
-      }}
-      allowIntervalData
-      periodSelectorSettings={periodSelectorSettings}
-      intervalType={filterTypeValue === "intraDay" ? "Minutes" : "Days"}
-      // enableRtl={true}
-      enableDeferredUpdate={true}
-    >
-      <Inject services={[LineSeries, DateTime, RangeTooltip, PeriodSelector]} />
-      <RangenavigatorSeriesCollectionDirective>
-        {xName && (
-          <RangenavigatorSeriesDirective
-            dataSource={dataSource}
-            xName={xName}
-            yName={yName}
-            type="Line"
-            width={2}
-          />
-        )}
-      </RangenavigatorSeriesCollectionDirective>
-    </RangeNavigatorComponent>
+  return filterTypeValue === "intraDay" ? (
+    <RangeSliderWithPeriodSelector dataSource={dataSource} {...props} />
+  ) : (
+    <RangeSliderWithoutPeriodSelector dataSource={dataSource} {...props} />
   );
 };
 
