@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchQueryHiveData } from "store/actions";
+import useToast from "hooks/useToast";
+import { queryHiveDataWithFilterTypeSelector } from "store/selectors";
 import PageHeader from "./PageHeader";
 import ArcLayerWithSlider from "./ArcLayerWithSlider";
-import { useCsvData } from "../hooks/useCsvData";
 
 const ArcLayerPage = () => {
-  const { sampleData } = useCsvData();
+  const sampleData = useSelector(queryHiveDataWithFilterTypeSelector);
+  const toast = useToast();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!sampleData.length) {
+      dispatch({
+        ...fetchQueryHiveData(),
+        statusCodeMap: {
+          success: () => toast.success("data loaded"),
+        },
+      });
+    }
+  }, [dispatch, sampleData]);
 
   return (
     <div>

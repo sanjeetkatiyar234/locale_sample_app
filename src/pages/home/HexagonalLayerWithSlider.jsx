@@ -1,12 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import moment from "moment";
 import TimeRangeSlider from "components/TimeRangeSlider";
 import CustomHexagonLayer from "components/hexagonLayer/CustomHexagonLayer";
 
-const HexagonalLayerWithSlider = ({ sampleData }) => {
+const HexagonalLayerWithSlider = ({sampleData}) => {
   const [dateRange, setDateRange] = useState({});
   const { start, end } = dateRange;
-
   const filterData = useMemo(
     () =>
       sampleData.filter(
