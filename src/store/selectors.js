@@ -3,7 +3,7 @@ import {createSelector} from 'reselect';
 
 // state selectors
 const queryHiveDataSelector=(state)=>state.data.queryHive;
-const h3SampleDataSelector=(state)=>state.data.queryHive;
+const h3SampleDataSelector=(state)=>state.data.h3SampleData;
 const filterTypeValueSelector = (state) => state.filterType.value;
 
 export const queryHiveDataWithFilterTypeSelector=createSelector([queryHiveDataSelector,filterTypeValueSelector],
