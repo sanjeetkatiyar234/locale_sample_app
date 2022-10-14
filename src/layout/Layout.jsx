@@ -22,9 +22,9 @@ const Layout = () => {
       <CssBaseline />
       <Header open={open} handleDrawerOpen={handleDrawerOpen} />
       <SideBar open={open} handleDrawerClose={handleDrawerClose} />
-      <MainContent>
-        <Outlet />
-      </MainContent>
+        <MainContent>
+          <Outlet />
+        </MainContent>
     </Box>
   );
 };
