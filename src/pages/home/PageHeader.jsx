@@ -13,6 +13,9 @@ const PageHeader = () => {
           <NavLink to="/">
             <Typography color="text.primary">Home</Typography>
           </NavLink>
+          <NavLink to="/">
+            <Typography color="text.primary">Sub Home</Typography>
+          </NavLink>
         </Breadcrumbs>
         <Box component="div">
           <FilterTypeDropDown />
