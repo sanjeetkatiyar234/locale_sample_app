@@ -5,6 +5,7 @@ import useToast from "hooks/useToast";
 import { queryHiveDataWithFilterTypeSelector } from "store/selectors";
 import HexagonalLayerWithSlider from "./HexagonalLayerWithSlider";
 import PageHeader from "./PageHeader";
+import HomeRightSidePanel from "./HomeRightSidePanel";
 
 const Home = () => {
   const sampleData = useSelector(queryHiveDataWithFilterTypeSelector);
@@ -25,6 +26,7 @@ const Home = () => {
     <div>
       <PageHeader />
       <HexagonalLayerWithSlider sampleData={sampleData} />
+      <HomeRightSidePanel />
     </div>
   );
 };
