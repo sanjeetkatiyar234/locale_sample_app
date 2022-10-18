@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import H3HexagonLayerWithSlider from "./H3HexagonLayerWithSlider";
 import PageHeader from "./PageHeader";
 import { fetchH3SampleData } from "store/actions";
+import OriginDestinationRightSidePanel from "./OriginDestinationRightSidePanel";
 
 const MapPage = () => {
   const sampleData = useSelector(h3SampleDataWithFilterTypeSelector);
@@ -25,6 +26,7 @@ const MapPage = () => {
     <div>
       <PageHeader />
       <H3HexagonLayerWithSlider sampleData={sampleData} />
+      <OriginDestinationRightSidePanel />
     </div>
   );
 };
