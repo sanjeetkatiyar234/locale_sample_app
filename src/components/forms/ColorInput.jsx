@@ -7,6 +7,7 @@ const ColorInput = ({ ...rest }) => {
   
   return (
     <MuiColorInput
+     style={{marginBottom:'16px'}}
       value={formHandling.value}
       {...rest}
       {...formHandling}

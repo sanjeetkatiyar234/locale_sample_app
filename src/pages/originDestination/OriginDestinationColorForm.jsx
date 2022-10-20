@@ -6,8 +6,8 @@ import ColorInput from 'components/forms/ColorInput';
 const OriginDestinationColorForm = ({handleSubmit}) => {
   return (
     <form onSubmit={handleSubmit}> 
-          <Field name='primaryColor' component={ColorInput} size="small"  />
-          <Field name='secondaryColor' component={ColorInput} size="small" />
+          <Field name='primaryColor' component={ColorInput} size="small"  label="Primary Color"/>
+          <Field name='secondaryColor' component={ColorInput} size="small" label="Secondary Color"/>
           
     </form>
   )
