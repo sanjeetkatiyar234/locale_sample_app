@@ -6,6 +6,8 @@ import H3HexagonLayerWithSlider from "./H3HexagonLayerWithSlider";
 import PageHeader from "./PageHeader";
 import { fetchH3SampleData } from "store/actions";
 import OriginDestinationRightSidePanel from "./OriginDestinationRightSidePanel";
+import PageLeftSidePanel from "layout/PageLeftSidePanel";
+import OriginDestinationColorForm from "./OriginDestinationColorForm";
 
 const MapPage = () => {
   const sampleData = useSelector(h3SampleDataWithFilterTypeSelector);
@@ -25,6 +27,9 @@ const MapPage = () => {
   return (
     <div>
       <PageHeader />
+      <PageLeftSidePanel >
+        <OriginDestinationColorForm />
+      </PageLeftSidePanel>
       <H3HexagonLayerWithSlider sampleData={sampleData} />
       <OriginDestinationRightSidePanel />
     </div>
