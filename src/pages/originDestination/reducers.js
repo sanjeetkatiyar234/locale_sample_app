@@ -8,7 +8,7 @@ const defaultSate={
   secondaryColor:[255, 255,0],
 }
 
-function  selectedColorReducer(state = {}, action) {
+function  selectedColorReducer(state =defaultSate, action) {
     switch (action.type) {
       case UPDATE_SELECTED_COLOR:
         return {
