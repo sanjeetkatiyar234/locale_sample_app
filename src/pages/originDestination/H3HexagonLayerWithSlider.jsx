@@ -2,20 +2,26 @@ import moment from "moment";
 import React, { useMemo, useState } from "react";
 import CustomH3HexagonLayer from "components/hexagonLayer/CustomH3HexagonLayer";
 import TimeRangeSlider from "components/TimeRangeSlider";
+import { useSelector } from "react-redux";
 
 const H3HexagonLayerWithSlider = ({ sampleData }) => {
   const [dateRange, setDateRange] = useState({});
   const { start, end } = dateRange;
+  const { primaryColor, secondaryColor } =
+    useSelector((state) => state.pages.originDestination.selectedColor) || {};
 
-  const filterData = useMemo(
-    () =>
-      sampleData.filter(
-        (d) =>
-          moment(d.start).isSameOrAfter(start) &&
-          moment(d.end).isSameOrBefore(end)
-      ),
-    [sampleData, start, end]
-  );
+  const filterData = useMemo(() => {
+    const filterData = sampleData.filter(
+      (d) =>
+        moment(d.start).isSameOrAfter(start) &&
+        moment(d.end).isSameOrBefore(end)
+    );
+    const dataMidlength = parseInt(filterData.length / 2);
+    return filterData.map((data) => ({
+      ...data,
+      color: data.id <= dataMidlength ? primaryColor : secondaryColor,
+    }));
+  }, [sampleData, start, end, primaryColor, secondaryColor]);
   return (
     <>
       <TimeRangeSlider

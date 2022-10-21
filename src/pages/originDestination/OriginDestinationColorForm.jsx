@@ -47,9 +47,10 @@ const OriginDestinationColorForm = ({ handleSubmit, submitting }) => {
 
 export default reduxForm({
   form: ORIGIN_DESTINATION_COLOR_FORM,
-  enableReinitialize:true,
+  enableReinitialize:false,
   initialValues: {
     primaryColor: "rgb(255, 0, 0)",
     secondaryColor: "rgb(255, 255, 0)",
   },
+ destroyOnUnmount:false
 })(OriginDestinationColorForm);

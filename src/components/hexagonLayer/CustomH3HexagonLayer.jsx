@@ -1,7 +1,6 @@
 import { DeckGL, H3HexagonLayer } from "deck.gl";
 import React from "react";
 import MapGL from "react-map-gl";
-import { useSelector } from "react-redux";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
 
 // const MAP_STYLE = "mapbox://styles/mapbox/dark-v10";
@@ -20,12 +19,11 @@ const INITIAL_VIEW_STATE = {
 const getTooltip = ({ object }) =>
   object &&
   `Hex:${object.Hex}
+  Id:${object.id}
   Count: ${object.Count}`;
 
 const CustomH3HexagonLayer = ({ data = [] }) => {
-  const { primaryColor, secondaryColor } =
-    useSelector((state) => state.pages.originDestination.selectedColor) || {};
-  const dataMidlength = parseInt(data.length / 2);
+ 
   // const navigate = useNavigate();
   const layer = new H3HexagonLayer({
     id: "H3HexagonLayer",
@@ -38,8 +36,7 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
     extruded: true,
     filled: true,
     getElevation: (d) => d.Count,
-    getFillColor: (d) =>
-      d.id <= dataMidlength ? secondaryColor : primaryColor,
+    getFillColor: (d) =>d.color,
     getHexagon: (d) => d.Hex,
     wireframe: false,
     pickable: true,
@@ -58,6 +55,7 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
         //   });
         // }
       }}
+
     >
       <MapGL
         height="100vh"
