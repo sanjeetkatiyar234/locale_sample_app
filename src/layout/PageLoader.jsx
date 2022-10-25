@@ -12,7 +12,7 @@ const PageLoader = () => {
         width="100px"
         ariaLabel="blocks-loading"
         wrapperClass="blocks-wrapper"
-        colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+        colors={['#FF0000', '#FF0000', '#FF0000', '#FF0000','#FF0000']}
       />
     </Box>
   );
