@@ -1,0 +1,13 @@
+.subHeader {
+    height: 56px;
+    position: fixed;
+    top: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    /* WebKit-based browsers will ignore this. */
+    width: -moz-available;
+    /* Mozilla-based browsers will ignore this. */
+    width: -webkit-fill-available;
+    width: fill-available;
+}

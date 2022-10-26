@@ -3,7 +3,6 @@ import { IconButton, Toolbar, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
 import React from "react";
-import FilterTypeDropDown from "../components/dropDown/FilterTypeDropDown";
 import mainLogo from "./logo.png";
 import { drawerWidth } from "./SideBar";
 
@@ -48,7 +47,6 @@ const Header = ({ open, handleDrawerOpen }) => {
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
           <img src={mainLogo} alt="fireSpot" height="50" />
         </Typography>
-        <FilterTypeDropDown />
       </Toolbar>
     </AppBar>
   );

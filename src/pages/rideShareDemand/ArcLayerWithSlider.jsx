@@ -1,11 +1,10 @@
 import moment from "moment";
 import React, { useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
-import CustomArcLayer from "../components/arcLayer/CustomArcLayer";
-import TimeRangeSlider from "../components/TimeRangeSlider";
-import { useCsvData } from "./hooks/useCsvData";
+import CustomArcLayer from "components/arcLayer/CustomArcLayer";
+import TimeRangeSlider from "components/TimeRangeSlider";
 
-const ArcLayerPage = () => {
+const ArcLayerWithSlider = ({ sampleData }) => {
   const [dateRange, setDateRange] = useState({});
   const { state } = useLocation();
   const { hexagonLayerData } = state || {};
@@ -15,7 +14,6 @@ const ArcLayerPage = () => {
     } else return null;
   }, [hexagonLayerData]);
 
-  const { sampleData } = useCsvData();
   const { start, end } = dateRange;
 
   const filterData = useMemo(
@@ -29,7 +27,7 @@ const ArcLayerPage = () => {
   );
 
   return (
-    <div>
+    <>
       <TimeRangeSlider
         selectedDateRange={dateRange}
         dataSource={arcData ?? sampleData}
@@ -37,8 +35,8 @@ const ArcLayerPage = () => {
         xName="dateTime"
       />
       <CustomArcLayer data={filterData} />
-    </div>
+    </>
   );
 };
 
-export default ArcLayerPage;
+export default ArcLayerWithSlider;

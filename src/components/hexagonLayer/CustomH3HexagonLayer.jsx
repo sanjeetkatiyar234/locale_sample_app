@@ -19,9 +19,11 @@ const INITIAL_VIEW_STATE = {
 const getTooltip = ({ object }) =>
   object &&
   `Hex:${object.Hex}
+  Id:${object.id}
   Count: ${object.Count}`;
 
 const CustomH3HexagonLayer = ({ data = [] }) => {
+ 
   // const navigate = useNavigate();
   const layer = new H3HexagonLayer({
     id: "H3HexagonLayer",
@@ -34,7 +36,7 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
     extruded: true,
     filled: true,
     getElevation: (d) => d.Count,
-    getFillColor: (d) => [255, (1 - d.count / 500) * 255, 0],
+    getFillColor: (d) =>d.color,
     getHexagon: (d) => d.Hex,
     wireframe: false,
     pickable: true,
@@ -53,6 +55,7 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
         //   });
         // }
       }}
+
     >
       <MapGL
         height="100vh"

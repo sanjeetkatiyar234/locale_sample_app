@@ -1,14 +1,11 @@
+import React, { useEffect, useMemo, useState } from "react";
 import moment from "moment";
-import React, { useMemo, useState } from "react";
-import CustomHexagonLayer from "../components/hexagonLayer/CustomHexagonLayer";
-import TimeRangeSlider from "../components/TimeRangeSlider";
-import { useCsvData } from "./hooks/useCsvData";
+import TimeRangeSlider from "components/TimeRangeSlider";
+import CustomHexagonLayer from "components/hexagonLayer/CustomHexagonLayer";
 
-const Map = () => {
+const HexagonalLayerWithSlider = ({sampleData}) => {
   const [dateRange, setDateRange] = useState({});
-  const { sampleData } = useCsvData();
   const { start, end } = dateRange;
-
   const filterData = useMemo(
     () =>
       sampleData.filter(
@@ -18,9 +15,8 @@ const Map = () => {
       ),
     [sampleData, start, end]
   );
-
   return (
-    <div>
+    <>
       <TimeRangeSlider
         selectedDateRange={dateRange}
         dataSource={sampleData}
@@ -28,8 +24,8 @@ const Map = () => {
         xName="dateTime"
       />
       <CustomHexagonLayer data={filterData} />
-    </div>
+    </>
   );
 };
 
-export default Map;
+export default HexagonalLayerWithSlider;
