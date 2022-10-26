@@ -34,7 +34,8 @@ class HttpWrapper {
   _getFetchOptions(method, payload, headers, useDefaultHeaders = true, stringify = true) {
     const options = {
       method,
-      credentials: 'include', // use 'same-origin' if we disable CORS
+      // mode: 'no-cors',
+      // credentials: 'include', // use 'same-origin' if we disable CORS
     };
 
     options.headers = useDefaultHeaders ? { ...defaultHeaders, ...headers } : { ...headers };

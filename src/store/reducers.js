@@ -1,16 +1,15 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import { FETCH_QUERY_HIVE_DATA_RECEIVED, FETCH_SAMPLE_H3_DATA_RECEIVED } from 'app/actionConstants';
+import { FETCH_QUERY_HIVE_DATA_RECEIVED, FETCH_H3HEX_LAYER_DATA_RECEIVED } from 'app/actionConstants';
 
 
 function queryHiveReducer(state=[],action){
     switch (action.type) {
         case FETCH_QUERY_HIVE_DATA_RECEIVED:
-            return (action.response ||[])?.map((row,id)=>({
+            return (action.response?.items ||[])?.map((row,id)=>({
                 id,
                 ...row,
-                dateTime: new Date(row["_c0"]),
-                startPosition: [+row["first_lat"], +row["first_lon"]],
-                endPosition: [+row["end_lat"], +row["end_lon"]],
+                start_loc:[+row['start_loc']['0'],+row['start_loc']['1']],
+                end_loc:[+row['end_loc']['0'],+row['end_loc']['1']]
               })); 
         default:
             return state;
@@ -19,13 +18,12 @@ function queryHiveReducer(state=[],action){
 
 function h3SampleDataReducer(state=[],action){
     switch (action.type) {
-        case FETCH_SAMPLE_H3_DATA_RECEIVED:
-            return  (action.response ||[])?.map((row,id)=>({
+        case FETCH_H3HEX_LAYER_DATA_RECEIVED:
+            return  (action.response?.body ||[])?.map((row,id)=>({
                 id,
                 ...row,
-                start: new Date(row["start"]),
-                end: new Date(row["end"]),
-                Count: +row["Count"],
+                starttime: new Date(row["starttime"]),
+                endtime: new Date(row["endtime"]),
               })); ;
         default:
             return state;

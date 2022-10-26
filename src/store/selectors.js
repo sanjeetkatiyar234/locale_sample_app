@@ -11,15 +11,14 @@ export const queryHiveDataWithFilterTypeSelector=createSelector([queryHiveDataSe
    
     const todayDate = moment().subtract(9, "M");
     const filterData=filterTypeValue === "intraDay"
-      ? sampleData.filter((d) => moment(d.dateTime).isSameOrAfter(todayDate))
+      ? sampleData.filter((d) => moment(d.start_time).isSameOrAfter(todayDate))
       : sampleData;
 
       return filterData?.filter((d) =>
-      d.startPosition[0] != null &&
-      d.startPosition[1] != null &&
-      d.endPosition[0] != null &&
-      d.endPosition[1] != null &&
-      d.start_hex);
+      d.start_loc[0] != null &&
+      d.start_loc[1] != null &&
+      d.end_loc[0] != null &&
+      d.end_loc[1] != null);
 });
 
 export const h3SampleDataWithFilterTypeSelector=createSelector([h3SampleDataSelector,filterTypeValueSelector],
@@ -28,10 +27,10 @@ export const h3SampleDataWithFilterTypeSelector=createSelector([h3SampleDataSele
     const filterData=  filterTypeValue === "intraDay"
       ? sampleData.filter(
           (d) =>
-            moment(d.start).isSameOrAfter(todayDate) &&
-            moment(d.end).isSameOrAfter(todayDate)
+            moment(d.starttime).isSameOrAfter(todayDate) &&
+            moment(d.endtime).isSameOrAfter(todayDate)
         )
       : sampleData;
 
-      return filterData?.filter((d) => !!d.Hex);
+      return filterData?.filter((d) => !!d.hex_id);
 });

@@ -131,10 +131,14 @@ export function getLoaderStatusCodeMap(dispatch, statusCodeMap, action) {
  */
 function getUrl(action) {
   const { queryParams } = action;
-  let { url, templatedUrl, params } = action;
+  let { url, templatedUrl, relativeUrl,params } = action;
 
   if (url) {
-   return `${getApiRootUrl()}/${url}`;
+   return url;
+  }
+
+  if (relativeUrl) {
+   return `${getApiRootUrl()}/${relativeUrl}`;
   }
 
   if (templatedUrl && params ) {

@@ -18,9 +18,9 @@ const INITIAL_VIEW_STATE = {
 
 const getTooltip = ({ object }) =>
   object &&
-  `Hex:${object.Hex}
+  `Hex:${object.hex_id}
   Id:${object.id}
-  Count: ${object.Count}`;
+  Vehicle Count: ${object.vehicle_count}`;
 
 const CustomH3HexagonLayer = ({ data = [] }) => {
  
@@ -35,9 +35,9 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
     elevationScale: 20,
     extruded: true,
     filled: true,
-    getElevation: (d) => d.Count,
+    getElevation: (d) => d.vehicle_count,
     getFillColor: (d) =>d.color,
-    getHexagon: (d) => d.Hex,
+    getHexagon: (d) => d.hex_id,
     wireframe: false,
     pickable: true,
   });

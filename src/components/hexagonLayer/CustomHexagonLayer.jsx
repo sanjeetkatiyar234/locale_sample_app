@@ -47,7 +47,7 @@ const CustomHexagonLayer = ({ data = [] }) => {
     // getColorWeight: 1,
     // getElevationValue: null,
     // getElevationWeight: 1,
-    getPosition: (d) => d.startPosition,
+    getPosition: (d) => d.start_loc,
     // hexagonAggregator: null,
     // lowerPercentile: 0,
     // material: true,

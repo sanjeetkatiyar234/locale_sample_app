@@ -40,10 +40,10 @@ const CustomArcLayer = ({ data = [] }) => {
     data,
     pickable: true,
     getWidth: 1,
-    getSourcePosition: (d) => d.startPosition,
-    getTargetPosition: (d) => d.endPosition,
-    getSourceColor: (d) => [100 * +d.route_id, 140, 0],
-    getTargetColor: (d) => [200 * +d.route_id, 140, 0],
+    getSourcePosition: (d) => d.start_loc,
+    getTargetPosition: (d) => d.end_loc,
+    getSourceColor: (d) => [d.id % 255, 140, 0],
+    getTargetColor: (d) => [d.id % 255, 140, 0],
   });
 
   return (
@@ -53,7 +53,7 @@ const CustomArcLayer = ({ data = [] }) => {
       controller={true}
       getTooltip={({ object }) =>
         object &&
-        `${object.startPosition.join(",")} to ${object.endPosition.join(",")}`
+        `${object.start_loc.join(",")} to ${object.end_loc.join(",")}`
       }
     >
       <MapGL
