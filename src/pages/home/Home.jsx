@@ -12,15 +12,14 @@ const Home = () => {
   const toast = useToast();
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!sampleData.length) {
       dispatch({
         ...fetchQueryHiveData(),
         statusCodeMap: {
           success: () => toast.success("data loaded"),
+          error: () => toast.error("failed data load"),
         },
       });
-    }
-  }, [dispatch, sampleData]);
+  }, [dispatch]);
 
   return (
     <div>
