@@ -2,7 +2,7 @@ import {
   FETCH_QUERY_HIVE_DATA,
   FETCH_H3HEX_LAYER_DATA,
 } from "app/actionConstants";
-import { CSV_FILE, GET, QUERY_HIVE_QUERY, H3HEX_LAYER_DATA,x_api_Key } from "app/apiConstants";
+import {  GET, QUERY_HIVE_QUERY, H3HEX_LAYER_DATA,x_api_Key } from "app/apiConstants";
 
 
 export const queryHiveDataLoader = "queryHiveDataLoader";

@@ -20,6 +20,7 @@ export const QUERY_HIVE_QUERY='https://tmu7gwwk8a.execute-api.us-east-1.amazonaw
 export const H3HEX_LAYER_DATA='https://5dnrk1mlq8.execute-api.us-east-1.amazonaws.com/v1?start_time=2022-01-25 08:30:10&end_time=2022-01-25 10:30:10';
 
 // for drill down h3 hex to arc
-export const H3HEX_TO_ARC_LAYER='https://mw19qulj46.execute-api.us-east-1.amazonaws.com/v1?start_time=2022-01-03 09:00:00&start_hex=8743a02f5ffffff';
+export const H3HEX_TO_ARC_LAYER='https://mw19qulj46.execute-api.us-east-1.amazonaws.com/v1';
+// ?start_time=2022-01-03 09:00:00&start_hex=8743a02f5ffffff
 
 // templated url constants

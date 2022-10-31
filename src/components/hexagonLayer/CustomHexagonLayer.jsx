@@ -74,13 +74,13 @@ const CustomHexagonLayer = ({ data = [] }) => {
       initialViewState={INITIAL_VIEW_STATE}
       controller={true}
       getTooltip={getTooltip}
-      onClick={({ object }) => {
-        if (object) {
-          navigate("/arclayer", {
-            state: { hexagonLayerData: object },
-          });
-        }
-      }}
+      // onClick={({ object }) => {
+      //   // if (object) {
+      //   //   navigate("/arclayer", {
+      //   //     state: { hexagonLayerData: object },
+      //   //   });
+      //   // }
+      // }}
     >
       <MapGL
         height="100vh"

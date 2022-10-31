@@ -1,6 +1,7 @@
 import { DeckGL, H3HexagonLayer } from "deck.gl";
 import React from "react";
 import MapGL from "react-map-gl";
+import { useNavigate } from "react-router-dom";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
 
 // const MAP_STYLE = "mapbox://styles/mapbox/dark-v10";
@@ -23,8 +24,7 @@ const getTooltip = ({ object }) =>
   Vehicle Count: ${object.vehicle_count}`;
 
 const CustomH3HexagonLayer = ({ data = [] }) => {
- 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const layer = new H3HexagonLayer({
     id: "H3HexagonLayer",
     // data: "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf.h3cells.json",
@@ -36,7 +36,7 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
     extruded: true,
     filled: true,
     getElevation: (d) => d.vehicle_count,
-    getFillColor: (d) =>d.color,
+    getFillColor: (d) => d.color,
     getHexagon: (d) => d.hex_id,
     wireframe: false,
     pickable: true,
@@ -47,15 +47,15 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
       initialViewState={INITIAL_VIEW_STATE}
       controller={true}
       getTooltip={getTooltip}
-      onClick={(value) => {
-        console.log(value);
-        // if (object) {
-        //   navigate("/arclayer", {
-        //     state: { hexagonLayerData: object },
-        //   });
-        // }
+      onClick={({ object, picked }) => {
+        if (picked && object) {
+          // navigate(`/ride-share-demand?hex_id=${object.hex_id}&start_time=${object.start_time}`);
+          navigate({
+            pathname: "/ride-share-demand",
+            search: `start_hex=${object.hex_id}&start_time=${object.start_time}`,
+          });
+        }
       }}
-
     >
       <MapGL
         height="100vh"
