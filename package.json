@@ -19,6 +19,7 @@
     "classnames": "^2.3.2",
     "d3": "^7.6.1",
     "deck.gl": "^8.8.11",
+    "h3-js": "^4.0.1",
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
