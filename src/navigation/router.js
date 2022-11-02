@@ -11,6 +11,7 @@ import PageLoader from "layout/PageLoader";
 const Home = React.lazy(() => import('pages/home/Home'));
 const MapPage = React.lazy(() => import('pages/originDestination/MapPage'));
 const ArcLayerPage = React.lazy(() => import('pages/rideShareDemand/ArcLayerPage'));
+const PredictionLayerPage = React.lazy(() => import('pages/predictionLayer/PredictionLayerPage'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,10 @@ const router = createBrowserRouter(
       <Route path="ride-share-demand" element={
         <React.Suspense fallback={<PageLoader />}>
           <ArcLayerPage />
+        </React.Suspense>} />
+      <Route path="prediction-layer" element={
+        <React.Suspense fallback={<PageLoader />}>
+          <PredictionLayerPage />
         </React.Suspense>} />
     </Route>
   )

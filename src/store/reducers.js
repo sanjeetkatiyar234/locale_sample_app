@@ -7,7 +7,7 @@ import {
 function queryHiveReducer(state = [], action) {
     switch (action.type) {
         case FETCH_QUERY_HIVE_DATA_RECEIVED:
-            return (action.response?.body?.items || [])?.map((row, id) => ({
+            return (action.response.data?.body?.items || [])?.map((row, id) => ({
                 id,
                 ...row,
             }));
@@ -19,7 +19,7 @@ function queryHiveReducer(state = [], action) {
 function h3SampleDataReducer(state = [], action) {
     switch (action.type) {
         case FETCH_H3HEX_LAYER_DATA_RECEIVED:
-            return (action.response?.body || [])?.map((row, id) => ({
+            return (action.response.data?.body || [])?.map((row, id) => ({
                 id,
                 ...row,
             }));

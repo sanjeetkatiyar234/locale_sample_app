@@ -9,7 +9,7 @@ import {
 function selectedArcLayerReducer(state = [], action) {
     switch (action.type) {
         case FETCH_H3HEX_TO_ARC_LAYER_DATA_RECEIVED:
-            return (action.response?.body || [])?.map((row, id) => ({
+            return (action.response.data?.body || [])?.map((row, id) => ({
                 id,
                 ...row,
             }));

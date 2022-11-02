@@ -23,4 +23,4 @@ export const H3HEX_LAYER_DATA='https://5dnrk1mlq8.execute-api.us-east-1.amazonaw
 export const H3HEX_TO_ARC_LAYER='https://mw19qulj46.execute-api.us-east-1.amazonaws.com/v1';
 // ?start_time=2022-01-03 09:00:00&start_hex=8743a02f5ffffff
 
-// templated url constants
+export const PREDICTION_LAYER_DATA='https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/bart-stations.json';
