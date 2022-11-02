@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import omit from 'lodash/omit';
 import mapValues from 'lodash/mapValues';
-import createEchoHttpWrapper from './http';
+import createHttpWrapper from './http';
 import { getApiRootUrl, objectToParamString } from './util';
 import { CLEAR_ACTION_QUEUE, UPDATE_LOADING_COUNTER } from './actionConstants';
 import { queueAction, reloadApp } from './actions';
@@ -12,7 +12,7 @@ import ForbiddenError from './errors/ForbiddenError';
 
 
 export function reduxApiMiddleware(storeApi) {
-  const http = createEchoHttpWrapper();
+  const http = createHttpWrapper();
   const { dispatch } = storeApi;
 
   return (next) => (action) => {
