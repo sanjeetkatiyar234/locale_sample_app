@@ -1,15 +1,16 @@
 /*
 * https://deck.gl/docs/api-reference/layers/scatterplot-layer
 */
-import { ScatterplotLayer, DeckGL } from "deck.gl";
+import { ScatterplotLayer, DeckGL, H3HexagonLayer } from "deck.gl";
 import React from "react";
 import MapGL from "react-map-gl";
+import {  latLngToCell } from "h3-js";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
 
 const INITIAL_VIEW_STATE = {
     longitude: -122.4,
     latitude: 37.74,
-    zoom: 11,
+    zoom: 10,
     maxZoom: 20,
     pitch: 30,
     bearing: 0
@@ -17,7 +18,7 @@ const INITIAL_VIEW_STATE = {
 
 const CustomScatterplotLayer = ({data=[]}) => {
 
-    const layer = new ScatterplotLayer({
+    const scatterplotLayer = new ScatterplotLayer({
         id: 'ScatterplotLayer',
         data: data,
         
@@ -54,9 +55,26 @@ const CustomScatterplotLayer = ({data=[]}) => {
         // wrapLongitude: false,
       });
 
+      const h3HexagonLayer = new H3HexagonLayer({
+        id: "H3HexagonLayer",
+        // data: "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf.h3cells.json",
+        data: data,
+        /* props from H3HexagonLayer class */
+        // centerHexagon: null,
+        // coverage: 1,
+        elevationScale: 10,
+        extruded: true,
+        filled: true,
+        getElevation: (d) => Math.sqrt(d.exits),
+        getFillColor: [255, 0, 0,100],
+        getHexagon: (d) => latLngToCell(d.coordinates[1], d.coordinates[0], 8),
+        wireframe: false,
+        pickable: true,
+      });
+
   return (
      <DeckGL
-      layers={[layer]}
+      layers={[h3HexagonLayer,scatterplotLayer]}
       initialViewState={INITIAL_VIEW_STATE}
       controller={true}
       getTooltip={({object}) => object && `${object.name}
