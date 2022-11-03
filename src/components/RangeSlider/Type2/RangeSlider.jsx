@@ -9,7 +9,7 @@ visible={true}
 height="80"
 width="100%"
 ariaLabel="blocks-loading"
-wrapperStyle={{background:'lightgray'}}
+wrapperStyle={{background:'rgba(0,0,0,0.5)'}}
 wrapperClass="blocks-wrapper"
 colors={['#FF0000', '#FF0000', '#FF0000', '#FF0000','#FF0000']}
 />;

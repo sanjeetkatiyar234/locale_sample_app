@@ -44,6 +44,11 @@ const RangeSliderWithPeriodSelector = ({
       intervalType="Minutes"
       // enableRtl={true}
       enableDeferredUpdate={true}
+      navigatorStyleSettings={
+        { selectedRegionColor:'grey',
+          unselectedRegionColor:'black'
+        }
+      }
     >
       <Inject services={[LineSeries, DateTime, RangeTooltip, PeriodSelector]} />
       <RangenavigatorSeriesCollectionDirective>

@@ -31,6 +31,11 @@ const RangeSliderWithoutPeriodSelector = ({
       allowIntervalData
       intervalType="Days"
       enableDeferredUpdate={true}
+      navigatorStyleSettings={
+        { selectedRegionColor:'grey',
+        unselectedRegionColor:'black'
+        }
+      }
     >
       <Inject services={[LineSeries, DateTime, RangeTooltip]} />
       <RangenavigatorSeriesCollectionDirective>

@@ -11,7 +11,7 @@ export const arcLayerDataSelector = createSelector([queryHiveDataSelector, selec
     (sampleData = [], selectedArcLayerData = [], filterTypeValue, isSearch) => {
         const data = isSearch ? selectedArcLayerData : sampleData;
 
-        const todayDate = moment().subtract(9, "M");
+        const todayDate = moment().subtract(10, "M");
         const filterData = filterTypeValue === "intraDay"
             ? data.filter((d) => moment(d.start_time).isSameOrAfter(todayDate))
             : data;
