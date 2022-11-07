@@ -21,7 +21,7 @@ const ArcLayerWithSlider = ({ sampleData }) => {
       (arcData ?? sampleData).filter(
         (d) =>
           moment(d.start_time).isSameOrAfter(start) &&
-          moment(d.end_time).isSameOrBefore(end)
+          moment(d.start_time).isSameOrBefore(end)
       ),
     [arcData, sampleData, start, end]
   );

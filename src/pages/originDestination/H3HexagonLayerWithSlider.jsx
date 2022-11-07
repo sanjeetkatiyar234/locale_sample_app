@@ -14,7 +14,7 @@ const H3HexagonLayerWithSlider = ({ sampleData }) => {
     const filterData = sampleData.filter(
       (d) =>
         moment(d.start_time).isSameOrAfter(start) &&
-        moment(d.end_time).isSameOrBefore(end)
+        moment(d.start_time).isSameOrBefore(end)
     );
     const dataMidlength = parseInt(filterData.length / 2);
     return filterData.map((data) => ({
