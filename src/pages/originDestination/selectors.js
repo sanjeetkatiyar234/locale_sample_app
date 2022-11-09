@@ -2,11 +2,12 @@ import moment from "moment";
 import { createSelector } from "reselect";
 
 // state selectors
-const queryHiveDataSelector = (state) => state.data.queryHive;
+const h3SampleDataSelector = (state) =>
+  state.pages.originDestination.h3SampleData;
 const filterTypeValueSelector = (state) => state.filterType.value;
 
-export const queryHiveDataWithFilterTypeSelector = createSelector(
-  [queryHiveDataSelector, filterTypeValueSelector],
+export const h3SampleDataWithFilterTypeSelector = createSelector(
+  [h3SampleDataSelector, filterTypeValueSelector],
   (sampleData = [], filterTypeValue) => {
     const todayDate = moment().subtract(10, "M");
     const filterData =
@@ -16,12 +17,6 @@ export const queryHiveDataWithFilterTypeSelector = createSelector(
           )
         : sampleData;
 
-    return filterData?.filter(
-      (d) =>
-        d.start_loc[0] != null &&
-        d.start_loc[1] != null &&
-        d.end_loc[0] != null &&
-        d.end_loc[1] != null
-    );
+    return filterData?.filter((d) => !!d.hex_id);
   }
 );
