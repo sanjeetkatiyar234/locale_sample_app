@@ -1,7 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import {
   UPDATE_SELECTED_COLOR,
-  FETCH_H3HEX_LAYER_DATA_RECEIVED,
+  COMBINE_H3HEX_LAYER_DATA,
+  FIRST_FETCH_H3HEX_LAYER_DATA_RECEIVED,
+  SECOND_FETCH_H3HEX_LAYER_DATA_RECEIVED,
+  THIRD_FETCH_H3HEX_LAYER_DATA_RECEIVED,
 } from "app/actionConstants";
 
 const defaultSate = {
@@ -21,13 +24,23 @@ function selectedColorReducer(state = defaultSate, action) {
   }
 }
 
-function h3SampleDataReducer(state = [], action) {
+const defaultState = {
+  first: [],
+  second: [],
+  third: [],
+  combine: [],
+};
+
+function h3SampleDataReducer(state = defaultState, action) {
   switch (action.type) {
-    case FETCH_H3HEX_LAYER_DATA_RECEIVED:
-      return (action.response.data?.body || [])?.map((row, id) => ({
-        id,
-        ...row,
-      }));
+    case FIRST_FETCH_H3HEX_LAYER_DATA_RECEIVED:
+      return { ...state, first: action.response.data?.body };
+    case SECOND_FETCH_H3HEX_LAYER_DATA_RECEIVED:
+      return { ...state, second: action.response.data?.body };
+    case THIRD_FETCH_H3HEX_LAYER_DATA_RECEIVED:
+      return { ...state, third: action.response.data?.body };
+    case COMBINE_H3HEX_LAYER_DATA:
+      return state;
     default:
       return state;
   }
@@ -35,5 +48,5 @@ function h3SampleDataReducer(state = [], action) {
 
 export default combineReducers({
   selectedColor: selectedColorReducer,
-  h3SampleData: h3SampleDataReducer,
+  data: h3SampleDataReducer,
 });

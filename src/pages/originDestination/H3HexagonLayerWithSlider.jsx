@@ -17,9 +17,9 @@ const H3HexagonLayerWithSlider = ({ sampleData }) => {
         moment(d.start_time).isSameOrBefore(end)
     );
     const dataMidlength = parseInt(filterData.length / 2);
-    return filterData.map((data) => ({
+    return filterData.map((data, index) => ({
       ...data,
-      color: data.id <= dataMidlength ? primaryColor : secondaryColor,
+      color: index <= dataMidlength ? primaryColor : secondaryColor,
     }));
   }, [sampleData, start, end, primaryColor, secondaryColor]);
   return (
