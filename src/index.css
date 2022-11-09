@@ -28,3 +28,19 @@ code {
 #js-licensing {
   display: none !important;
 }
+
+a:-webkit-any-link{
+  text-decoration:none !important;
+}
+
+#charts1_ChartBorder, #charts1_MajorGridLine, #charts1_MajorTickLine{
+  fill: rgb(42, 42, 42) !important;
+  opacity: 0.5;
+}
+#charts1_SeriesBorder {
+  stroke: transparent !important
+}
+
+.e-toolbar-items, #charts1_selector {
+  background: transparent !important;
+}
