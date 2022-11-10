@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useToast from "hooks/useToast";
 import {
   fetchH3SampleData1,
@@ -17,6 +17,16 @@ const THIRD_DATA =
 const useInitializeOriginDestination = () => {
   const toast = useToast();
   const dispatch = useDispatch();
+  const data1 = useSelector(
+    (state) => state.pages.originDestination.data.first
+  );
+  const data2 = useSelector(
+    (state) => state.pages.originDestination.data.second
+  );
+  const data3 = useSelector(
+    (state) => state.pages.originDestination.data.third
+  );
+
   useEffect(() => {
     dispatch({
       ...fetchH3SampleData1(FIRST_DATA),
@@ -40,6 +50,13 @@ const useInitializeOriginDestination = () => {
       },
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    if (data1.length && data2.length & data3.length) {
+      const combineData = [...data1, ...data2, ...data3];
+      combineData.forEach((data) => {});
+    }
+  }, [data1, data2, data3]);
 };
 
 export default useInitializeOriginDestination;
