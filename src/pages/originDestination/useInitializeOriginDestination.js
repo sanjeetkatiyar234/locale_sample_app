@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useToast from "hooks/useToast";
 import {
+  combineH3SampleData3,
   fetchH3SampleData1,
   fetchH3SampleData2,
   fetchH3SampleData3,
@@ -54,7 +55,28 @@ const useInitializeOriginDestination = () => {
   useEffect(() => {
     if (data1.length && data2.length & data3.length) {
       const combineData = [...data1, ...data2, ...data3];
-      combineData.forEach((data) => {});
+
+      const filteredArr = Object.values(
+        combineData.reduce((accObj, current) => {
+          const key = `${current.hex_id}${current.start_time}`;
+          const alreadyPresent = accObj[key];
+          if (alreadyPresent) {
+            return {
+              ...accObj,
+              [key]: {
+                ...alreadyPresent,
+                vehicle_count:
+                  alreadyPresent.vehicle_count + current.vehicle_count,
+              },
+            };
+          } else {
+            return { ...accObj, [key]: current };
+          }
+        }, {})
+      );
+      if (filteredArr.length) {
+        dispatch(combineH3SampleData3(filteredArr));
+      }
     }
   }, [data1, data2, data3]);
 };

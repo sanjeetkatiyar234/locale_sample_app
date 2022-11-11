@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 
 // state selectors
 const h3SampleDataSelector = (state) =>
-  state.pages.originDestination.data.first;
+  state.pages.originDestination.data.combine;
 const filterTypeValueSelector = (state) => state.filterType.value;
 
 export const h3SampleDataWithFilterTypeSelector = createSelector(

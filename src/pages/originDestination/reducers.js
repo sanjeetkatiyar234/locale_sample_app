@@ -40,7 +40,7 @@ function h3SampleDataReducer(state = defaultState, action) {
     case THIRD_FETCH_H3HEX_LAYER_DATA_RECEIVED:
       return { ...state, third: action.response.data?.body };
     case COMBINE_H3HEX_LAYER_DATA:
-      return state;
+      return {...state,combine:action.payload};
     default:
       return state;
   }

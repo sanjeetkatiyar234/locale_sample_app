@@ -1,4 +1,5 @@
 import {
+  COMBINE_H3HEX_LAYER_DATA,
   FIRST_FETCH_H3HEX_LAYER_DATA,
   SECOND_FETCH_H3HEX_LAYER_DATA,
   THIRD_FETCH_H3HEX_LAYER_DATA,
@@ -48,5 +49,12 @@ export function fetchH3SampleData3(search) {
     },
     loader: h3SampleDataLoader,
     search,
+  };
+}
+
+export function combineH3SampleData3(payload) {
+  return {
+    type: COMBINE_H3HEX_LAYER_DATA,
+    payload
   };
 }
