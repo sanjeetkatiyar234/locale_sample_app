@@ -1,4 +1,5 @@
 /*
+ * TODO Remove component // just for reference
  * https://deck.gl/docs/api-reference/layers/scatterplot-layer
  */
 import { ScatterplotLayer, DeckGL, H3HexagonLayer, MapView } from "deck.gl";
