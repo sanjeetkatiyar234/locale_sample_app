@@ -52,45 +52,45 @@ const minimapBackgroundStyle = {
 const CustomScatterplotLayer = ({ data = [] }) => {
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
 
-  const scatterplotLayer = new ScatterplotLayer({
-    id: "ScatterplotLayer",
-    data: data,
+  // const scatterplotLayer = new ScatterplotLayer({
+  //   id: "ScatterplotLayer",
+  //   data: data,
 
-    /* props from ScatterplotLayer class */
+  //   /* props from ScatterplotLayer class */
 
-    // antialiasing: true,
-    // billboard: false,
-    // filled: true,
-    getFillColor: [255, 140, 0],
-    getLineColor: [0, 0, 0],
-    // getLineWidth: 1,
-    getPosition: (d) => d.coordinates,
-    getRadius: (d) => Math.sqrt(d.exits),
-    // lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
-    lineWidthMinPixels: 1,
-    // lineWidthScale: 1,
-    // lineWidthUnits: 'meters',
-    radiusMaxPixels: 100,
-    radiusMinPixels: 1,
-    radiusScale: 6,
-    // radiusUnits: 'meters',
-    stroked: true,
+  //   // antialiasing: true,
+  //   // billboard: false,
+  //   // filled: true,
+  //   getFillColor: [255, 140, 0],
+  //   getLineColor: [0, 0, 0],
+  //   // getLineWidth: 1,
+  //   getPosition: (d) => d.coordinates,
+  //   getRadius: (d) => Math.sqrt(d.exits),
+  //   // lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
+  //   lineWidthMinPixels: 1,
+  //   // lineWidthScale: 1,
+  //   // lineWidthUnits: 'meters',
+  //   radiusMaxPixels: 100,
+  //   radiusMinPixels: 1,
+  //   radiusScale: 6,
+  //   // radiusUnits: 'meters',
+  //   stroked: true,
 
-    /* props inherited from Layer class */
+  //   /* props inherited from Layer class */
 
-    // autoHighlight: false,
-    // coordinateOrigin: [0, 0, 0],
-    // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
-    // highlightColor: [0, 0, 128, 128],
-    // modelMatrix: null,
-    opacity: 0.8,
-    pickable: true,
-    // visible: true,
-    // wrapLongitude: false,
-  });
-
-  const h3HexagonLayer = new H3HexagonLayer({
-    id: "H3HexagonLayer",
+  //   // autoHighlight: false,
+  //   // coordinateOrigin: [0, 0, 0],
+  //   // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
+  //   // highlightColor: [0, 0, 128, 128],
+  //   // modelMatrix: null,
+  //   opacity: 0.8,
+  //   pickable: true,
+  //   // visible: true,
+  //   // wrapLongitude: false,
+  // });
+const layers=[
+  new H3HexagonLayer({
+    id: "H3HexagonLayer0",
     // data: "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf.h3cells.json",
     data: data,
     /* props from H3HexagonLayer class */
@@ -104,7 +104,25 @@ const CustomScatterplotLayer = ({ data = [] }) => {
     getHexagon: (d) => latLngToCell(d.coordinates[1], d.coordinates[0], 8),
     wireframe: false,
     pickable: true,
-  });
+  }),
+  
+  new H3HexagonLayer({
+    id: "H3HexagonLayer1",
+    // data: "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf.h3cells.json",
+    data: data,
+    /* props from H3HexagonLayer class */
+    // centerHexagon: null,
+    // coverage: 1,
+    elevationScale: 10,
+    extruded: true,
+    filled: true,
+    getElevation: (d) => Math.sqrt(d.exits * 2),
+    getFillColor: [100, 255, 0, 100],
+    getHexagon: (d) => latLngToCell(d.coordinates[1], d.coordinates[0], 8),
+    wireframe: false,
+    pickable: true,
+  }),
+];
 
   const onViewStateChange = useCallback(({viewState: newViewState}) => {
     setViewState(() => ({
@@ -119,10 +137,10 @@ const CustomScatterplotLayer = ({ data = [] }) => {
 
   return (
     <DeckGL
-      layers={[h3HexagonLayer, scatterplotLayer]}
+      layers={layers}
       views={[mainView, minimapView]}
       viewState={viewState}
-      parameters={{depthTest: false}}
+      // parameters={{depthTest: false}}
       // initialViewState={INITIAL_VIEW_STATE}
       onViewStateChange={onViewStateChange}
       // layerFilter={layerFilter}
