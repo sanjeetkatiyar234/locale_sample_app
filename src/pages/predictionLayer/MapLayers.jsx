@@ -27,17 +27,18 @@ const INITIAL_VIEW_STATE = {
 
 const mainView = new MapView({
   id: "main",
-  x: 365,
+  x: 855,
   y: 0,
-  width: "70%",
+  width: "50%",
   controller: true,
 });
 const minimapView = new MapView({
   id: "minimap",
   x: 1,
   y: 0,
-  width: "30%",
+  width: "50%",
   clear: true,
+  controller: true,
 });
 
 const minimapBackgroundStyle = {
@@ -173,6 +174,9 @@ const CustomScatterplotLayer = ({ data = [] }) => {
         ...INITIAL_VIEW_STATE.minimap,
         longitude: newViewState.longitude,
         latitude: newViewState.latitude,
+        zoom: newViewState.zoom,
+        pitch: newViewState.pitch,
+        bearing: newViewState.bearing
       },
     }));
   }, []);
@@ -186,7 +190,7 @@ const CustomScatterplotLayer = ({ data = [] }) => {
       // initialViewState={INITIAL_VIEW_STATE}
       onViewStateChange={onViewStateChange}
       // layerFilter={layerFilter}
-      // controller={true}
+      controller={false}
       getTooltip={getTooltip}
     >
       <MapView id="main">

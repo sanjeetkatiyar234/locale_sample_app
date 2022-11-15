@@ -44,6 +44,7 @@ const RangeSliderWithPeriodSelector = ({
       allowIntervalData={false}
       interval={5}
       enableDeferredUpdate={true}
+      allowSnapping={true}
       navigatorStyleSettings={
         {
           unselectedRegionColor:'rgba(60, 60, 60, 0.7)'

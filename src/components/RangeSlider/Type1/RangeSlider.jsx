@@ -11,6 +11,7 @@ const RangeSlider = () => {
       thumbClassName="thumb"
       trackClassName="track"
       defaultValue={[0, 100]}
+      allowSnapping={true}
       ariaLabel={["Lower thumb", "Upper thumb"]}
       ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
       renderThumb={(props, state) => (
