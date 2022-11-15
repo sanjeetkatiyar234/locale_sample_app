@@ -25,13 +25,18 @@ const INITIAL_VIEW_STATE = {
   },
 };
 
-const mainView = new MapView({ id: "main", controller: true });
+const mainView = new MapView({
+  id: "main",
+  x: 365,
+  y: 0,
+  width: "70%",
+  controller: true,
+});
 const minimapView = new MapView({
   id: "minimap",
-  x: 20,
-  y: 20,
-  width: "20%",
-  height: "20%",
+  x: 1,
+  y: 0,
+  width: "30%",
   clear: true,
 });
 
