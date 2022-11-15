@@ -34,7 +34,6 @@
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
-    "react-slider": "^2.0.4",
     "redux-form": "^8.3.8",
     "reselect": "^4.1.6",
     "web-vitals": "^2.1.0"
