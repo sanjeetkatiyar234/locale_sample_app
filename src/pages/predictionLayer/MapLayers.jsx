@@ -5,6 +5,7 @@ import { DeckGL, HexagonLayer, MapView } from "deck.gl";
 import {GeoJsonLayer} from '@deck.gl/layers';
 import React, { useCallback, useState } from "react";
 import MapGL from "react-map-gl";
+import useDimensions from 'react-cool-dimensions';
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
 
 const INITIAL_VIEW_STATE = {
@@ -25,22 +26,6 @@ const INITIAL_VIEW_STATE = {
     bearing: 0,
   },
 };
-
-const mainView = new MapView({
-  id: "main",
-  x: 855,
-  y: 0,
-  width: "50%",
-  controller: true,
-});
-const minimapView = new MapView({
-  id: "minimap",
-  x: 1,
-  y: 0,
-  width: "50%",
-  clear: true,
-  controller: true,
-});
 
 const minimapBackgroundStyle = {
   position: "absolute",
@@ -75,8 +60,25 @@ const colorRange = [
 ];
 
 const MapLayers = ({ data = [], geoJsonData }) => {
+  const {observe,width}= useDimensions();
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
   
+  const views=[ new MapView({
+    id: "main",
+    x: parseInt(width/2),
+    y: 0,
+    width: "50%",
+    controller: true,
+  }),
+  new MapView({
+    id: "minimap",
+    x: 1,
+    y: 0,
+    width: "50%",
+    clear: true,
+    controller: true,
+  })]
+
   const layers = [
       new GeoJsonLayer({
         id: "geojson-layer",
@@ -202,9 +204,10 @@ const MapLayers = ({ data = [], geoJsonData }) => {
   }, []);
 
   return (
+    <div ref={observe}>
     <DeckGL
       layers={layers}
-      views={[mainView, minimapView]}
+      views={views}
       viewState={viewState}
       // parameters={{depthTest: false}}
       // initialViewState={INITIAL_VIEW_STATE}
@@ -225,6 +228,7 @@ const MapLayers = ({ data = [], geoJsonData }) => {
         <div style={minimapBackgroundStyle} />
       </MapView>
     </DeckGL>
+    </div>
   );
 };
 
