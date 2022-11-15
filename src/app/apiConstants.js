@@ -27,3 +27,5 @@ export const H3HEX_TO_ARC_LAYER =
 
 export const PREDICTION_LAYER_DATA =
   "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/bart-stations.json";
+
+export const GEO_JSON_LAYER_DATA='https://raw.githubusercontent.com/sbma44/uber-cities/master/geojson/abu-dhabi.geojson'  

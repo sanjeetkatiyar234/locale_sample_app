@@ -1,7 +1,8 @@
 import {
+    FETCH_GEO_JSON_LAYER_DATA,
     FETCH_PREDICTION_LAYER_DATA,
 } from "app/actionConstants";
-import { GET, PREDICTION_LAYER_DATA } from "app/apiConstants";
+import { GEO_JSON_LAYER_DATA, GET, PREDICTION_LAYER_DATA } from "app/apiConstants";
 
 export function fetchPredictionLayerData() {
     return {
@@ -12,5 +13,13 @@ export function fetchPredictionLayerData() {
         //     "Content-Type": "application/json",
         //     'Access-Control-Allow-Origin': '*',
         //     }
+    };
+}
+
+export function fetchGeoJsonLayerData() {
+    return {
+        types: FETCH_GEO_JSON_LAYER_DATA,
+        rel: GET,
+        url: GEO_JSON_LAYER_DATA,
     };
 }

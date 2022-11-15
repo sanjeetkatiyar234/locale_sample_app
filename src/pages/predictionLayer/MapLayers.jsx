@@ -2,6 +2,7 @@
  * https://deck.gl/docs/api-reference/layers/scatterplot-layer
  */
 import { DeckGL, HexagonLayer, MapView } from "deck.gl";
+import {GeoJsonLayer} from '@deck.gl/layers';
 import React, { useCallback, useState } from "react";
 import MapGL from "react-map-gl";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
@@ -56,10 +57,13 @@ const minimapBackgroundStyle = {
 //   return !shouldDrawInMinimap;
 // }
 
-const getTooltip = ({ object }) =>
-  object &&
-  `${object.position.join(", ")}
-Count: ${object.points.length}`;
+const getTooltip = ({ object }) =>{
+return object && object.elevationValue + " ";
+//   object &&
+//   `${object.position.join(", ")}
+// Count: ${object.points.length}`;
+};
+
 
 const colorRange = [
   [255, 0, 60, 122],
@@ -70,11 +74,28 @@ const colorRange = [
   [209, 55, 78],
 ];
 
-const CustomScatterplotLayer = ({ data = [] }) => {
+const MapLayers = ({ data = [], geoJsonData }) => {
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
-
+  
   const layers = [
-    data &&
+      new GeoJsonLayer({
+        id: "geojson-layer",
+        data: geoJsonData,
+        pickable: true,
+        stroked: true,
+        filled: true,
+        extruded: false,
+        pointType: "circle",
+        lineWidthScale: 10,
+        lineWidthMinPixels: 1,
+        getFillColor: [90, 120, 120, 70],
+        getLineColor: [100, 100, 12, 200],
+        getPointRadius: 100,
+        getLineWidth: 2,
+        getElevation: 30,
+        Visible: true,
+      }),
+
       new HexagonLayer({
         id: "HexagonLayer0",
         data: data,
@@ -120,7 +141,6 @@ const CustomScatterplotLayer = ({ data = [] }) => {
         // wrapLongitude: false,
       }),
 
-    data &&
       new HexagonLayer({
         id: "HexagonLayer1",
         data: data,
@@ -167,7 +187,7 @@ const CustomScatterplotLayer = ({ data = [] }) => {
       }),
   ];
 
-  const onViewStateChange = useCallback(({ viewState: newViewState }) => {
+  const onViewStateChange = useCallback(({viewId, viewState: newViewState }) => {
     setViewState(() => ({
       main: newViewState,
       minimap: {
@@ -176,7 +196,7 @@ const CustomScatterplotLayer = ({ data = [] }) => {
         latitude: newViewState.latitude,
         zoom: newViewState.zoom,
         pitch: newViewState.pitch,
-        bearing: newViewState.bearing
+        bearing: newViewState.bearing,
       },
     }));
   }, []);
@@ -208,4 +228,4 @@ const CustomScatterplotLayer = ({ data = [] }) => {
   );
 };
 
-export default CustomScatterplotLayer;
+export default MapLayers;
