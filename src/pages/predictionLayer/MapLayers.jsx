@@ -35,12 +35,13 @@ const minimapBackgroundStyle = {
   boxShadow: "0 0 8px 2px rgba(0,0,0,0.5)",
 };
 
-// function layerFilter({layer, viewport}) {
-//   const shouldDrawInMinimap =
-//     layer.id.startsWith('coverage') || layer.id.startsWith('viewport-bounds');
-//   if (viewport.id === 'minimap') return shouldDrawInMinimap;
-//   return !shouldDrawInMinimap;
-// }
+function layerFilter({ layer, viewport }) {
+  if (viewport.id === 'main' && layer.id === 'geojson-layer') {
+    // Do not draw the geo layer for the minimap
+    return false;
+  }
+  return true;
+}
 
 const getTooltip = ({ object }) =>{
 return object && object.elevationValue + " ";
@@ -212,7 +213,7 @@ const MapLayers = ({ data = [], geoJsonData }) => {
       // parameters={{depthTest: false}}
       // initialViewState={INITIAL_VIEW_STATE}
       onViewStateChange={onViewStateChange}
-      // layerFilter={layerFilter}
+      layerFilter={layerFilter}
       controller={false}
       getTooltip={getTooltip}
     >
