@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useToast from "hooks/useToast";
+import PageLeftSidePanel from "layout/PageLeftSidePanel";
 import MapLayers from "./MapLayers";
 import PageHeader from "./PageHeader";
 import { fetchPredictionLayerData, fetchGeoJsonLayerData } from "./actions";
 import { fetchQueryHiveData } from "store/actions";
 import { predictionLayerDataSelector } from "./selectors";
+import PredictionLayerColorForm from "./PredictionLayerColorForm";
 
 const PredictionLayerPage = () => {
   const [checked, setChecked] = React.useState(false);
@@ -39,6 +41,9 @@ const PredictionLayerPage = () => {
   return (
     <div>
       <PageHeader checked={checked} handleValueChecked={handleValueChecked} />
+      <PageLeftSidePanel>
+        <PredictionLayerColorForm />
+      </PageLeftSidePanel>
       <MapLayers data={data} geoJsonData={geoJsonData} toggleView={checked} />
     </div>
   );
