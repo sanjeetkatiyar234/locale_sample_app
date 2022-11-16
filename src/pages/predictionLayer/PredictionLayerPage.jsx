@@ -1,17 +1,22 @@
-import React,{ useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import useToast from 'hooks/useToast';
-import MapLayers from './MapLayers';
-import PageHeader from './PageHeader';
-import {fetchPredictionLayerData,fetchGeoJsonLayerData} from './actions';
-import { fetchQueryHiveData } from 'store/actions';
-import { predictionLayerDataSelector } from './selectors';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import useToast from "hooks/useToast";
+import MapLayers from "./MapLayers";
+import PageHeader from "./PageHeader";
+import { fetchPredictionLayerData, fetchGeoJsonLayerData } from "./actions";
+import { fetchQueryHiveData } from "store/actions";
+import { predictionLayerDataSelector } from "./selectors";
 
 const PredictionLayerPage = () => {
+  const [checked, setChecked] = React.useState(false);
   const data = useSelector(predictionLayerDataSelector);
-  const geoJsonData = useSelector(state=>state.pages.predictionLayer.geoJsonData);
+  const geoJsonData = useSelector(
+    (state) => state.pages.predictionLayer.geoJsonData
+  );
   const toast = useToast();
   const dispatch = useDispatch();
+
+  const handleValueChecked = (value) => setChecked(value);
 
   useEffect(() => {
     dispatch({
@@ -33,10 +38,10 @@ const PredictionLayerPage = () => {
 
   return (
     <div>
-        <PageHeader/>
-        <MapLayers data={data} geoJsonData={geoJsonData}/>
+      <PageHeader checked={checked} handleValueChecked={handleValueChecked} />
+      <MapLayers data={data} geoJsonData={geoJsonData} toggleView={checked} />
     </div>
   );
-}
+};
 
 export default PredictionLayerPage;
