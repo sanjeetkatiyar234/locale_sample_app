@@ -1,11 +1,10 @@
 import { ORIGIN_DESTINATION_COLOR_FORM } from "app/formConstants";
 import React from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, getFormValues } from "redux-form";
 import ColorInput from "components/forms/ColorInput";
 import { Card, CardContent } from "@mui/material";
-import FormSubmitButton from "components/forms/submit/FormSubmitButton";
 import { convertRbgtoArray } from "utils/convertRgbToArray";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { applySelectedColor } from "./actions";
 
 const normalizeValue = (value = {}) => ({
@@ -13,32 +12,34 @@ const normalizeValue = (value = {}) => ({
   secondaryColor: convertRbgtoArray(value.secondaryColor),
 });
 
-const OriginDestinationColorForm = ({ handleSubmit, submitting }) => {
+const OriginDestinationColorForm = () => {
   const dispatch = useDispatch();
+  const formValue=useSelector(getFormValues(ORIGIN_DESTINATION_COLOR_FORM));
 
-  const handleApply = (value) => {
-    if (value) {
-      dispatch(applySelectedColor(normalizeValue(value)));
+  const handleApply = () => {
+    if (formValue) {
+      dispatch(applySelectedColor(normalizeValue(formValue)));
     }
   };
 
   return (
     <Card>
       <CardContent>
-        <form onSubmit={handleSubmit(handleApply)}>
+        <form >
           <Field
             name="primaryColor"
             component={ColorInput}
             size="small"
             label="Primary Color"
+            onChange={handleApply}
           />
           <Field
             name="secondaryColor"
             component={ColorInput}
             size="small"
             label="Secondary Color"
+            onChange={handleApply}
           />
-          <FormSubmitButton isLoading={submitting} label="Apply" />
         </form>
       </CardContent>
     </Card>

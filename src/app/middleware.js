@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import omit from 'lodash/omit';
 import mapValues from 'lodash/mapValues';
-import createEchoHttpWrapper from './http';
+import createHttpWrapper from './http';
 import { getApiRootUrl, objectToParamString } from './util';
 import { CLEAR_ACTION_QUEUE, UPDATE_LOADING_COUNTER } from './actionConstants';
 import { queueAction, reloadApp } from './actions';
@@ -12,7 +12,7 @@ import ForbiddenError from './errors/ForbiddenError';
 
 
 export function reduxApiMiddleware(storeApi) {
-  const http = createEchoHttpWrapper();
+  const http = createHttpWrapper();
   const { dispatch } = storeApi;
 
   return (next) => (action) => {
@@ -131,23 +131,23 @@ export function getLoaderStatusCodeMap(dispatch, statusCodeMap, action) {
  */
 function getUrl(action) {
   const { queryParams } = action;
-  let { url, templatedUrl, params } = action;
+  let { url,params,search } = action;
 
-  if (url) {
-   return `${getApiRootUrl()}/${url}`;
-  }
-
-  if (templatedUrl && params ) {
+  if (url && params ) {
     Object.keys(params).forEach((param) => {
-        templatedUrl = templatedUrl.replace(`{${param}}`, params[param]);
+      url = url.replace(`{${param}}`, params[param]);
     });
   }
-
-  if (templatedUrl && queryParams) {
-    templatedUrl += objectToParamString(queryParams);
+  
+// if search is alreay params strings
+  if (url && search) {
+    url += search;
+  }
+  if (url && queryParams) {
+    url += objectToParamString(queryParams);
   }
 
-  return `${getApiRootUrl()}/${templatedUrl}`;
+  return url;
 }
 
 // Combines the action's statusCodeMap with some reasonable defaults and handling

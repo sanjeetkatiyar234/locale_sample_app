@@ -13,13 +13,13 @@ const H3HexagonLayerWithSlider = ({ sampleData }) => {
   const filterData = useMemo(() => {
     const filterData = sampleData.filter(
       (d) =>
-        moment(d.start).isSameOrAfter(start) &&
-        moment(d.end).isSameOrBefore(end)
+        moment(d.start_time).isSameOrAfter(start) &&
+        moment(d.start_time).isSameOrBefore(end)
     );
     const dataMidlength = parseInt(filterData.length / 2);
-    return filterData.map((data) => ({
+    return filterData.map((data, index) => ({
       ...data,
-      color: data.id <= dataMidlength ? primaryColor : secondaryColor,
+      color: index <= dataMidlength ? primaryColor : secondaryColor,
     }));
   }, [sampleData, start, end, primaryColor, secondaryColor]);
   return (
@@ -28,8 +28,8 @@ const H3HexagonLayerWithSlider = ({ sampleData }) => {
         selectedDateRange={dateRange}
         dataSource={sampleData}
         setDateRange={setDateRange}
-        xName="start"
-        yName="Count"
+        xName="start_time"
+        yName="vehicle_count"
       />
       <CustomH3HexagonLayer data={filterData} />
     </>

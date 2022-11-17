@@ -10,8 +10,8 @@ const HexagonalLayerWithSlider = ({sampleData}) => {
     () =>
       sampleData.filter(
         (d) =>
-          moment(d.dateTime).isSameOrAfter(start) &&
-          moment(d.dateTime).isSameOrBefore(end)
+          moment(d.start_time).isSameOrAfter(start) &&
+          moment(d.start_time).isSameOrBefore(end)
       ),
     [sampleData, start, end]
   );
@@ -21,7 +21,7 @@ const HexagonalLayerWithSlider = ({sampleData}) => {
         selectedDateRange={dateRange}
         dataSource={sampleData}
         setDateRange={setDateRange}
-        xName="dateTime"
+        xName="start_time"
       />
       <CustomHexagonLayer data={filterData} />
     </>

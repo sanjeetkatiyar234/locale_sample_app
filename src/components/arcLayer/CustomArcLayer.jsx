@@ -1,6 +1,7 @@
 import { ArcLayer, DeckGL } from "deck.gl";
 import React from "react";
 import MapGL from "react-map-gl";
+import { cellToLatLng } from "h3-js";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
 
 // const MAP_STYLE =
@@ -40,10 +41,10 @@ const CustomArcLayer = ({ data = [] }) => {
     data,
     pickable: true,
     getWidth: 1,
-    getSourcePosition: (d) => d.startPosition,
-    getTargetPosition: (d) => d.endPosition,
-    getSourceColor: (d) => [100 * +d.route_id, 140, 0],
-    getTargetColor: (d) => [200 * +d.route_id, 140, 0],
+    getSourcePosition: (d) => (d.start_hex ? cellToLatLng(d.start_hex)?.reverse() : d.start_loc),
+    getTargetPosition: (d) => (d.end_hex ? cellToLatLng(d.end_hex)?.reverse() : d.end_loc),
+    getSourceColor: (d) => [d.id % 255, 140, 0],
+    getTargetColor: (d) => [d.id % 255, 140, 0],
   });
 
   return (
@@ -52,8 +53,7 @@ const CustomArcLayer = ({ data = [] }) => {
       initialViewState={INITIAL_VIEW_STATE}
       controller={true}
       getTooltip={({ object }) =>
-        object &&
-        `${object.startPosition.join(",")} to ${object.endPosition.join(",")}`
+        object && `${object.start_hex ? object.start_hex : object.start_loc.join(",")} to ${object.end_hex ? object.end_hex : object.end_loc.join(",")}`
       }
     >
       <MapGL

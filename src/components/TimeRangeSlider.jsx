@@ -1,5 +1,5 @@
 import React from "react";
-import RangeSlider from "./RangeSlider/Type2/RangeSlider";
+import RangeSlider from "./RangeSlider/RangeSlider";
 import "./TimeRangeSlider.css";
 
 const TimeRangeSlider = (props) => {

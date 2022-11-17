@@ -20,8 +20,8 @@ const ArcLayerWithSlider = ({ sampleData }) => {
     () =>
       (arcData ?? sampleData).filter(
         (d) =>
-          moment(d.dateTime).isSameOrAfter(start) &&
-          moment(d.dateTime).isSameOrBefore(end)
+          moment(d.start_time).isSameOrAfter(start) &&
+          moment(d.start_time).isSameOrBefore(end)
       ),
     [arcData, sampleData, start, end]
   );
@@ -32,7 +32,7 @@ const ArcLayerWithSlider = ({ sampleData }) => {
         selectedDateRange={dateRange}
         dataSource={arcData ?? sampleData}
         setDateRange={setDateRange}
-        xName="dateTime"
+        xName="start_time"
       />
       <CustomArcLayer data={filterData} />
     </>
