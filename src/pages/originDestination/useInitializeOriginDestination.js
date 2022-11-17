@@ -21,12 +21,12 @@ const useInitializeOriginDestination = () => {
   const data1 = useSelector(
     (state) => state.pages.originDestination.data.first
   );
-  const data2 = useSelector(
-    (state) => state.pages.originDestination.data.second
-  );
-  const data3 = useSelector(
-    (state) => state.pages.originDestination.data.third
-  );
+  // const data2 = useSelector(
+  //   (state) => state.pages.originDestination.data.second
+  // );
+  // const data3 = useSelector(
+  //   (state) => state.pages.originDestination.data.third
+  // );
 
   useEffect(() => {
     dispatch({
@@ -36,25 +36,25 @@ const useInitializeOriginDestination = () => {
         error: () => toast.error("failed 1st data load"),
       },
     });
-    dispatch({
-      ...fetchH3SampleData2(SECOND_DATA),
-      statusCodeMap: {
-        success: () => toast.success("2nd data loaded"),
-        error: () => toast.error("failed 2nd data load"),
-      },
-    });
-    dispatch({
-      ...fetchH3SampleData3(THIRD_DATA),
-      statusCodeMap: {
-        success: () => toast.success("data 3rd loaded"),
-        error: () => toast.error("failed 3rd data load"),
-      },
-    });
+    // dispatch({
+    //   ...fetchH3SampleData2(SECOND_DATA),
+    //   statusCodeMap: {
+    //     success: () => toast.success("2nd data loaded"),
+    //     error: () => toast.error("failed 2nd data load"),
+    //   },
+    // });
+    // dispatch({
+    //   ...fetchH3SampleData3(THIRD_DATA),
+    //   statusCodeMap: {
+    //     success: () => toast.success("data 3rd loaded"),
+    //     error: () => toast.error("failed 3rd data load"),
+    //   },
+    // });
   }, [dispatch]);
 
   useEffect(() => {
-    if (data1.length && data2.length & data3.length) {
-      const combineData = [...data1, ...data2, ...data3];
+    if (data1.length) {
+      const combineData = [...data1];
 
       const filteredArr = Object.values(
         combineData.reduce((accObj, current) => {
@@ -78,7 +78,7 @@ const useInitializeOriginDestination = () => {
         dispatch(combineH3SampleData3(filteredArr));
       }
     }
-  }, [data1, data2, data3]);
+  }, [data1]);
 };
 
 export default useInitializeOriginDestination;
