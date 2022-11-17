@@ -2,7 +2,7 @@ import ArchitectureIcon from "@mui/icons-material/Architecture";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
 import MapIcon from "@mui/icons-material/Map";
-import BatchPredictionIcon from '@mui/icons-material/BatchPrediction';
+import BatchPredictionIcon from "@mui/icons-material/BatchPrediction";
 import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
@@ -14,7 +14,9 @@ import ListItemText from "@mui/material/ListItemText";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
 import { NavLink } from "react-router-dom";
+import mainLogo from "./logo.png";
 import CustomTooltip from "../components/ToolTip/CustomTooltip";
+import { Typography } from "@mui/material";
 
 export const drawerWidth = 240;
 
@@ -42,7 +44,7 @@ const closedMixin = (theme) => ({
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-end",
+  justifyContent: "space-around",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
@@ -74,9 +76,12 @@ const SideBar = ({ open, handleDrawerClose }) => {
     >
       <DrawerHeader style={{ backgroundColor: "rgb(42, 42, 42)" }}>
         {open && (
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
+          <>
+            <img src={mainLogo} alt="fireSpot" height="40" />
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </>
         )}
       </DrawerHeader>
       <Divider />

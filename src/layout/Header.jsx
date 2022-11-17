@@ -3,7 +3,7 @@ import { IconButton, Toolbar, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
 import React from "react";
-import mainLogo from "./logo.png";
+import smallLogo from "./smallLogo.png";
 import { drawerWidth } from "./SideBar";
 
 const AppBar = styled(MuiAppBar, {
@@ -31,7 +31,15 @@ const Header = ({ open, handleDrawerOpen }) => {
       open={open}
       style={{ backgroundColor: "rgb(42, 42, 42)" }}
     >
-      <Toolbar>
+      <Toolbar style={{ paddingLeft: "10px" }}>
+        {!open && (
+          <img
+            src={smallLogo}
+            alt="fireSpot"
+            height="40"
+            style={{ marginRight: "5px" }}
+          />
+        )}
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -44,9 +52,6 @@ const Header = ({ open, handleDrawerOpen }) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-          <img src={mainLogo} alt="fireSpot" height="50" />
-        </Typography>
       </Toolbar>
     </AppBar>
   );
