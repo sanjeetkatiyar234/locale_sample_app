@@ -6,8 +6,10 @@ import {
 } from "app/actionConstants";
 
 const defaultSate = {
-  primaryColor: [255, 0, 0],
-  secondaryColor: [255, 255, 0],
+  mainViewPrimaryColor: [255, 0, 0],
+  mainViewSecondaryColor: [255, 255, 0],
+  miniViewPrimaryColor: [255, 0, 0],
+  miniViewSecondaryColor: [255, 255, 0],
 };
 
 function selectedColorReducer(state = defaultSate, action) {
