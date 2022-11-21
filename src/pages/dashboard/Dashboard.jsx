@@ -1,6 +1,5 @@
 import { Box, Card, CardContent, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
-import { styled } from "@mui/material/styles";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import VideocamIcon from "@mui/icons-material/Videocam";
@@ -13,14 +12,6 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 const Dashboard = () => {
   return (
