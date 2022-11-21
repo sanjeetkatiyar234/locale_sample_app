@@ -114,7 +114,7 @@ const Dashboard = () => {
                       </Box>
                       <Box>
                         <Typography variant="body1">Capture Video</Typography>
-                        <Typography variant="body2">
+                        <Typography variant="body2" color="text.secondary">
                           {" "}
                           Lorem ipsum dolor sit amet, consectetur adipisicing
                           elit. Officiis nesciunt necessitatibus quam, non
@@ -135,7 +135,7 @@ const Dashboard = () => {
                         <Typography variant="body1">
                           Enagage and Target your customer
                         </Typography>
-                        <Typography variant="body2">
+                        <Typography variant="body2" color="text.secondary">
                           {" "}
                           Lorem ipsum dolor sit amet, consectetur adipisicing
                           elit. Officiis
@@ -155,7 +155,7 @@ const Dashboard = () => {
                         <Typography variant="body1">
                           Location efficiency
                         </Typography>
-                        <Typography variant="body2">
+                        <Typography variant="body2" color="text.secondary">
                           {" "}
                           Lorem ipsum dolor sit amet, consectetur adipisicing
                           elit. Officiis dffde.
