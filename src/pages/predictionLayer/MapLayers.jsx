@@ -7,6 +7,7 @@ import React, { useCallback, useState } from "react";
 import MapGL from "react-map-gl";
 import useDimensions from "react-cool-dimensions";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
+import { useSelector } from "react-redux";
 
 const INITIAL_VIEW_STATE = {
   main: {
@@ -40,6 +41,22 @@ function layerFilter({ layer, viewport }) {
     // Do not draw the geo layer for the minimap
     return false;
   }
+  if (
+    viewport.id === "main" &&
+    (layer.id === "HexagonLayer-mini-0" || layer.id === "HexagonLayer-mini-1")
+  ) {
+    // Do not draw the mini hex layer  layer for the main view
+    return false;
+  }
+
+  if (
+    viewport.id === "minimap" &&
+    (layer.id === "HexagonLayer-main-0" || layer.id === "HexagonLayer-main-1")
+  ) {
+    //  Do not draw the main hex layer  layer for the mini view
+    return false;
+  }
+
   return true;
 }
 
@@ -50,18 +67,18 @@ const getTooltip = ({ object }) => {
   // Count: ${object.points.length}`;
 };
 
-const colorRange = [
-  [255, 0, 60, 122],
-  [0, 122, 255, 122],
-  [0, 122, 255, 122],
-  [254, 237, 177],
-  [254, 173, 84],
-  [209, 55, 78],
-];
-
 const MapLayers = ({ data = [], geoJsonData, toggleView = true }) => {
   const { observe, width } = useDimensions();
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
+  const {
+    mainViewPrimaryColor,
+    mainViewSecondaryColor,
+    miniViewPrimaryColor,
+    miniViewSecondaryColor,
+  } = useSelector((state) => state.pages.predictionLayer.selectedColor) || {};
+
+  const mainViewColorRange = [mainViewPrimaryColor, mainViewSecondaryColor];
+  const miniViewColorRange = [miniViewPrimaryColor, miniViewSecondaryColor];
 
   const views = [
     new MapView({
@@ -99,16 +116,16 @@ const MapLayers = ({ data = [], geoJsonData, toggleView = true }) => {
       getElevation: 30,
       Visible: true,
     }),
-
+    // for main view layers
     new HexagonLayer({
-      id: "HexagonLayer0",
+      id: "HexagonLayer-main-0",
       data: data,
 
       /* props from HexagonLayer class */
 
       // colorAggregation: 'SUM',
       // colorDomain: null,
-      colorRange,
+      colorRange: mainViewColorRange,
       colorScaleType: "ordinal",
       coverage: 1,
       // elevationAggregation: 'SUM',
@@ -146,14 +163,104 @@ const MapLayers = ({ data = [], geoJsonData, toggleView = true }) => {
     }),
 
     new HexagonLayer({
-      id: "HexagonLayer1",
+      id: "HexagonLayer-main-1",
       data: data,
 
       /* props from HexagonLayer class */
 
       // colorAggregation: 'SUM',
       // colorDomain: null,
-      colorRange,
+      colorRange: mainViewColorRange,
+      colorScaleType: "ordinal",
+      coverage: 3,
+      // elevationAggregation: 'SUM',
+      elevationDomain: [1, 50000],
+      // elevationLowerPercentile: 0,
+      elevationRange: [0, 50000],
+      elevationScale: 1,
+      // elevationScaleType: 'linear',
+      // elevationUpperPercentile: 100,
+      extruded: true,
+      getColorValue: (points) => points.length,
+      // getColorWeight: 1,
+      // getElevationValue: null,
+      // getElevationWeight: 1,
+      getPosition: (d) => d.end_loc,
+      // hexagonAggregator: null,
+      // lowerPercentile: 0,
+      // material: true,
+      // onSetColorDomain: null,
+      // onSetElevationDomain: null,
+      radius: 200,
+      // upperPercentile: 100,
+
+      /* props inherited from Layer class */
+
+      // autoHighlight: false,
+      // coordinateOrigin: [0, 0, 0],
+      // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
+      // highlightColor: [0, 0, 128, 128],
+      // modelMatrix: null,
+      // opacity: 1,
+      pickable: true,
+      // visible: true,
+      // wrapLongitude: false,
+    }),
+    // for mini view layers
+    new HexagonLayer({
+      id: "HexagonLayer-mini-0",
+      data: data,
+
+      /* props from HexagonLayer class */
+
+      // colorAggregation: 'SUM',
+      // colorDomain: null,
+      colorRange: miniViewColorRange,
+      colorScaleType: "ordinal",
+      coverage: 1,
+      // elevationAggregation: 'SUM',
+      // elevationDomain: null,
+      // elevationLowerPercentile: 0,
+      elevationRange: [1, 10000],
+      elevationScale: 1,
+      // elevationScaleType: 'linear',
+      // elevationUpperPercentile: 100,
+      extruded: true,
+      getColorValue: (points) => points.length % 2,
+      // getColorWeight: 1,
+      // getElevationValue: null,
+      // getElevationWeight: 1,
+      getPosition: (d) => d.start_loc,
+      // hexagonAggregator: null,
+      // lowerPercentile: 0,
+      // material: true,
+      // onSetColorDomain: null,
+      // onSetElevationDomain: null,
+      radius: 200,
+      upperPercentile: 100,
+
+      /* props inherited from Layer class */
+
+      // autoHighlight: false,
+      // coordinateOrigin: [0, 0, 0],
+      // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
+      // highlightColor: [0, 0, 128, 128],
+      // modelMatrix: null,
+      // opacity: 1,
+      pickable: true,
+      // visible: true,
+      // wrapLongitude: false,
+    }),
+
+    new HexagonLayer({
+      id: "HexagonLayer-mini-1",
+      data: data,
+
+      /* props from HexagonLayer class */
+
+      // colorAggregation: 'SUM',
+      // colorDomain: null,
+      colorRange: miniViewColorRange,
       colorScaleType: "ordinal",
       coverage: 3,
       // elevationAggregation: 'SUM',
