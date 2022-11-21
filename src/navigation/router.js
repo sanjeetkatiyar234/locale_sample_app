@@ -8,31 +8,56 @@ import Layout from "layout/Layout";
 import PageLoader from "layout/PageLoader";
 
 // Lazy-loaded
-const Home = React.lazy(() => import('pages/home/Home'));
-const MapPage = React.lazy(() => import('pages/originDestination/MapPage'));
-const ArcLayerPage = React.lazy(() => import('pages/rideShareDemand/ArcLayerPage'));
-const PredictionLayerPage = React.lazy(() => import('pages/predictionLayer/PredictionLayerPage'));
+// const Home = React.lazy(() => import('pages/home/Home'));
+const Dashboard = React.lazy(() => import("pages/dashboard/Dashboard"));
+const MapPage = React.lazy(() => import("pages/originDestination/MapPage"));
+const ArcLayerPage = React.lazy(() =>
+  import("pages/rideShareDemand/ArcLayerPage")
+);
+const PredictionLayerPage = React.lazy(() =>
+  import("pages/predictionLayer/PredictionLayerPage")
+);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route index element={
+      <Route
+        index
+        element={
+          <React.Suspense fallback={<PageLoader />}>
+            <Dashboard />
+          </React.Suspense>
+        }
+      />
+      {/* <Route index element={
         <React.Suspense fallback={<PageLoader />}>
           <Home />
         </React.Suspense>
-      } />
-      <Route path="origin-destination" element={
-        <React.Suspense fallback={<PageLoader />}>
-          <MapPage />
-        </React.Suspense>} />
-      <Route path="ride-share-demand" element={
-        <React.Suspense fallback={<PageLoader />}>
-          <ArcLayerPage />
-        </React.Suspense>} />
-      <Route path="prediction-layer" element={
-        <React.Suspense fallback={<PageLoader />}>
-          <PredictionLayerPage />
-        </React.Suspense>} />
+      } /> */}
+      <Route
+        path="origin-destination"
+        element={
+          <React.Suspense fallback={<PageLoader />}>
+            <MapPage />
+          </React.Suspense>
+        }
+      />
+      <Route
+        path="ride-share-demand"
+        element={
+          <React.Suspense fallback={<PageLoader />}>
+            <ArcLayerPage />
+          </React.Suspense>
+        }
+      />
+      <Route
+        path="prediction-layer"
+        element={
+          <React.Suspense fallback={<PageLoader />}>
+            <PredictionLayerPage />
+          </React.Suspense>
+        }
+      />
     </Route>
   )
 );

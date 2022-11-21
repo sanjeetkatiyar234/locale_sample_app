@@ -88,7 +88,12 @@ const SideBar = ({ open, handleDrawerClose }) => {
       <List style={{ backgroundColor: "rgb(42, 42, 42)" }}>
         <NavLink to="/">
           <ListItem disablePadding sx={{ display: "block" }}>
-            <CustomTooltip disable={open} title="Home" placement="right" arrow>
+            <CustomTooltip
+              disable={open}
+              title="Dashboard"
+              placement="right"
+              arrow
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -107,7 +112,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
                 </ListItemIcon>
 
                 <ListItemText
-                  primary="Home"
+                  primary="Dashboard"
                   sx={{ opacity: open ? 1 : 0, textDecoration: "none" }}
                 />
               </ListItemButton>
