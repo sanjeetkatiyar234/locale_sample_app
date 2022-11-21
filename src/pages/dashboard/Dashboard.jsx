@@ -33,11 +33,10 @@ const Dashboard = () => {
             <Card>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Lizard
+                  Welcome Back
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
+                  Livli Dashboard
                 </Typography>
               </CardContent>
             </Card>
@@ -47,7 +46,7 @@ const Dashboard = () => {
               <CardContent sx={{ display: "flex" }}>
                 <Box>
                   <Typography gutterBottom variant="body1" component="div">
-                    Screens
+                    Facilities
                   </Typography>
                   <Typography variant="h6" color="text.secondary">
                     0
@@ -61,7 +60,7 @@ const Dashboard = () => {
               <CardContent sx={{ display: "flex" }}>
                 <Box>
                   <Typography gutterBottom variant="body1" component="div">
-                    Screens
+                    Cameras
                   </Typography>
                   <Typography variant="h6" color="text.secondary">
                     0
@@ -90,12 +89,10 @@ const Dashboard = () => {
               <CardActionArea>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Lizard
+                    Livli Dashboard
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus expedita similique deleniti maxime provident, inventore quod blanditiis dicta necessitatibus dolore esse officia, vero sequi rerum consequuntur quaerat magnam beatae tempora.
                   </Typography>
                 </CardContent>
               </CardActionArea>
