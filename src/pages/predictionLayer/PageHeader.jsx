@@ -13,9 +13,9 @@ const PageHeader = ({ checked, handleValueChecked }) => {
           <NavLink to="/prediction-layer">
             <Typography color="text.primary">Prediction Layer</Typography>
           </NavLink>
-          <NavLink to="/prediction-layer">
+          {/* <NavLink to="/prediction-layer">
             <Typography color="text.primary">Sub Prediction Layer</Typography>
-          </NavLink>
+          </NavLink> */}
         </Breadcrumbs>
         <Box component="div">
           <ToggleViewSwitch

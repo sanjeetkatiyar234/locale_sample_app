@@ -8,7 +8,7 @@ import Layout from "layout/Layout";
 import PageLoader from "layout/PageLoader";
 
 // Lazy-loaded
-// const Home = React.lazy(() => import('pages/home/Home'));
+const Home = React.lazy(() => import('pages/home/Home'));
 const Dashboard = React.lazy(() => import("pages/dashboard/Dashboard"));
 const MapPage = React.lazy(() => import("pages/originDestination/MapPage"));
 const ArcLayerPage = React.lazy(() =>
@@ -29,11 +29,11 @@ const router = createBrowserRouter(
           </React.Suspense>
         }
       />
-      {/* <Route index element={
+      <Route path="origin-destination-v1" element={
         <React.Suspense fallback={<PageLoader />}>
           <Home />
         </React.Suspense>
-      } /> */}
+      } />
       <Route
         path="origin-destination"
         element={

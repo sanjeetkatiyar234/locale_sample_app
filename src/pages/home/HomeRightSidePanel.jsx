@@ -23,7 +23,7 @@ const HomeRightSidePanel = () => {
 
   return (
     <RightSidePanel>
-      <Card component="div">
+      {/* <Card component="div">
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             Overview Summary
@@ -31,7 +31,7 @@ const HomeRightSidePanel = () => {
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur
           laborum non perferendis asperiores qui. Earum, esse?
         </CardContent>
-      </Card>
+      </Card> */}
       <Card>
         <CardContent>
           <FormControl sx={{ m: 1, minWidth: 120 }} size="small">

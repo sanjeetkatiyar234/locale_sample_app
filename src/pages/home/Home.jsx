@@ -25,7 +25,7 @@ const Home = () => {
     <div>
       <PageHeader />
       <HexagonalLayerWithSlider sampleData={sampleData} />
-      <HomeRightSidePanel />
+      {/* <HomeRightSidePanel /> */}
     </div>
   );
 };

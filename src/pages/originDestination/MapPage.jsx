@@ -18,7 +18,7 @@ const MapPage = () => {
         <OriginDestinationColorForm />
       </PageLeftSidePanel>
       <H3HexagonLayerWithSlider sampleData={sampleData} />
-      <OriginDestinationRightSidePanel />
+      {/* <OriginDestinationRightSidePanel /> */}
     </div>
   );
 };

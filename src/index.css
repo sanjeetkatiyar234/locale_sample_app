@@ -44,3 +44,7 @@ a:-webkit-any-link{
 .e-toolbar-items, #charts1_selector {
   background: transparent !important;
 }
+
+a {
+  /* color: white; */
+}
