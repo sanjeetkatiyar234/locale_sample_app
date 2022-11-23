@@ -11,7 +11,7 @@ export const h3SampleDataWithFilterTypeSelector = createSelector(
   (sampleData = [], filterTypeValue) => {
     const todayDate = moment().subtract(10, "M");
     const filterData =
-      filterTypeValue === "intraDay"
+      filterTypeValue === "daily"
         ? sampleData.filter((d) =>
             moment(d.start_time).isSameOrAfter(todayDate)
           )

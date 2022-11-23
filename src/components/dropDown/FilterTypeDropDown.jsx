@@ -12,9 +12,9 @@ const FilterTypeDropDown = () => {
   const dispatch = useDispatch();
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 140 }}>
       <FormControl fullWidth size="small">
-        <InputLabel id="select-label">Filter Type</InputLabel>
+        <InputLabel id="select-label">View Selection</InputLabel>
         <Select
           labelId="select-label"
           value={filterTypeValue}
@@ -24,8 +24,9 @@ const FilterTypeDropDown = () => {
           }}
           variant="outlined"
         >
-          <MenuItem value="intraDay">Intra Day</MenuItem>
+          <MenuItem value="daily">Daily</MenuItem>
           <MenuItem value="monthly">Monthly</MenuItem>
+          <MenuItem value="detailed">Detailed</MenuItem>
         </Select>
       </FormControl>
     </Box>
