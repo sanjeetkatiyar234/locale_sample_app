@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Grid, Paper, Typography } from "@mui/material";
+import { Box, Card, CardContent, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import EventNoteIcon from "@mui/icons-material/EventNote";
@@ -12,10 +12,11 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
+import Footer from "layout/Footer";
 
 const Dashboard = () => {
   return (
-    <div>
+    <>
       <PageHeader />
       <Box sx={{ padding: 2 }}>
         <Grid container spacing={2}>
@@ -169,7 +170,8 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Box>
-    </div>
+      <Footer />
+    </>
   );
 };
 
