@@ -2,6 +2,13 @@ import React from "react";
 import NotificationSystem from "react-notification-system";
 
 const style = {
+  NotificationItem: {
+    // Override the notification item
+    DefaultStyle: {
+      // Applied to every notification, regardless of the notification level
+      backgroundColor: "rgb(42, 42, 42)",
+    },
+  },
   Title: {
     DefaultStyle: {
       fontWeight: "600",
