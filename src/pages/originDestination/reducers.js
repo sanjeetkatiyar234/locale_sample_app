@@ -34,13 +34,13 @@ const defaultState = {
 function h3SampleDataReducer(state = defaultState, action) {
   switch (action.type) {
     case FIRST_FETCH_H3HEX_LAYER_DATA_RECEIVED:
-      return { ...state, first: action.response.data?.body };
+      return { ...state, first: action.response.data?.body?.data };
     case SECOND_FETCH_H3HEX_LAYER_DATA_RECEIVED:
-      return { ...state, second: action.response.data?.body };
+      return { ...state, second: action.response.data?.body?.data };
     case THIRD_FETCH_H3HEX_LAYER_DATA_RECEIVED:
-      return { ...state, third: action.response.data?.body };
+      return { ...state, third: action.response.data?.body?.data };
     case COMBINE_H3HEX_LAYER_DATA:
-      return {...state,combine:action.payload};
+      return { ...state, combine: action.payload };
     default:
       return state;
   }

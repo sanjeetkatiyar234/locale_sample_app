@@ -2,21 +2,11 @@ import moment from "moment";
 import { createSelector } from "reselect";
 
 // state selectors
-const h3SampleDataSelector = (state) =>
-  state.pages.originDestination.data.combine;
-const filterTypeValueSelector = (state) => state.filterType.value;
+const sateDataSelector = (state) => state.pages.originDestination.data.combine;
 
-export const h3SampleDataWithFilterTypeSelector = createSelector(
-  [h3SampleDataSelector, filterTypeValueSelector],
-  (sampleData = [], filterTypeValue) => {
-    const todayDate = moment().subtract(10, "M");
-    const filterData =
-      filterTypeValue === "daily"
-        ? sampleData.filter((d) =>
-            moment(d.start_time).isSameOrAfter(todayDate)
-          )
-        : sampleData;
-
-    return filterData?.filter((d) => !!d.hex_id);
+export const h3HexDataSelector = createSelector(
+  [sateDataSelector],
+  (sampleData = []) => {
+    return sampleData?.filter((d) => !!d.hex_id);
   }
 );
