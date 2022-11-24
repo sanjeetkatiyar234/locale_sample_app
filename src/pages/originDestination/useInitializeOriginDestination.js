@@ -8,8 +8,10 @@ import {
   fetchH3SampleData3,
 } from "./actions";
 
-const FIRST_DATA =
-  "?start_time=2022-01-1 00:00:00&end_time=2022-01-10 00:00:00";
+const FIRST_DATA = {
+  start_time: "2022-01-1 00:00:00",
+  end_time: "2022-01-10 00:00:00",
+};
 const SECOND_DATA =
   "?start_time=2022-01-11 00:00:00&end_time=2022-01-20 00:00:00";
 const THIRD_DATA =
@@ -18,6 +20,7 @@ const THIRD_DATA =
 const useInitializeOriginDestination = () => {
   const toast = useToast();
   const dispatch = useDispatch();
+  const filterTypeValue = useSelector((state) => state.filterType.value);
   const data1 = useSelector(
     (state) => state.pages.originDestination.data.first
   );
@@ -30,7 +33,7 @@ const useInitializeOriginDestination = () => {
 
   useEffect(() => {
     dispatch({
-      ...fetchH3SampleData1(FIRST_DATA),
+      ...fetchH3SampleData1({ ...FIRST_DATA, view_type: filterTypeValue }),
       statusCodeMap: {
         success: () => toast.success("1st data loaded"),
         error: () => toast.error("failed 1st data load"),
@@ -50,7 +53,7 @@ const useInitializeOriginDestination = () => {
     //     error: () => toast.error("failed 3rd data load"),
     //   },
     // });
-  }, [dispatch]);
+  }, [dispatch, filterTypeValue]);
 
   useEffect(() => {
     if (data1.length) {

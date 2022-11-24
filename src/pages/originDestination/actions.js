@@ -15,7 +15,7 @@ export function applySelectedColor(payload) {
 }
 
 export const h3SampleDataLoader = "h3SampleDataLoader";
-export function fetchH3SampleData1(search) {
+export function fetchH3SampleData1(queryParams) {
   return {
     types: FIRST_FETCH_H3HEX_LAYER_DATA,
     rel: GET,
@@ -24,7 +24,7 @@ export function fetchH3SampleData1(search) {
       "x-api-key": x_api_Key,
     },
     loader: h3SampleDataLoader,
-    search,
+    queryParams,
   };
 }
 export function fetchH3SampleData2(search) {
@@ -55,6 +55,6 @@ export function fetchH3SampleData3(search) {
 export function combineH3SampleData3(payload) {
   return {
     type: COMBINE_H3HEX_LAYER_DATA,
-    payload
+    payload,
   };
 }

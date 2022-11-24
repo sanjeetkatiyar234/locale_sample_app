@@ -18,7 +18,7 @@ export const QUERY_HIVE_QUERY =
 
 //for H3 hex layer map
 export const H3HEX_LAYER_DATA =
-  "https://5dnrk1mlq8.execute-api.us-east-1.amazonaws.com/v1";
+  "https://5dnrk1mlq8.execute-api.us-east-1.amazonaws.com/v1?";
 
 // for drill down h3 hex to arc
 export const H3HEX_TO_ARC_LAYER =
@@ -28,4 +28,5 @@ export const H3HEX_TO_ARC_LAYER =
 export const PREDICTION_LAYER_DATA =
   "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/bart-stations.json";
 
-export const GEO_JSON_LAYER_DATA='https://raw.githubusercontent.com/sbma44/uber-cities/master/geojson/abu-dhabi.geojson'  
+export const GEO_JSON_LAYER_DATA =
+  "https://raw.githubusercontent.com/sbma44/uber-cities/master/geojson/abu-dhabi.geojson";

@@ -9,12 +9,12 @@ export function getHostUrl() {
       return `${protocol}//${host}`;
     }
   } catch (err) {
-    return 'http://localhost';
+    return "http://localhost";
   }
 }
 
 export function getApiRootUrl() {
-//   return `${getHostUrl()}/api`;
+  //   return `${getHostUrl()}/api`;
   return `${getHostUrl()}`;
 }
 const encodeParam = (key, value) => `${key}=${encodeURIComponent(value)}`;
@@ -23,14 +23,12 @@ export const objectToParamString = (obj) => {
   const params =
     obj &&
     Object.keys(obj)
-      .filter((key) => obj[key] !== undefined && obj[key] !== '')
+      .filter((key) => obj[key] !== undefined && obj[key] !== "")
       .map((key) =>
         Array.isArray(obj[key])
-          ? obj[key].map((item) => encodeParam(key, item)).join('&')
+          ? obj[key].map((item) => encodeParam(key, item)).join("&")
           : encodeParam(key, obj[key])
       )
-      .join('&');
-  return params ? `?${params}` : '';
+      .join("&");
+  return params ? `&${params}` : "";
 };
-
-
