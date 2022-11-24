@@ -14,7 +14,7 @@ const normalizeValue = (value = {}) => ({
 
 const OriginDestinationColorForm = () => {
   const dispatch = useDispatch();
-  const formValue=useSelector(getFormValues(ORIGIN_DESTINATION_COLOR_FORM));
+  const formValue = useSelector(getFormValues(ORIGIN_DESTINATION_COLOR_FORM));
 
   const handleApply = () => {
     if (formValue) {
@@ -25,7 +25,7 @@ const OriginDestinationColorForm = () => {
   return (
     <Card>
       <CardContent>
-        <form >
+        <form>
           <Field
             name="primaryColor"
             component={ColorInput}
@@ -48,10 +48,10 @@ const OriginDestinationColorForm = () => {
 
 export default reduxForm({
   form: ORIGIN_DESTINATION_COLOR_FORM,
-  enableReinitialize:false,
+  enableReinitialize: false,
   initialValues: {
-    primaryColor: "rgb(255, 0, 0)",
-    secondaryColor: "rgb(255, 255, 0)",
+    primaryColor: "rgb(170, 255, 0)",
+    secondaryColor: "rgb(144, 238, 144)",
   },
- destroyOnUnmount:false
+  destroyOnUnmount: false,
 })(OriginDestinationColorForm);

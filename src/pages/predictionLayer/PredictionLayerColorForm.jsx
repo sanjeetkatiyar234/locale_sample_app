@@ -68,10 +68,10 @@ export default reduxForm({
   form: PREDICTION_LAYER_COLOR_FORM,
   enableReinitialize: false,
   initialValues: {
-    mainViewPrimaryColor: "rgba(255, 0, 0,0.5)",
-    mainViewSecondaryColor: "rgba(255, 255, 0,0.5)",
-    miniViewPrimaryColor: "rgba(255, 0, 0,0.5)",
-    miniViewSecondaryColor: "rgba(255, 255, 0,0.5)",
+    mainViewPrimaryColor: "rgba(170, 255, 0,0.5)",
+    mainViewSecondaryColor: "rgba(144, 238, 144,0.5)",
+    miniViewPrimaryColor: "rgba(170, 255, 0,0.5)",
+    miniViewSecondaryColor: "rgba(144, 238, 144,0.5)",
   },
   destroyOnUnmount: false,
 })(PredictionLayerColorForm);

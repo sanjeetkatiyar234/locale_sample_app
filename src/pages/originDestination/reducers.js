@@ -8,8 +8,8 @@ import {
 } from "app/actionConstants";
 
 const defaultSate = {
-  primaryColor: [255, 0, 0],
-  secondaryColor: [255, 255, 0],
+  primaryColor: [170, 255, 0],
+  secondaryColor: [144, 238, 144],
 };
 
 function selectedColorReducer(state = defaultSate, action) {

@@ -32,7 +32,10 @@ const CustomHexagonLayer = ({ data = [] }) => {
 
     // colorAggregation: 'SUM',
     // colorDomain: null,
-    // colorRange: [[255, 255, 178], [254, 217, 118], [254, 178, 76], [253, 141, 60], [240, 59, 32], [189, 0, 38]],
+    colorRange: [
+      [170, 255, 0],
+      [144, 238, 144],
+    ],
     // colorScaleType: 'quantize',
     // coverage: 1,
     // elevationAggregation: 'SUM',
