@@ -14,7 +14,7 @@ export function applySelectedColor(payload) {
   };
 }
 
-export const h3SampleDataLoader = "h3SampleDataLoader";
+// export const h3SampleDataLoader = "h3SampleDataLoader";
 export function fetchH3SampleData1(queryParams) {
   return {
     types: FIRST_FETCH_H3HEX_LAYER_DATA,
@@ -23,7 +23,7 @@ export function fetchH3SampleData1(queryParams) {
     headers: {
       "x-api-key": x_api_Key,
     },
-    loader: h3SampleDataLoader,
+    // loader: h3SampleDataLoader,
     queryParams,
   };
 }
@@ -35,7 +35,7 @@ export function fetchH3SampleData2(search) {
     headers: {
       "x-api-key": x_api_Key,
     },
-    loader: h3SampleDataLoader,
+    // loader: h3SampleDataLoader,
     search,
   };
 }
@@ -47,7 +47,7 @@ export function fetchH3SampleData3(search) {
     headers: {
       "x-api-key": x_api_Key,
     },
-    loader: h3SampleDataLoader,
+    // loader: h3SampleDataLoader,
     search,
   };
 }

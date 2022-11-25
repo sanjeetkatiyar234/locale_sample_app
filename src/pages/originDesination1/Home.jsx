@@ -6,10 +6,12 @@ import { queryHiveDataWithFilterTypeSelector } from "store/selectors";
 import HexagonalLayerWithSlider from "./HexagonalLayerWithSlider";
 import PageHeader from "./PageHeader";
 import HomeRightSidePanel from "./HomeRightSidePanel";
+import PageLoader from "layout/PageLoader";
 
 const Home = () => {
   const sampleData = useSelector(queryHiveDataWithFilterTypeSelector);
   const filterTypeValue = useSelector((state) => state.filterType.value);
+  const loading = useSelector((state) => state.app.loading?.global);
   const toast = useToast();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,6 +24,7 @@ const Home = () => {
     });
   }, [dispatch, filterTypeValue]);
 
+  if (loading) return <PageLoader />;
   return (
     <div>
       <PageHeader />

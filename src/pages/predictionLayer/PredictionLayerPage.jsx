@@ -8,9 +8,11 @@ import { fetchPredictionLayerData, fetchGeoJsonLayerData } from "./actions";
 import { fetchQueryHiveData } from "store/actions";
 import { predictionLayerDataSelector } from "./selectors";
 import PredictionLayerColorForm from "./PredictionLayerColorForm";
+import PageLoader from "layout/PageLoader";
 
 const PredictionLayerPage = () => {
   const [checked, setChecked] = React.useState(false);
+  const loading = useSelector((state) => state.app.loading?.global);
   const data = useSelector(predictionLayerDataSelector);
   const geoJsonData = useSelector(
     (state) => state.pages.predictionLayer.geoJsonData
@@ -38,6 +40,7 @@ const PredictionLayerPage = () => {
     });
   }, [dispatch]);
 
+  if (loading) return <PageLoader />;
   return (
     <div>
       <PageHeader checked={checked} handleValueChecked={handleValueChecked} />

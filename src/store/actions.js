@@ -1,7 +1,7 @@
 import { FETCH_QUERY_HIVE_DATA } from "app/actionConstants";
 import { GET, QUERY_HIVE_QUERY, x_api_Key } from "app/apiConstants";
 
-export const queryHiveDataLoader = "queryHiveDataLoader";
+// export const queryHiveDataLoader = "queryHiveDataLoader";
 export function fetchQueryHiveData(filterTypeValue) {
   return {
     types: FETCH_QUERY_HIVE_DATA,
@@ -13,6 +13,6 @@ export function fetchQueryHiveData(filterTypeValue) {
     queryParams: {
       view_type: filterTypeValue,
     },
-    loader: queryHiveDataLoader,
+    // loader: queryHiveDataLoader,
   };
 }
