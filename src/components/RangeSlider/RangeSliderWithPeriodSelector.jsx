@@ -45,11 +45,9 @@ const RangeSliderWithPeriodSelector = ({
       interval={5}
       enableDeferredUpdate={true}
       allowSnapping={true}
-      navigatorStyleSettings={
-        {
-          unselectedRegionColor:'rgba(60, 60, 60, 0.7)'
-        }
-      }
+      navigatorStyleSettings={{
+        unselectedRegionColor: "rgba(60, 60, 60, 0.7)",
+      }}
     >
       <Inject services={[LineSeries, DateTime, RangeTooltip, PeriodSelector]} />
       <RangenavigatorSeriesCollectionDirective>
@@ -60,6 +58,7 @@ const RangeSliderWithPeriodSelector = ({
             yName={yName}
             type="Line"
             width={2}
+            fill="green"
           />
         )}
       </RangenavigatorSeriesCollectionDirective>
