@@ -23,7 +23,7 @@ const Dashboard = () => {
           <Grid item xs={3}>
             <Card>
               <CardContent>
-                <Typography gutterBottom variant="body1" component="div">
+                <Typography gutterBottom variant="h6" component="div">
                   Welcome Back !
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -38,7 +38,7 @@ const Dashboard = () => {
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
                 <Box>
-                  <Typography gutterBottom variant="body1" component="div">
+                  <Typography gutterBottom variant="h6" component="div">
                     Facilitites
                   </Typography>
                   <Typography variant="h6" color="text.secondary">
@@ -57,7 +57,7 @@ const Dashboard = () => {
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
                 <Box>
-                  <Typography gutterBottom variant="body1" component="div">
+                  <Typography gutterBottom variant="h6" component="div">
                     Cameras
                   </Typography>
                   <Typography variant="h6" color="text.secondary">
@@ -76,7 +76,7 @@ const Dashboard = () => {
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
                 <Box>
-                  <Typography gutterBottom variant="body1" component="div">
+                  <Typography gutterBottom variant="h6" component="div">
                     Screens
                   </Typography>
                   <Typography variant="h6" color="text.secondary">
@@ -93,7 +93,7 @@ const Dashboard = () => {
           <Grid item xs={12}>
             <Card>
               <CardContent sx={{ paddingBottom: 0 }}>
-                <Typography gutterBottom variant="body1">
+                <Typography gutterBottom variant="h6">
                   How it works
                 </Typography>
                 <Timeline
