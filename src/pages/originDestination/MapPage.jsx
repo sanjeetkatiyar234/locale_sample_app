@@ -8,6 +8,8 @@ import { h3HexDataSelector } from "./selectors";
 import OriginDestinationColorForm from "./OriginDestinationColorForm";
 import useInitializeOriginDestination from "./useInitializeOriginDestination";
 import PageLoader from "layout/PageLoader";
+import Footer from "layout/Footer";
+import "./MapPage.css";
 
 const MapPage = () => {
   const sampleData = useSelector(h3HexDataSelector);
@@ -17,13 +19,17 @@ const MapPage = () => {
   if (loading) return <PageLoader />;
 
   return (
-    <div>
+    <div className="mapPageContainer">
       <PageHeader />
       <PageLeftSidePanel>
         <OriginDestinationColorForm />
       </PageLeftSidePanel>
-      <H3HexagonLayerWithSlider sampleData={sampleData} />
+      <H3HexagonLayerWithSlider
+        className="mapContent"
+        sampleData={sampleData}
+      />
       {/* <OriginDestinationRightSidePanel /> */}
+      <Footer />
     </div>
   );
 };

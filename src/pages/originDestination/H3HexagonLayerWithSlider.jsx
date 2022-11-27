@@ -4,7 +4,7 @@ import CustomH3HexagonLayer from "components/hexagonLayer/CustomH3HexagonLayer";
 import TimeRangeSlider from "components/TimeRangeSlider";
 import { useSelector } from "react-redux";
 
-const H3HexagonLayerWithSlider = ({ sampleData }) => {
+const H3HexagonLayerWithSlider = ({ className, sampleData }) => {
   const [dateRange, setDateRange] = useState({});
   const { start, end } = dateRange;
   const { primaryColor, secondaryColor } =
@@ -23,7 +23,7 @@ const H3HexagonLayerWithSlider = ({ sampleData }) => {
     }));
   }, [sampleData, start, end, primaryColor, secondaryColor]);
   return (
-    <>
+    <div className={className}>
       <TimeRangeSlider
         selectedDateRange={dateRange}
         dataSource={sampleData}
@@ -32,7 +32,7 @@ const H3HexagonLayerWithSlider = ({ sampleData }) => {
         yName="vehicle_count"
       />
       <CustomH3HexagonLayer data={filterData} />
-    </>
+    </div>
   );
 };
 

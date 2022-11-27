@@ -3,7 +3,7 @@ import moment from "moment";
 import TimeRangeSlider from "components/TimeRangeSlider";
 import CustomHexagonLayer from "components/hexagonLayer/CustomHexagonLayer";
 
-const HexagonalLayerWithSlider = ({sampleData}) => {
+const HexagonalLayerWithSlider = ({ className, sampleData }) => {
   const [dateRange, setDateRange] = useState({});
   const { start, end } = dateRange;
   const filterData = useMemo(
@@ -16,7 +16,7 @@ const HexagonalLayerWithSlider = ({sampleData}) => {
     [sampleData, start, end]
   );
   return (
-    <>
+    <div className={className}>
       <TimeRangeSlider
         selectedDateRange={dateRange}
         dataSource={sampleData}
@@ -24,7 +24,7 @@ const HexagonalLayerWithSlider = ({sampleData}) => {
         xName="start_time"
       />
       <CustomHexagonLayer data={filterData} />
-    </>
+    </div>
   );
 };
 

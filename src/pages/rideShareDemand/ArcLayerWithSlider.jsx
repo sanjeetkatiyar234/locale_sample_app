@@ -27,7 +27,7 @@ const ArcLayerWithSlider = ({ sampleData }) => {
   );
 
   return (
-    <>
+    <div style={{ position: "relative", flex: 1 }}>
       <TimeRangeSlider
         selectedDateRange={dateRange}
         dataSource={arcData ?? sampleData}
@@ -35,7 +35,7 @@ const ArcLayerWithSlider = ({ sampleData }) => {
         xName="start_time"
       />
       <CustomArcLayer data={filterData} />
-    </>
+    </div>
   );
 };
 

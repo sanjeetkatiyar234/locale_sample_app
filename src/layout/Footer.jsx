@@ -3,10 +3,19 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <Card sx={{ marginTop: "auto" }}>
+    <Card
+      sx={{
+        display: "flex",
+        position: "absolute",
+        bottom: "0px",
+        width: "100%",
+        height: "40px",
+      }}
+    >
       <CardContent
         sx={{
           display: "flex",
+          width: "100%",
           justifyContent: "space-between",
           alignItems: "center",
           p: "16px",

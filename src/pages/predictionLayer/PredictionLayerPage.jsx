@@ -9,6 +9,8 @@ import { fetchQueryHiveData } from "store/actions";
 import { predictionLayerDataSelector } from "./selectors";
 import PredictionLayerColorForm from "./PredictionLayerColorForm";
 import PageLoader from "layout/PageLoader";
+import "./PredictionLayerPage.css";
+import Footer from "layout/Footer";
 
 const PredictionLayerPage = () => {
   const [checked, setChecked] = React.useState(false);
@@ -42,12 +44,15 @@ const PredictionLayerPage = () => {
 
   if (loading) return <PageLoader />;
   return (
-    <div>
+    <div className="predicationLayerContainer">
       <PageHeader checked={checked} handleValueChecked={handleValueChecked} />
-      <PageLeftSidePanel>
+      <PageLeftSidePanel className>
         <PredictionLayerColorForm />
       </PageLeftSidePanel>
-      <MapLayers data={data} geoJsonData={geoJsonData} toggleView={checked} />
+      <div className="mapContent">
+        <MapLayers data={data} geoJsonData={geoJsonData} toggleView={checked} />
+      </div>
+      <Footer />
     </div>
   );
 };

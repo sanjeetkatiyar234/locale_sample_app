@@ -7,6 +7,8 @@ import HexagonalLayerWithSlider from "./HexagonalLayerWithSlider";
 import PageHeader from "./PageHeader";
 import HomeRightSidePanel from "./HomeRightSidePanel";
 import PageLoader from "layout/PageLoader";
+import Footer from "layout/Footer";
+import "./Home.css";
 
 const Home = () => {
   const sampleData = useSelector(queryHiveDataWithFilterTypeSelector);
@@ -26,10 +28,14 @@ const Home = () => {
 
   if (loading) return <PageLoader />;
   return (
-    <div>
+    <div className="homeContainer">
       <PageHeader />
-      <HexagonalLayerWithSlider sampleData={sampleData} />
+      <HexagonalLayerWithSlider
+        className="mapContent"
+        sampleData={sampleData}
+      />
       {/* <HomeRightSidePanel /> */}
+      <Footer />
     </div>
   );
 };

@@ -1,0 +1,10 @@
+.predicationLayerContainer {
+  display: flex;
+  min-height: calc(100% - 40px);
+  /* 40px for footer */
+}
+
+.mapContent {
+  flex: 1;
+  position: relative;
+}

@@ -18,7 +18,7 @@ const Dashboard = () => {
   return (
     <>
       <PageHeader />
-      <Box sx={{ padding: 2 }}>
+      <Box sx={{ padding: 2, overflow: "auto", marginBottom: "40px" }}>
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <Card>

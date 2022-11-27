@@ -8,6 +8,8 @@ import ArcLayerWithSlider from "./ArcLayerWithSlider";
 import { fetchH3ToArcLayerData } from "./actions";
 import { arcLayerDataSelector } from "./selectors";
 import PageLoader from "layout/PageLoader";
+import Footer from "layout/Footer";
+import "./ArcLayerPage.css";
 
 const ArcLayerPage = () => {
   const toast = useToast();
@@ -32,9 +34,10 @@ const ArcLayerPage = () => {
   }, [dispatch, search]);
   if (loading) return <PageLoader />;
   return (
-    <div>
+    <div className="arcLayerContainer">
       <PageHeader />
       <ArcLayerWithSlider sampleData={sampleData} />
+      <Footer />
     </div>
   );
 };
