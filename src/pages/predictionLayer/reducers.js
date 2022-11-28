@@ -3,6 +3,7 @@ import {
   FETCH_GEO_JSON_LAYER_DATA_RECEIVED,
   FETCH_PREDICTION_LAYER_DATA_RECEIVED,
   UPDATE_PREDICTION_LAYER_SELECTED_COLOR,
+  RESET_PREDICTION_LAYER_VIEW,
 } from "app/actionConstants";
 
 const defaultSate = {
@@ -19,6 +20,8 @@ function selectedColorReducer(state = defaultSate, action) {
         ...state,
         ...action.payload,
       };
+    case RESET_PREDICTION_LAYER_VIEW:
+      return { ...defaultSate };
     default:
       return state;
   }

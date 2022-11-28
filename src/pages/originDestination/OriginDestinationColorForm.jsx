@@ -4,7 +4,8 @@ import { Field, reduxForm, getFormValues } from "redux-form";
 import ColorInput from "components/forms/ColorInput";
 import { Card, CardContent } from "@mui/material";
 import { convertRbgtoArray } from "utils/convertRgbToArray";
-import { useDispatch, useSelector } from "react-redux";
+import { convertArrayToRgb } from "utils/convertArrayToRgb";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { applySelectedColor } from "./actions";
 
 const normalizeValue = (value = {}) => ({
@@ -46,12 +47,25 @@ const OriginDestinationColorForm = () => {
   );
 };
 
-export default reduxForm({
-  form: ORIGIN_DESTINATION_COLOR_FORM,
-  enableReinitialize: false,
-  initialValues: {
-    primaryColor: "rgb(170, 255, 0)",
-    secondaryColor: "rgb(144, 238, 144)",
-  },
-  destroyOnUnmount: false,
-})(OriginDestinationColorForm);
+export default connect((state) => {
+  const primaryColor = convertArrayToRgb(
+    state.pages.originDestination.selectedColor.primaryColor
+  );
+  const secondaryColor = convertArrayToRgb(
+    state.pages.originDestination.selectedColor.secondaryColor
+  );
+  console.log(primaryColor);
+  console.log(secondaryColor);
+  return {
+    initialValues: {
+      primaryColor: primaryColor || "rgb(170, 255, 0)",
+      secondaryColor: secondaryColor || "rgb(144, 238, 144)",
+    },
+  };
+})(
+  reduxForm({
+    form: ORIGIN_DESTINATION_COLOR_FORM,
+    enableReinitialize: true,
+    destroyOnUnmount: false,
+  })(OriginDestinationColorForm)
+);

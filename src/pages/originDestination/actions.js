@@ -1,6 +1,7 @@
 import {
   COMBINE_H3HEX_LAYER_DATA,
   FIRST_FETCH_H3HEX_LAYER_DATA,
+  RESET_ORIGIN_DESTINATION_VIEW,
   SECOND_FETCH_H3HEX_LAYER_DATA,
   THIRD_FETCH_H3HEX_LAYER_DATA,
 } from "app/actionConstants";
@@ -56,5 +57,10 @@ export function combineH3SampleData3(payload) {
   return {
     type: COMBINE_H3HEX_LAYER_DATA,
     payload,
+  };
+}
+export function resetOriginDestinationView() {
+  return {
+    type: RESET_ORIGIN_DESTINATION_VIEW,
   };
 }

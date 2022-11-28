@@ -3,7 +3,8 @@ import { Field, reduxForm, getFormValues } from "redux-form";
 import ColorInput from "components/forms/ColorInput";
 import { Card, CardContent, Typography } from "@mui/material";
 import { convertRbgtoArray } from "utils/convertRgbToArray";
-import { useDispatch, useSelector } from "react-redux";
+import { convertArrayToRgb } from "utils/convertArrayToRgb";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { PREDICTION_LAYER_COLOR_FORM } from "app/formConstants";
 import { applySelectedColor } from "./actions";
 
@@ -64,14 +65,34 @@ const PredictionLayerColorForm = () => {
   );
 };
 
-export default reduxForm({
-  form: PREDICTION_LAYER_COLOR_FORM,
-  enableReinitialize: false,
-  initialValues: {
-    mainViewPrimaryColor: "rgba(170, 255, 0,0.5)",
-    mainViewSecondaryColor: "rgba(144, 238, 144,0.5)",
-    miniViewPrimaryColor: "rgba(170, 255, 0,0.5)",
-    miniViewSecondaryColor: "rgba(144, 238, 144,0.5)",
-  },
-  destroyOnUnmount: false,
-})(PredictionLayerColorForm);
+export default connect((state) => {
+  const mainViewPrimaryColor = convertArrayToRgb(
+    state.pages.predictionLayer.selectedColor.mainViewPrimaryColor
+  );
+  const mainViewSecondaryColor = convertArrayToRgb(
+    state.pages.predictionLayer.selectedColor.mainViewSecondaryColor
+  );
+  const miniViewPrimaryColor = convertArrayToRgb(
+    state.pages.predictionLayer.selectedColor.miniViewPrimaryColor
+  );
+  const miniViewSecondaryColor = convertArrayToRgb(
+    state.pages.predictionLayer.selectedColor.miniViewSecondaryColor
+  );
+
+  return {
+    initialValues: {
+      mainViewPrimaryColor: mainViewPrimaryColor || "rgba(170, 255, 0,0.5)",
+      mainViewSecondaryColor:
+        mainViewSecondaryColor || "rgba(144, 238, 144,0.5)",
+      miniViewPrimaryColor: miniViewPrimaryColor || "rgba(170, 255, 0,0.5)",
+      miniViewSecondaryColor:
+        miniViewSecondaryColor || "rgba(144, 238, 144,0.5)",
+    },
+  };
+})(
+  reduxForm({
+    form: PREDICTION_LAYER_COLOR_FORM,
+    enableReinitialize: true,
+    destroyOnUnmount: false,
+  })(PredictionLayerColorForm)
+);

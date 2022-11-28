@@ -5,11 +5,12 @@ import {
   FIRST_FETCH_H3HEX_LAYER_DATA_RECEIVED,
   SECOND_FETCH_H3HEX_LAYER_DATA_RECEIVED,
   THIRD_FETCH_H3HEX_LAYER_DATA_RECEIVED,
+  RESET_ORIGIN_DESTINATION_VIEW,
 } from "app/actionConstants";
 
 const defaultSate = {
-  primaryColor: [170, 255, 0],
-  secondaryColor: [144, 238, 144],
+  primaryColor: [170, 255, 0, 255],
+  secondaryColor: [144, 238, 144, 255],
 };
 
 function selectedColorReducer(state = defaultSate, action) {
@@ -19,6 +20,8 @@ function selectedColorReducer(state = defaultSate, action) {
         ...state,
         ...action.payload,
       };
+    case RESET_ORIGIN_DESTINATION_VIEW:
+      return { ...defaultSate };
     default:
       return state;
   }

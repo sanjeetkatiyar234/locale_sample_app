@@ -1,6 +1,7 @@
 import {
   FETCH_GEO_JSON_LAYER_DATA,
   FETCH_PREDICTION_LAYER_DATA,
+  RESET_PREDICTION_LAYER_VIEW,
   UPDATE_PREDICTION_LAYER_SELECTED_COLOR,
 } from "app/actionConstants";
 import {
@@ -33,5 +34,11 @@ export function fetchGeoJsonLayerData() {
     types: FETCH_GEO_JSON_LAYER_DATA,
     rel: GET,
     url: GEO_JSON_LAYER_DATA,
+  };
+}
+
+export function resetPredictionLayerView() {
+  return {
+    type: RESET_PREDICTION_LAYER_VIEW,
   };
 }
