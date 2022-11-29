@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import SubHeader from "layout/SubHeader";
 import FilterTypeDropDown from "components/dropDown/FilterTypeDropDown";
+import { resetFilterType } from "components/dropDown/filterTypeSlice";
 import "./PageHeader.css";
 import { resetOriginDestinationView } from "./actions";
 
@@ -17,6 +18,7 @@ const PageHeader = () => {
   const dispatch = useDispatch();
   const resetViewClick = () => {
     dispatch(resetOriginDestinationView());
+    dispatch(resetFilterType());
   };
   return (
     <SubHeader>

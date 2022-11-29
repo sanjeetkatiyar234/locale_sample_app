@@ -9,10 +9,13 @@ export const filterTypeSlice = createSlice({
     handleChange: (state, action) => {
       state.value = action.payload;
     },
+    resetFilterType: (state) => {
+      state.value = "monthly";
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { handleChange } = filterTypeSlice.actions;
+export const { handleChange, resetFilterType } = filterTypeSlice.actions;
 
 export default filterTypeSlice.reducer;

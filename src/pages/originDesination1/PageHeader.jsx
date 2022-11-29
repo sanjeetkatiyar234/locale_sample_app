@@ -7,11 +7,18 @@ import {
   Typography,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import SubHeader from "layout/SubHeader";
 import FilterTypeDropDown from "components/dropDown/FilterTypeDropDown";
 import "./PageHeader.css";
+import { resetFilterType } from "components/dropDown/filterTypeSlice";
 
 const PageHeader = () => {
+  const dispatch = useDispatch();
+  const resetView = () => {
+    dispatch(resetFilterType());
+  };
+
   return (
     <SubHeader>
       <Box className="pageHeader">
@@ -27,7 +34,7 @@ const PageHeader = () => {
           </NavLink> */}
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>
-          <Button sx={{ mr: 1 }} variant="outlined">
+          <Button sx={{ mr: 1 }} variant="outlined" onClick={resetView}>
             Reset View
           </Button>
           <FilterTypeDropDown />

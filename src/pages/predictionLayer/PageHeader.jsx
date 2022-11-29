@@ -3,6 +3,7 @@ import { Box, Breadcrumbs, Button, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import SubHeader from "layout/SubHeader";
+import { resetFilterType } from "components/dropDown/filterTypeSlice";
 import { resetPredictionLayerView } from "./actions";
 import "./PageHeader.css";
 import ToggleViewSwitch from "./ToggleViewSwitch";
@@ -11,6 +12,7 @@ const PageHeader = ({ checked, handleValueChecked }) => {
   const dispatch = useDispatch();
   const resetViewClick = () => {
     dispatch(resetPredictionLayerView());
+    dispatch(resetFilterType());
   };
   return (
     <SubHeader>

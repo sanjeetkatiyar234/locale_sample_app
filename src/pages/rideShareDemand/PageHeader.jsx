@@ -9,13 +9,14 @@ import {
 import { NavLink } from "react-router-dom";
 import SubHeader from "layout/SubHeader";
 import FilterTypeDropDown from "components/dropDown/FilterTypeDropDown";
+import { resetFilterType } from "components/dropDown/filterTypeSlice";
 import "./PageHeader.css";
 import { useDispatch } from "react-redux";
 
 const PageHeader = () => {
   const dispatch = useDispatch();
   const onResetClick = () => {
-    dispatch();
+    dispatch(resetFilterType());
   };
   return (
     <SubHeader>
