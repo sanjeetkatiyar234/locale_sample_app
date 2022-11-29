@@ -12,14 +12,16 @@ import SubHeader from "layout/SubHeader";
 import FilterTypeDropDown from "components/dropDown/FilterTypeDropDown";
 import { resetFilterType } from "components/dropDown/filterTypeSlice";
 import "./PageHeader.css";
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { resetOriginDestinationView } from "./actions";
+import { resetMapPosition } from "app/actions";
 
 const PageHeader = () => {
   const dispatch = useDispatch();
   const resetViewClick = () => {
     dispatch(resetOriginDestinationView());
     dispatch(resetFilterType());
+    dispatch(resetMapPosition(true));
   };
   return (
     <SubHeader>
@@ -36,7 +38,11 @@ const PageHeader = () => {
           </NavLink> */}
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>
-          <Button sx={{ mr: 0.5, px: 1, minWidth: 'auto' }} variant="outlined" onClick={resetViewClick}>
+          <Button
+            sx={{ mr: 0.5, px: 1, minWidth: "auto" }}
+            variant="outlined"
+            onClick={resetViewClick}
+          >
             {/* Reset View */}
             <RestartAltIcon />
           </Button>

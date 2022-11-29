@@ -12,12 +12,14 @@ import FilterTypeDropDown from "components/dropDown/FilterTypeDropDown";
 import { resetFilterType } from "components/dropDown/filterTypeSlice";
 import "./PageHeader.css";
 import { useDispatch } from "react-redux";
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import { resetMapPosition } from "app/actions";
 
 const PageHeader = () => {
   const dispatch = useDispatch();
   const onResetClick = () => {
     dispatch(resetFilterType());
+    dispatch(resetMapPosition(true));
   };
   return (
     <SubHeader>
@@ -34,7 +36,11 @@ const PageHeader = () => {
           </NavLink> */}
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>
-          <Button sx={{ mr: 0.5, px: 1, minWidth: 'auto' }} variant="outlined" onClick={onResetClick}>
+          <Button
+            sx={{ mr: 0.5, px: 1, minWidth: "auto" }}
+            variant="outlined"
+            onClick={onResetClick}
+          >
             {/* Reset View */}
             <RestartAltIcon />
           </Button>

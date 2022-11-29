@@ -3,7 +3,8 @@ import {
   CLEAR_ACTION_QUEUE,
   QUEUE_ACTION,
   RELOAD_APP,
-} from './actionConstants';
+  RESET_MAP_POSIITON,
+} from "./actionConstants";
 
 export function setAppInitialized() {
   return {
@@ -27,5 +28,11 @@ export function clearActionQueue() {
 export function reloadApp() {
   return {
     type: RELOAD_APP,
+  };
+}
+export function resetMapPosition(payload) {
+  return {
+    type: RESET_MAP_POSIITON,
+    payload,
   };
 }

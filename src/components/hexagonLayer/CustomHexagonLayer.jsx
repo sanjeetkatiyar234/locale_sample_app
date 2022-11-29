@@ -1,6 +1,10 @@
+import { resetMapPosition } from "app/actions";
 import { DeckGL, HexagonLayer } from "deck.gl";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import MapGL from "react-map-gl";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
 
@@ -23,6 +27,20 @@ const getTooltip = ({ object }) =>
 Count: ${object.points.length}`;
 
 const CustomHexagonLayer = ({ data = [] }) => {
+  const dispatch = useDispatch();
+  const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
+  const resetMap = useSelector((state) => state.app.appState.resetMapPosition);
+
+  useEffect(() => {
+    if (resetMap) {
+      // enforce a different latitude
+      setViewState({
+        ...INITIAL_VIEW_STATE,
+        latitude: INITIAL_VIEW_STATE.latitude + Math.random() * 0.001,
+      });
+      dispatch(resetMapPosition(false));
+    }
+  }, [resetMap]);
   const navigate = useNavigate();
   const layer = new HexagonLayer({
     id: "HexagonLayer",
@@ -74,7 +92,7 @@ const CustomHexagonLayer = ({ data = [] }) => {
   return (
     <DeckGL
       layers={[layer]}
-      initialViewState={INITIAL_VIEW_STATE}
+      initialViewState={viewState}
       controller={true}
       getTooltip={getTooltip}
       // onClick={({ object }) => {

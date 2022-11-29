@@ -7,7 +7,9 @@ import React, { useCallback, useState } from "react";
 import MapGL from "react-map-gl";
 import useDimensions from "react-cool-dimensions";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { resetMapPosition } from "app/actions";
 
 const INITIAL_VIEW_STATE = {
   main: {
@@ -69,7 +71,9 @@ const getTooltip = ({ object }) => {
 
 const MapLayers = ({ data = [], geoJsonData, toggleView = true }) => {
   const { observe, width } = useDimensions();
+  const dispatch = useDispatch();
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
+  const resetMap = useSelector((state) => state.app.appState.resetMapPosition);
   const {
     mainViewPrimaryColor,
     mainViewSecondaryColor,
@@ -97,6 +101,15 @@ const MapLayers = ({ data = [], geoJsonData, toggleView = true }) => {
       controller: true,
     }),
   ];
+
+  useEffect(() => {
+    if (resetMap) {
+      setViewState({
+        ...INITIAL_VIEW_STATE,
+      });
+      dispatch(resetMapPosition(false));
+    }
+  }, [resetMap]);
 
   const layers = [
     new GeoJsonLayer({
@@ -300,6 +313,7 @@ const MapLayers = ({ data = [], geoJsonData, toggleView = true }) => {
 
   const onViewStateChange = useCallback(
     ({ viewId, viewState: newViewState }) => {
+      console.log(newViewState);
       setViewState(() => ({
         main: newViewState,
         minimap: {

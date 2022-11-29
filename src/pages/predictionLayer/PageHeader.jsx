@@ -10,8 +10,9 @@ import {
   resetToggleView,
 } from "./actions";
 import "./PageHeader.css";
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import ToggleViewSwitch from "./ToggleViewSwitch";
+import { resetMapPosition } from "app/actions";
 
 const PageHeader = ({ toggleView }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const PageHeader = ({ toggleView }) => {
     dispatch(resetPredictionLayerView());
     dispatch(resetFilterType());
     dispatch(resetToggleView());
+    dispatch(resetMapPosition(true));
   };
   const handleValueChecked = (value) => {
     dispatch(changeToggleView(value));
@@ -39,7 +41,11 @@ const PageHeader = ({ toggleView }) => {
           </NavLink> */}
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>
-          <Button sx={{ mr: 0.5, px: 1, minWidth: 'auto' }} variant="outlined" onClick={resetViewClick}>
+          <Button
+            sx={{ mr: 0.5, px: 1, minWidth: "auto" }}
+            variant="outlined"
+            onClick={resetViewClick}
+          >
             {/* Reset View */}
             <RestartAltIcon />
           </Button>

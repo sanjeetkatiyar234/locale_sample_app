@@ -5,14 +5,15 @@ import {
   CLEAR_ACTION_QUEUE,
   RELOAD_APP,
   UPDATE_LOADING_COUNTER,
+  RESET_MAP_POSIITON,
 } from "./actionConstants";
 
-
-const defaultAppState={
-    initialized:false,
-    actionQueue:[]
-}
-  // TODO add side bar state to reducer
+const defaultAppState = {
+  initialized: false,
+  actionQueue: [],
+  resetMapPosition: false,
+};
+// TODO add side bar state to reducer
 export function appStateReducer(state = defaultAppState, action) {
   switch (action.type) {
     case APP_INITIALIZED:
@@ -27,6 +28,8 @@ export function appStateReducer(state = defaultAppState, action) {
     //     return { ...state, initialized: false };
     //   case LOGOUT_FAILED:
     //     return { ...state, initialized: true };
+    case RESET_MAP_POSIITON:
+      return { ...state, resetMapPosition: action.payload };
     default:
       return state;
   }
