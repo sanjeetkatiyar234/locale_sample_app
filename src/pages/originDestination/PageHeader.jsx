@@ -12,6 +12,7 @@ import SubHeader from "layout/SubHeader";
 import FilterTypeDropDown from "components/dropDown/FilterTypeDropDown";
 import { resetFilterType } from "components/dropDown/filterTypeSlice";
 import "./PageHeader.css";
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { resetOriginDestinationView } from "./actions";
 
 const PageHeader = () => {
@@ -35,8 +36,9 @@ const PageHeader = () => {
           </NavLink> */}
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>
-          <Button sx={{ mr: 1 }} variant="outlined" onClick={resetViewClick}>
-            Reset View
+          <Button sx={{ mr: 0.5, px: 1, minWidth: 'auto' }} variant="outlined" onClick={resetViewClick}>
+            {/* Reset View */}
+            <RestartAltIcon />
           </Button>
           <FilterTypeDropDown />
         </Box>

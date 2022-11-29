@@ -6,6 +6,7 @@ import SubHeader from "layout/SubHeader";
 import { resetFilterType } from "components/dropDown/filterTypeSlice";
 import { resetPredictionLayerView } from "./actions";
 import "./PageHeader.css";
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ToggleViewSwitch from "./ToggleViewSwitch";
 
 const PageHeader = ({ checked, handleValueChecked }) => {
@@ -29,8 +30,9 @@ const PageHeader = ({ checked, handleValueChecked }) => {
           </NavLink> */}
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>
-          <Button sx={{ mr: 1 }} variant="outlined" onClick={resetViewClick}>
-            Reset View
+          <Button sx={{ mr: 0.5, px: 1, minWidth: 'auto' }} variant="outlined" onClick={resetViewClick}>
+            {/* Reset View */}
+            <RestartAltIcon />
           </Button>
           <ToggleViewSwitch
             checked={checked}

@@ -10,6 +10,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import SubHeader from "layout/SubHeader";
 import FilterTypeDropDown from "components/dropDown/FilterTypeDropDown";
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import "./PageHeader.css";
 import { resetFilterType } from "components/dropDown/filterTypeSlice";
 
@@ -34,8 +35,9 @@ const PageHeader = () => {
           </NavLink> */}
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>
-          <Button sx={{ mr: 1 }} variant="outlined" onClick={resetView}>
-            Reset View
+          <Button sx={{ mr: 0.5, px: 1, minWidth: 'auto' }} variant="outlined">
+            {/* Reset View */}
+            <RestartAltIcon />
           </Button>
           <FilterTypeDropDown />
         </Box>

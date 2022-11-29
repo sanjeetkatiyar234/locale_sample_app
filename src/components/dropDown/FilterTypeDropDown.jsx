@@ -12,7 +12,7 @@ const FilterTypeDropDown = () => {
   const dispatch = useDispatch();
 
   return (
-    <Box sx={{ minWidth: 140 }}>
+    <Box sx={{ minWidth: 200 }}>
       <FormControl fullWidth size="small">
         <InputLabel id="select-label">View Selection</InputLabel>
         <Select
