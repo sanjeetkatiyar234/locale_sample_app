@@ -13,7 +13,9 @@ import "./PredictionLayerPage.css";
 import Footer from "layout/Footer";
 
 const PredictionLayerPage = () => {
-  const [checked, setChecked] = React.useState(false);
+  const toggleView = useSelector(
+    (state) => state.pages.predictionLayer.toggleView
+  );
   const loading = useSelector((state) => state.app.loading?.global);
   const data = useSelector(predictionLayerDataSelector);
   const geoJsonData = useSelector(
@@ -21,8 +23,6 @@ const PredictionLayerPage = () => {
   );
   const toast = useToast();
   const dispatch = useDispatch();
-
-  const handleValueChecked = (value) => setChecked(value);
 
   useEffect(() => {
     dispatch({
@@ -45,12 +45,16 @@ const PredictionLayerPage = () => {
   if (loading) return <PageLoader />;
   return (
     <div className="predicationLayerContainer">
-      <PageHeader checked={checked} handleValueChecked={handleValueChecked} />
+      <PageHeader toggleView={toggleView} />
       <PageLeftSidePanel className>
         <PredictionLayerColorForm />
       </PageLeftSidePanel>
       <div className="mapContent">
-        <MapLayers data={data} geoJsonData={geoJsonData} toggleView={checked} />
+        <MapLayers
+          data={data}
+          geoJsonData={geoJsonData}
+          toggleView={toggleView}
+        />
       </div>
       <Footer />
     </div>

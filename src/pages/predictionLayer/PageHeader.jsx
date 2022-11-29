@@ -1,20 +1,29 @@
 import React from "react";
 import { Box, Breadcrumbs, Button, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SubHeader from "layout/SubHeader";
 import { resetFilterType } from "components/dropDown/filterTypeSlice";
-import { resetPredictionLayerView } from "./actions";
+import {
+  changeToggleView,
+  resetPredictionLayerView,
+  resetToggleView,
+} from "./actions";
 import "./PageHeader.css";
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ToggleViewSwitch from "./ToggleViewSwitch";
 
-const PageHeader = ({ checked, handleValueChecked }) => {
+const PageHeader = ({ toggleView }) => {
   const dispatch = useDispatch();
   const resetViewClick = () => {
     dispatch(resetPredictionLayerView());
     dispatch(resetFilterType());
+    dispatch(resetToggleView());
   };
+  const handleValueChecked = (value) => {
+    dispatch(changeToggleView(value));
+  };
+
   return (
     <SubHeader>
       <Box className="pageHeader">
@@ -35,7 +44,7 @@ const PageHeader = ({ checked, handleValueChecked }) => {
             <RestartAltIcon />
           </Button>
           <ToggleViewSwitch
-            checked={checked}
+            checked={toggleView}
             handleValueChecked={handleValueChecked}
           />
         </Box>

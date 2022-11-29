@@ -4,6 +4,8 @@ import {
   FETCH_PREDICTION_LAYER_DATA_RECEIVED,
   UPDATE_PREDICTION_LAYER_SELECTED_COLOR,
   RESET_PREDICTION_LAYER_VIEW,
+  CHANGE_TOGGLE_VIEW,
+  RESET_TOGGLE_VIEW,
 } from "app/actionConstants";
 
 const defaultSate = {
@@ -45,8 +47,20 @@ function geoJsonLayerReducer(state = {}, action) {
   }
 }
 
+function toggleViewReducer(state = false, action) {
+  switch (action.type) {
+    case CHANGE_TOGGLE_VIEW:
+      return action.payload;
+    case RESET_TOGGLE_VIEW:
+      return false;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   data: predictionLayerReducer,
   geoJsonData: geoJsonLayerReducer,
   selectedColor: selectedColorReducer,
+  toggleView: toggleViewReducer,
 });
