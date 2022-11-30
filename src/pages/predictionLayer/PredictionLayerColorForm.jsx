@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Field, reduxForm, getFormValues } from "redux-form";
 import ColorInput from "components/forms/ColorInput";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Box, Typography, Fab, IconButton } from "@mui/material";
+import ColorLensIcon from "@mui/icons-material/ColorLens";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { convertRbgtoArray } from "utils/convertRgbToArray";
 import { convertArrayToRgb } from "utils/convertArrayToRgb";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { PREDICTION_LAYER_COLOR_FORM } from "app/formConstants";
 import { applySelectedColor } from "./actions";
+import "./PredictionLayerColorForm.css";
 
 const normalizeValue = (value = {}) => ({
   mainViewPrimaryColor: convertRbgtoArray(value.mainViewPrimaryColor),
@@ -18,6 +21,7 @@ const normalizeValue = (value = {}) => ({
 const PredictionLayerColorForm = () => {
   const dispatch = useDispatch();
   const formValue = useSelector(getFormValues(PREDICTION_LAYER_COLOR_FORM));
+  const [open, setOpen] = useState(false);
 
   const handleApply = () => {
     if (formValue) {
@@ -26,9 +30,26 @@ const PredictionLayerColorForm = () => {
   };
 
   return (
-    <Card>
-      <CardContent>
-        <form>
+    <>
+      <div className={open ? "inActive" : "active"}>
+        <Fab
+          size="small"
+          color="primary"
+          aria-label="add"
+          sx={{ ml: 1 }}
+          onClick={() => setOpen(!open)}
+          onMouseEnter={() => setOpen(!open)}
+        >
+          <ColorLensIcon />
+        </Fab>
+      </div>
+      <Box className={`colorFormContainer ${open ? "active" : "inActive"}`}>
+        <div className="closeButton">
+          <IconButton size="small" onClick={() => setOpen(!open)}>
+            <HighlightOffIcon />
+          </IconButton>
+        </div>
+        <form className="form">
           <Typography gutterBottom>Actual View</Typography>
           <Field
             name="miniViewPrimaryColor"
@@ -60,8 +81,8 @@ const PredictionLayerColorForm = () => {
             onChange={handleApply}
           />
         </form>
-      </CardContent>
-    </Card>
+      </Box>
+    </>
   );
 };
 
