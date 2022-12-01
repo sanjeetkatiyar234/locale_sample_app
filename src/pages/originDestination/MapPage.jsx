@@ -28,7 +28,7 @@ const MapPage = () => {
         className="mapContent"
         sampleData={sampleData}
       />
-      {/* <OriginDestinationRightSidePanel /> */}
+      <OriginDestinationRightSidePanel />
       <Footer />
     </div>
   );

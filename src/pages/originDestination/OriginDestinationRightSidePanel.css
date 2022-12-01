@@ -1,0 +1,30 @@
+.rightsidePanelContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(42, 42, 42);
+  border-radius: 3px;
+  transition-property: width height;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+}
+
+.rightsidePanelContainer.active {
+  width: 220px;
+  height: auto;
+}
+
+.activatebutton.active {
+  width: 56px;
+  height: auto;
+}
+
+.inActive {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  border: 0px solid transparent;
+}
+
+.rightsidePanelContainer.closeButton {
+  display: flex;
+}
