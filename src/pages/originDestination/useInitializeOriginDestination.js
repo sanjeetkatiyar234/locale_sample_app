@@ -56,30 +56,28 @@ const useInitializeOriginDestination = () => {
   }, [dispatch, filterTypeValue]);
 
   useEffect(() => {
-    if (data1.length) {
-      const combineData = [...data1];
+    const combineData = [...data1];
 
-      const filteredArr = Object.values(
-        combineData.reduce((accObj, current) => {
-          const key = `${current.hex_id}${current.start_time}`;
-          const alreadyPresent = accObj[key];
-          if (alreadyPresent) {
-            return {
-              ...accObj,
-              [key]: {
-                ...alreadyPresent,
-                vehicle_count:
-                  alreadyPresent.vehicle_count + current.vehicle_count,
-              },
-            };
-          } else {
-            return { ...accObj, [key]: current };
-          }
-        }, {})
-      );
-      if (filteredArr.length) {
-        dispatch(combineH3SampleData3(filteredArr));
-      }
+    const filteredArr = Object.values(
+      combineData.reduce((accObj, current) => {
+        const key = `${current.hex_id}${current.start_time}`;
+        const alreadyPresent = accObj[key];
+        if (alreadyPresent) {
+          return {
+            ...accObj,
+            [key]: {
+              ...alreadyPresent,
+              vehicle_count:
+                alreadyPresent.vehicle_count + current.vehicle_count,
+            },
+          };
+        } else {
+          return { ...accObj, [key]: current };
+        }
+      }, {})
+    );
+    if (filteredArr) {
+      dispatch(combineH3SampleData3(filteredArr));
     }
   }, [data1]);
 };

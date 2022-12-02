@@ -19,9 +19,9 @@ const RangeLoader = () => (
 const RangeSlider = ({ dataSource = [], ...props }) => {
   const filterTypeValue = useSelector((state) => state.filterType.value);
 
-  if (!dataSource.length) {
-    return <RangeLoader />;
-  }
+  // if (!dataSource.length) {
+  //   return <RangeLoader />;
+  // }
 
   return filterTypeValue === "daily" ? (
     <Suspense fallback={<RangeLoader />}>
