@@ -29,10 +29,11 @@ const RangeSliderWithoutPeriodSelector = ({
         setDateRange(value);
       }}
       allowIntervalData={false}
-      allowSnapping={true}
-      intervalType="Minutes"
-      interval={5}
-      enableDeferredUpdate={true}
+      intervalType="Days"
+      groupBy="Days"
+      interval={1}
+      allowSnapping
+      enableDeferredUpdate
       navigatorStyleSettings={{
         unselectedRegionColor: "rgba(60, 60, 60, 0.7)",
       }}

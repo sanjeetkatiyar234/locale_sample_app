@@ -40,11 +40,12 @@ const RangeSliderWithPeriodSelector = ({
         setDateRange(value);
       }}
       periodSelectorSettings={periodSelectorSettings}
-      intervalType="Minutes"
+      intervalType="Hours"
+      groupBy="Hours"
       allowIntervalData={false}
-      interval={5}
-      enableDeferredUpdate={true}
-      allowSnapping={true}
+      interval={1}
+      enableDeferredUpdate
+      allowSnapping
       navigatorStyleSettings={{
         unselectedRegionColor: "rgba(60, 60, 60, 0.7)",
       }}
