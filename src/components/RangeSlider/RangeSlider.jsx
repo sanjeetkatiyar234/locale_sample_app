@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { ColorRing } from "react-loader-spinner";
 import RangeSliderWithPeriodSelector from "./RangeSliderWithPeriodSelector";
 import RangeSliderWithoutPeriodSelector from "./RangeSliderWithoutPeriodSelector";
+import { groupRangeSelectorDataByDaily } from "./utils";
 
 const RangeLoader = () => (
   <ColorRing
@@ -18,18 +19,18 @@ const RangeLoader = () => (
 
 const RangeSlider = ({ dataSource = [], ...props }) => {
   const filterTypeValue = useSelector((state) => state.filterType.value);
-
-  // if (!dataSource.length) {
-  //   return <RangeLoader />;
-  // }
-
+  const modifyDataSource = groupRangeSelectorDataByDaily(dataSource);
+  // console.log("modifyDataSource", modifyDataSource);
   return filterTypeValue === "daily" ? (
     <Suspense fallback={<RangeLoader />}>
       <RangeSliderWithPeriodSelector dataSource={dataSource} {...props} />
     </Suspense>
   ) : (
     <Suspense fallback={<RangeLoader />}>
-      <RangeSliderWithoutPeriodSelector dataSource={dataSource} {...props} />
+      <RangeSliderWithoutPeriodSelector
+        dataSource={modifyDataSource}
+        {...props}
+      />
     </Suspense>
   );
 };
