@@ -2,8 +2,9 @@ import ArchitectureIcon from "@mui/icons-material/Architecture";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
 import MapIcon from "@mui/icons-material/Map";
-import RouteIcon from '@mui/icons-material/Route';
+import RouteIcon from "@mui/icons-material/Route";
 import BatchPredictionIcon from "@mui/icons-material/BatchPrediction";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
@@ -114,7 +115,11 @@ const SideBar = ({ open, handleDrawerClose }) => {
 
                 <ListItemText
                   primary="Dashboard"
-                  sx={{ opacity: open ? 1 : 0, textDecoration: "none", color: 'white' }}
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
                 />
               </ListItemButton>
             </CustomTooltip>
@@ -147,7 +152,11 @@ const SideBar = ({ open, handleDrawerClose }) => {
 
                 <ListItemText
                   primary="origin-destination-v1"
-                  sx={{ opacity: open ? 1 : 0, textDecoration: "none", color: 'white' }}
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
                 />
               </ListItemButton>
             </CustomTooltip>
@@ -179,7 +188,11 @@ const SideBar = ({ open, handleDrawerClose }) => {
                 </ListItemIcon>
                 <ListItemText
                   primary="Origin destination"
-                  sx={{ opacity: open ? 1 : 0, textDecoration: "none", color: 'white' }}
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
                 />
               </ListItemButton>
             </CustomTooltip>
@@ -211,7 +224,11 @@ const SideBar = ({ open, handleDrawerClose }) => {
                 </ListItemIcon>
                 <ListItemText
                   primary="Ride share demand"
-                  sx={{ opacity: open ? 1 : 0, textDecoration: "none", color: 'white' }}
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
                 />
               </ListItemButton>
             </CustomTooltip>
@@ -243,7 +260,47 @@ const SideBar = ({ open, handleDrawerClose }) => {
                 </ListItemIcon>
                 <ListItemText
                   primary="Prediction Layer"
-                  sx={{ opacity: open ? 1 : 0, textDecoration: "none", color: 'white' }}
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                />
+              </ListItemButton>
+            </CustomTooltip>
+          </ListItem>
+        </NavLink>
+        <NavLink to="/filtered-layer">
+          <ListItem disablePadding sx={{ display: "block" }}>
+            <CustomTooltip
+              disable={open}
+              title="Filtered Layer"
+              placement="right"
+              arrow
+            >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <FilterAltIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Filtered Layer"
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
                 />
               </ListItemButton>
             </CustomTooltip>

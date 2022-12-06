@@ -17,6 +17,9 @@ const ArcLayerPage = React.lazy(() =>
 const PredictionLayerPage = React.lazy(() =>
   import("pages/predictionLayer/PredictionLayerPage")
 );
+const FilteredLayerPage = React.lazy(() =>
+  import("pages/filteredLayer/FilteredLayerPage")
+);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -58,6 +61,14 @@ const router = createBrowserRouter(
         element={
           <React.Suspense fallback={<PageLoader />}>
             <PredictionLayerPage />
+          </React.Suspense>
+        }
+      />
+      <Route
+        path="filtered-layer"
+        element={
+          <React.Suspense fallback={<PageLoader />}>
+            <FilteredLayerPage />
           </React.Suspense>
         }
       />
