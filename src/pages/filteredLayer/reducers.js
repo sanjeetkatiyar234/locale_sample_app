@@ -1,5 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { FETCH_FILTERED_LAYER_DATA_RECEIVED } from "app/actionConstants";
+import rightSidePanelFormReducer from "./rightSidePanelFormSlice";
 
 function filteredLayerDataReducer(state = [], action) {
   switch (action.type) {
@@ -12,4 +13,5 @@ function filteredLayerDataReducer(state = [], action) {
 
 export default combineReducers({
   data: filteredLayerDataReducer,
+  rightSidePanelForm: rightSidePanelFormReducer,
 });

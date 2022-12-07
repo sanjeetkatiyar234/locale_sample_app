@@ -10,6 +10,8 @@ import PageHeader from "./PageHeader";
 import "./FilteredLayerPage.css";
 import CustomH3HexagonLayer from "./CustomH3HexagonLayer";
 import { getFilteredLayerDataSelector } from "./selectors";
+import FilteredLayerColorForm from "./FilteredLayerColorForm";
+import FilteredLayerRightSidePanel from "./FilteredLayerRightSidePanel";
 
 const FilteredLayerPage = () => {
   const toast = useToast();
@@ -32,11 +34,12 @@ const FilteredLayerPage = () => {
     <div className="filteredLayerContainer">
       <PageHeader />
       <PageLeftSidePanel>
-        {/* <PredictionLayerColorForm /> */}
+        <FilteredLayerColorForm />
       </PageLeftSidePanel>
       <div className="mapContent">
         <CustomH3HexagonLayer data={data} />
       </div>
+      <FilteredLayerRightSidePanel />
       <Footer />
     </div>
   );
