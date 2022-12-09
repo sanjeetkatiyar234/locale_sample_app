@@ -18,7 +18,7 @@ const CountKeyOptions = [
 ];
 const FilteredLayerRightSidePanel = () => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const formValue = useSelector(
     (state) => state.pages.filteredLayer.rightSidePanelForm.value
   );

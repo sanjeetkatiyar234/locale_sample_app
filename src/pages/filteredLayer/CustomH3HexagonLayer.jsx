@@ -11,9 +11,8 @@ import { MAP_BOX_TOKEN, MAP_STYLE } from "utils/constants";
 import { getCountkeySelector } from "./selectors";
 
 const INITIAL_VIEW_STATE = {
-  // TODO change lat and log one api is right
-  latitude: 54.4,
-  longitude: 24.49,
+  longitude: 54.4,
+  latitude: 24.49,
   zoom: 9,
   maxZoom: 20,
   pitch: 30,
@@ -49,7 +48,6 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
     },
     [countKey]
   );
-
   useEffect(() => {
     if (resetMap) {
       // enforce a different latitude
@@ -70,7 +68,7 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
     elevationScale: 20,
     extruded: true,
     filled: true,
-    getElevation: (d) => 300,
+    getElevation: (d) => d.category_counts[countKey],
     getFillColor: (d) => [255, 255, 0],
     getHexagon: (d) => d.hex_id,
     wireframe: false,
