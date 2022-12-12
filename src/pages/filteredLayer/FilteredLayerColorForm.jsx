@@ -71,13 +71,12 @@ const FilteredLayerColorForm = () => {
 
 export default connect((state) => {
   const primaryColor = convertArrayToRgb(
-    state.pages.originDestination.selectedColor.primaryColor
+    state.pages.filteredLayer.selectedColor.primaryColor
   );
   const secondaryColor = convertArrayToRgb(
-    state.pages.originDestination.selectedColor.secondaryColor
+    state.pages.filteredLayer.selectedColor.secondaryColor
   );
-  console.log(primaryColor);
-  console.log(secondaryColor);
+
   return {
     initialValues: {
       primaryColor: primaryColor || "rgb(170, 255, 0)",

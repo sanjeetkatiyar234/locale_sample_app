@@ -23,7 +23,7 @@ const RangeSliderWithoutPeriodSelector = ({
     <RangeNavigatorComponent
       id="charts1"
       valueType="DateTime"
-      value={[new Date("2022-01-01"), new Date("2022-02-01")]}
+      // value={[new Date("2022-01-01"), new Date("2022-02-01")]}
       tooltip={{ enable: true, displayMode: "Always" }}
       changed={(value) => {
         setDateRange(value);

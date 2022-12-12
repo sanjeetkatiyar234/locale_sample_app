@@ -7,11 +7,14 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SubHeader from "layout/SubHeader";
 import { resetMapPosition } from "app/actions";
 import "./PageHeader.css";
+import { resetFilteredLayerView } from "./actions";
+import { resetValue } from "./rightSidePanelFormSlice";
 
 const PageHeader = () => {
   const dispatch = useDispatch();
   const resetViewClick = () => {
-    // dispatch(resetOriginDestinationView());
+    dispatch(resetFilteredLayerView());
+    dispatch(resetValue());
     // dispatch(resetFilterType());
     dispatch(resetMapPosition(true));
   };

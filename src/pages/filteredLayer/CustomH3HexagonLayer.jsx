@@ -19,35 +19,16 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
 };
 
+const getTooltip = ({ object }) =>
+  object &&
+  `Hex:${object.hex_id}
+        Vehicle Count: ${object.vehicle_count}`;
+
 const CustomH3HexagonLayer = ({ data = [] }) => {
   const dispatch = useDispatch();
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
   const resetMap = useSelector((state) => state.app.appState.resetMapPosition);
-  const countKey = useSelector(getCountkeySelector);
 
-  const getTooltip = useCallback(
-    ({ object }) => {
-      let count = 0;
-      if (
-        object &&
-        object.category_counts &&
-        Array.isArray(object.category_counts)
-      ) {
-        const countObj = object.category_counts.find((obj) => !!obj[+countKey]);
-        if (countObj) {
-          count = countObj[+countKey];
-        } else {
-          count = 0;
-        }
-      }
-      return (
-        object &&
-        `Hex:${object.hex_id}
-        Vehicle Count: ${count}`
-      );
-    },
-    [countKey]
-  );
   useEffect(() => {
     if (resetMap) {
       // enforce a different latitude
@@ -68,8 +49,8 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
     elevationScale: 20,
     extruded: true,
     filled: true,
-    getElevation: (d) => d.category_counts[countKey],
-    getFillColor: (d) => [255, 255, 0],
+    getElevation: (d) => 10 * +d.vehicle_count,
+    getFillColor: (d) => d.color,
     getHexagon: (d) => d.hex_id,
     wireframe: false,
     pickable: true,
@@ -86,7 +67,7 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
           // navigate(`/ride-share-demand?hex_id=${object.hex_id}&start_time=${object.start_time}`);
           navigate({
             pathname: "/ride-share-demand",
-            search: `start_hex=${object.hex_id}&start_time=${object.incident_datetime}`,
+            search: `start_hex=${object.hex_id}&start_time=${object.start_time}`,
           });
         }
       }}

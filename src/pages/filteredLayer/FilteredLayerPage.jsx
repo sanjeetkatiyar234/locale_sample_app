@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 // custom import
 import useToast from "hooks/useToast";
 import PageLeftSidePanel from "layout/PageLeftSidePanel";
@@ -9,27 +10,21 @@ import { fetchFilteredLayerData } from "./actions";
 import PageHeader from "./PageHeader";
 import "./FilteredLayerPage.css";
 import CustomH3HexagonLayer from "./CustomH3HexagonLayer";
-import { getFilteredLayerDataSelector } from "./selectors";
+import { getCountkeySelector, getFilteredLayerDataSelector } from "./selectors";
 import FilteredLayerColorForm from "./FilteredLayerColorForm";
 import FilteredLayerRightSidePanel from "./FilteredLayerRightSidePanel";
 import TimeRangeSlider from "components/TimeRangeSlider";
-import moment from "moment";
 
 const FilteredLayerPage = () => {
-  const toast = useToast();
-  const [dateRange, setDateRange] = useState();
-  // const [dateRange, setDateRange] = useState({
-  //   cancel: false,
-  //   end: new Date('2022-12-06'),
-  //   name: "changed",
-  //   selectedData: [],
-  //   start: new Date('2022-12-04'),
-  //   zoomFactor: -4.633333333333334,
-  //   zoomPosition: 0
-  // });
   const dispatch = useDispatch();
+  const toast = useToast();
   const loading = useSelector((state) => state.app.loading?.global);
+  const [dateRange, setDateRange] = useState({});
+  const { start, end } = dateRange;
+  const { primaryColor, secondaryColor } =
+    useSelector((state) => state.pages.filteredLayer.selectedColor) || {};
   const data = useSelector(getFilteredLayerDataSelector);
+  const countKey = useSelector(getCountkeySelector);
 
   useEffect(() => {
     dispatch({
@@ -41,9 +36,29 @@ const FilteredLayerPage = () => {
     });
   }, [dispatch]);
 
-  const temp = data.map((d) => { 
-    return { start_time: moment(d.incident_datetime).format("YYYY-MM-DD"), vehicle_count: d.category_counts[-1]}
-  })
+  const dataSource = useMemo(
+    () =>
+      data.map((d) => ({
+        ...d,
+        start_time: d.incident_datetime,
+        vehicle_count: d.category_counts[+countKey],
+      })),
+    [data, countKey]
+  );
+
+  const filterData = useMemo(() => {
+    const filterData = dataSource.filter(
+      (d) =>
+        moment(d.start_time).isSameOrAfter(start) &&
+        moment(d.start_time).isSameOrBefore(end)
+    );
+    const dataMidlength = parseInt(filterData.length / 2);
+    return filterData.map((data, index) => ({
+      ...data,
+      color: index <= dataMidlength ? primaryColor : secondaryColor,
+    }));
+  }, [dataSource, start, end, primaryColor, secondaryColor]);
+
   if (loading) return <PageLoader />;
   return (
     <div className="filteredLayerContainer">
@@ -52,14 +67,14 @@ const FilteredLayerPage = () => {
         <FilteredLayerColorForm />
       </PageLeftSidePanel>
       <div className="mapContent">
-        {temp && <TimeRangeSlider
+        <TimeRangeSlider
           selectedDateRange={dateRange}
-          dataSource={temp}
+          dataSource={dataSource}
           setDateRange={setDateRange}
           xName="start_time"
           yName="vehicle_count"
-        />}
-        <CustomH3HexagonLayer data={data} />
+        />
+        <CustomH3HexagonLayer data={filterData} />
       </div>
       <FilteredLayerRightSidePanel />
       <Footer />
