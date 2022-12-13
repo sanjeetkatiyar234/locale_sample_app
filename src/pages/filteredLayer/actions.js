@@ -12,11 +12,12 @@ export function applySelectedColor(payload) {
   };
 }
 
-export function fetchFilteredLayerData() {
+export function fetchFilteredLayerData(queryParams) {
   return {
     types: FETCH_FILTERED_LAYER_DATA,
     rel: GET,
     url: FILTERED_LAYER_DATA,
+    queryParams,
   };
 }
 

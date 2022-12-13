@@ -1,17 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
+// start_time=&end_time=2022-12-06%2018:30:10
 
 export const rightSidePanelFormSlice = createSlice({
   name: "rightSidePanelForm",
   initialState: {
-    value: { countKey: "-1", date: new moment() },
+    value: {
+      countKey: "-1",
+      date: new moment(new Date("2022-12-06 18:00:10")),
+    },
   },
   reducers: {
     handleChange: (state, action) => {
       state.value = { ...state.value, ...action.payload };
     },
     resetValue: (state) => {
-      state.value = { countKey: "-1", date: new moment() };
+      state.value = {
+        countKey: "-1",
+        date: new moment(new Date("2022-12-06 18:00:10")),
+      };
     },
   },
 });

@@ -25,16 +25,27 @@ const FilteredLayerPage = () => {
     useSelector((state) => state.pages.filteredLayer.selectedColor) || {};
   const data = useSelector(getFilteredLayerDataSelector);
   const countKey = useSelector(getCountkeySelector);
+  const viewFilterValue = useSelector(
+    (state) => state.pages.filteredLayer.viewFilter.value
+  );
+  const { date } = useSelector(
+    (state) => state.pages.filteredLayer.rightSidePanelForm.value
+  );
 
   useEffect(() => {
-    dispatch({
-      ...fetchFilteredLayerData(),
-      statusCodeMap: {
-        success: () => toast.success("data loaded"),
-        error: () => toast.error("failed data load"),
-      },
-    });
-  }, [dispatch]);
+    if (viewFilterValue) {
+      dispatch({
+        ...fetchFilteredLayerData({
+          // start_time: moment(data).format("YYYY-MM-DD HH:mm:ss"),
+          view_type: viewFilterValue,
+        }),
+        statusCodeMap: {
+          success: () => toast.success("data loaded"),
+          error: () => toast.error("failed data load"),
+        },
+      });
+    }
+  }, [dispatch, viewFilterValue, date]);
 
   const dataSource = useMemo(
     () =>

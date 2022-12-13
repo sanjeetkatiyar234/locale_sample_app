@@ -7,7 +7,7 @@ import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { FormControl, InputLabel, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { DesktopDatePicker } from "@mui/x-date-pickers";
+import { DateTimePicker } from "@mui/x-date-pickers";
 // local imports
 import { FILTERED_LAYER_RIGHT_PANEL_FORM } from "app/formConstants";
 import { handleChange } from "./rightSidePanelFormSlice";
@@ -76,9 +76,9 @@ const FilteredLayerRightSidePanel = () => {
               </Select>
             </FormControl>
 
-            <DesktopDatePicker
-              label="Date"
-              inputFormat="MM/DD/YYYY"
+            <DateTimePicker
+              label="Date&Time"
+              // inputFormat="MM/DD/YYYY"
               value={formValue.date}
               onChange={handleDateChange}
               renderInput={(params) => (
