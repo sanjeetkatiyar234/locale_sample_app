@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,9 +7,20 @@ import Select from "@mui/material/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { handleChange } from "./filterTypeSlice";
 
-const FilterTypeDropDown = () => {
+// TODO make dropdown component generic
+const defaultOptions = [
+  { value: "daily", label: "Daily" },
+  { value: "monthly", label: "Monthly" },
+  { value: "detailed", label: "Detailed" },
+];
+
+const FilterTypeDropDown = ({ value, onChange, options = defaultOptions }) => {
   const filterTypeValue = useSelector((state) => state.filterType.value);
   const dispatch = useDispatch();
+  const handleOnChange = (event) => {
+    const action = onChange ?? handleChange;
+    dispatch(action(event.target.value));
+  };
 
   return (
     <Box sx={{ minWidth: 200 }}>
@@ -17,16 +28,17 @@ const FilterTypeDropDown = () => {
         <InputLabel id="select-label">View Selection</InputLabel>
         <Select
           labelId="select-label"
-          value={filterTypeValue}
+          value={value ?? filterTypeValue}
           label="Filter Type"
-          onChange={(event) => {
-            dispatch(handleChange(event.target.value));
-          }}
+          onChange={handleOnChange}
           variant="outlined"
         >
-          <MenuItem value="daily">Daily</MenuItem>
-          <MenuItem value="monthly">Monthly</MenuItem>
-          <MenuItem value="detailed">Detailed</MenuItem>
+          {options &&
+            options.map((option, index) => (
+              <MenuItem key={index} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
     </Box>

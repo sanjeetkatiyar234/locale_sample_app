@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/lab": "^5.0.0-alpha.104",
     "@mui/material": "^5.10.10",
+    "@mui/x-date-pickers": "^5.0.10",
     "@reduxjs/toolkit": "^1.8.5",
     "@syncfusion/ej2-react-charts": "^20.2.50",
     "@syncfusion/ej2-react-grids": "^20.3.47",

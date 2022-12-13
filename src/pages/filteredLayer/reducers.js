@@ -5,6 +5,7 @@ import {
   UPDATE_FILTERED_LAYER_SELECTED_COLOR,
 } from "app/actionConstants";
 import rightSidePanelFormReducer from "./rightSidePanelFormSlice";
+import viewFilterReducer from "./viewFilterSlice";
 
 function filteredLayerDataReducer(state = [], action) {
   switch (action.type) {
@@ -38,4 +39,5 @@ export default combineReducers({
   data: filteredLayerDataReducer,
   rightSidePanelForm: rightSidePanelFormReducer,
   selectedColor: selectedColorReducer,
+  viewFilter: viewFilterReducer,
 });
