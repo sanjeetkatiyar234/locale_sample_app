@@ -71,7 +71,7 @@ const FilteredLayerPage = () => {
   }, [dataSource, start, end, primaryColor, secondaryColor]);
 
   if (loading) return <PageLoader />;
-  debugger;
+
   return (
     <div className="filteredLayerContainer">
       <PageHeader />

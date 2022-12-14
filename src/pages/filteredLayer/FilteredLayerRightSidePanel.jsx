@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import RightSidePanel from "layout/RightSidePanel";
 import { Card, CardContent, Select, TextField } from "@mui/material";
@@ -21,6 +21,10 @@ const CountKeyOptions = [
 const FilteredLayerRightSidePanel = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(true);
+  const { date } = useSelector(
+    (state) => state.pages.filteredLayer.rightSidePanelForm.value
+  );
+  const [localDate, setLocalDate] = useState(date);
   const formValue = useSelector(
     (state) => state.pages.filteredLayer.rightSidePanelForm.value
   );
@@ -29,8 +33,8 @@ const FilteredLayerRightSidePanel = () => {
     dispatch(handleChange({ [event.target.name]: event.target.value }));
   };
 
-  const handleDateChange = (value) => {
-    dispatch(handleChange({ date: value }));
+  const handleCompleteDateChange = () => {
+    dispatch(handleChange({ date: localDate }));
   };
 
   return (
@@ -78,9 +82,9 @@ const FilteredLayerRightSidePanel = () => {
 
             <DateTimePicker
               label="Date&Time"
-              // inputFormat="MM/DD/YYYY"
-              value={formValue.date}
-              onChange={handleDateChange}
+              value={localDate}
+              onChange={setLocalDate}
+              onClose={handleCompleteDateChange}
               renderInput={(params) => (
                 <TextField size="small" sx={{ mt: "15px" }} {...params} />
               )}
