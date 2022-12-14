@@ -37,6 +37,7 @@ const FilteredLayerPage = () => {
       dispatch({
         ...fetchFilteredLayerData({
           start_time: date?.format("YYYY-MM-DD HH:mm:ss"),
+          end_time: date?.endOf("day")?.format("YYYY-MM-DD HH:mm:ss"),
           view_type: viewFilterValue,
         }),
         statusCodeMap: {
@@ -51,8 +52,8 @@ const FilteredLayerPage = () => {
     () =>
       data.map((d) => ({
         ...d,
-        start_time: d.incident_datetime,
-        vehicle_count: d.category_counts[+countKey] || 0,
+        start_time: d?.incident_datetime,
+        vehicle_count: d?.category_counts[+countKey] || 0,
       })),
     [data, countKey]
   );
