@@ -52,7 +52,7 @@ const FilteredLayerPage = () => {
       data.map((d) => ({
         ...d,
         start_time: d.incident_datetime,
-        vehicle_count: d.category_counts[+countKey],
+        vehicle_count: d.category_counts[+countKey] || 0,
       })),
     [data, countKey]
   );
