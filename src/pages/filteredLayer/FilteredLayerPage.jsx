@@ -33,10 +33,10 @@ const FilteredLayerPage = () => {
   );
 
   useEffect(() => {
-    if (viewFilterValue) {
+    if (date && viewFilterValue) {
       dispatch({
         ...fetchFilteredLayerData({
-          // start_time: moment(data).format("YYYY-MM-DD HH:mm:ss"),
+          start_time: date?.format("YYYY-MM-DD HH:mm:ss"),
           view_type: viewFilterValue,
         }),
         statusCodeMap: {
@@ -71,6 +71,7 @@ const FilteredLayerPage = () => {
   }, [dataSource, start, end, primaryColor, secondaryColor]);
 
   if (loading) return <PageLoader />;
+  debugger;
   return (
     <div className="filteredLayerContainer">
       <PageHeader />
