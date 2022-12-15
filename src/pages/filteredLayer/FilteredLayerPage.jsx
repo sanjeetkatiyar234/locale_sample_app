@@ -15,6 +15,22 @@ import FilteredLayerColorForm from "./FilteredLayerColorForm";
 import FilteredLayerRightSidePanel from "./FilteredLayerRightSidePanel";
 import TimeRangeSlider from "components/TimeRangeSlider";
 
+const normalizeRequest = (date, viewFilterValue) => {
+  const start_time =
+    viewFilterValue === "daily"
+      ? date?.format("YYYY-MM-DD")
+      : date?.format("YYYY-MM-DD HH:mm:ss");
+  const end_time =
+    viewFilterValue === "daily"
+      ? date?.format("YYYY-MM-DD")
+      : date?.endOf("day")?.format("YYYY-MM-DD HH:mm:ss");
+  return {
+    start_time: start_time,
+    end_time: end_time,
+    view_type: viewFilterValue,
+  };
+};
+
 const FilteredLayerPage = () => {
   const dispatch = useDispatch();
   const toast = useToast();
@@ -36,9 +52,7 @@ const FilteredLayerPage = () => {
     if (date && viewFilterValue) {
       dispatch({
         ...fetchFilteredLayerData({
-          start_time: date?.format("YYYY-MM-DD HH:mm:ss"),
-          end_time: date?.endOf("day")?.format("YYYY-MM-DD HH:mm:ss"),
-          view_type: viewFilterValue,
+          ...normalizeRequest(date, viewFilterValue),
         }),
         statusCodeMap: {
           success: () => toast.success("data loaded"),
