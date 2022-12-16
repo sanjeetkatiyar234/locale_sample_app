@@ -7,7 +7,7 @@ import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { FormControl, InputLabel, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { DateTimePicker } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
 // local imports
 import { FILTERED_LAYER_RIGHT_PANEL_FORM } from "app/formConstants";
 import { handleChange } from "./rightSidePanelFormSlice";
@@ -21,10 +21,13 @@ const CountKeyOptions = [
 const FilteredLayerRightSidePanel = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(true);
-  const { date } = useSelector(
+  const viewFilterValue = useSelector(
+    (state) => state.pages.filteredLayer.viewFilter.value
+  );
+  const { start_date } = useSelector(
     (state) => state.pages.filteredLayer.rightSidePanelForm.value
   );
-  const [localDate, setLocalDate] = useState(date);
+  // const [localDate, setLocalDate] = useState(start_date);
   const formValue = useSelector(
     (state) => state.pages.filteredLayer.rightSidePanelForm.value
   );
@@ -33,9 +36,9 @@ const FilteredLayerRightSidePanel = () => {
     dispatch(handleChange({ [event.target.name]: event.target.value }));
   };
 
-  const handleCompleteDateChange = () => {
-    dispatch(handleChange({ date: localDate }));
-  };
+  // const handleCompleteDateChange = () => {
+  //   dispatch(handleChange({ start_date: localDate }));
+  // };
 
   return (
     <RightSidePanel>
@@ -80,15 +83,43 @@ const FilteredLayerRightSidePanel = () => {
               </Select>
             </FormControl>
 
-            <DateTimePicker
-              label="Date&Time"
-              value={localDate}
-              onChange={setLocalDate}
-              onClose={handleCompleteDateChange}
-              renderInput={(params) => (
-                <TextField size="small" sx={{ mt: "15px" }} {...params} />
-              )}
-            />
+            {viewFilterValue === "daily" ? (
+              <DatePicker
+                label="Date"
+                value={formValue.daily_start_date}
+                onChange={(value) =>
+                  dispatch(handleChange({ daily_start_date: value }))
+                }
+                renderInput={(params) => (
+                  <TextField size="small" sx={{ mt: "15px" }} {...params} />
+                )}
+              />
+            ) : (
+              <>
+                <DatePicker
+                  label="Start Date"
+                  maxDate={formValue.end_date}
+                  value={formValue.start_date}
+                  onChange={(value) =>
+                    dispatch(handleChange({ start_date: value }))
+                  }
+                  renderInput={(params) => (
+                    <TextField size="small" sx={{ mt: "15px" }} {...params} />
+                  )}
+                />
+                <DatePicker
+                  minDate={formValue.start_date}
+                  label="End Date"
+                  value={formValue.end_date}
+                  onChange={(value) =>
+                    dispatch(handleChange({ end_date: value }))
+                  }
+                  renderInput={(params) => (
+                    <TextField size="small" sx={{ mt: "15px" }} {...params} />
+                  )}
+                />
+              </>
+            )}
           </CardContent>
         </Card>
       </div>

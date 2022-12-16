@@ -15,15 +15,15 @@ import FilteredLayerColorForm from "./FilteredLayerColorForm";
 import FilteredLayerRightSidePanel from "./FilteredLayerRightSidePanel";
 import TimeRangeSlider from "components/TimeRangeSlider";
 
-const normalizeRequest = (date, viewFilterValue) => {
+const normalizeRequest = (formValue = {}, viewFilterValue) => {
   const start_time =
     viewFilterValue === "daily"
-      ? date?.format("YYYY-MM-DD")
-      : date?.format("YYYY-MM-DD HH:mm:ss");
+      ? formValue.daily_start_date?.format("YYYY-MM-DD")
+      : formValue.start_date?.format("YYYY-MM-DD");
   const end_time =
     viewFilterValue === "daily"
-      ? date?.format("YYYY-MM-DD")
-      : date?.endOf("day")?.format("YYYY-MM-DD HH:mm:ss");
+      ? formValue.daily_start_date?.format("YYYY-MM-DD")
+      : formValue.end_date?.format("YYYY-MM-DD");
   return {
     start_time: start_time,
     end_time: end_time,
@@ -44,15 +44,15 @@ const FilteredLayerPage = () => {
   const viewFilterValue = useSelector(
     (state) => state.pages.filteredLayer.viewFilter.value
   );
-  const { date } = useSelector(
+  const formValue = useSelector(
     (state) => state.pages.filteredLayer.rightSidePanelForm.value
   );
 
   useEffect(() => {
-    if (date && viewFilterValue) {
+    if (formValue && viewFilterValue) {
       dispatch({
         ...fetchFilteredLayerData({
-          ...normalizeRequest(date, viewFilterValue),
+          ...normalizeRequest(formValue, viewFilterValue),
         }),
         statusCodeMap: {
           success: () => toast.success("data loaded"),
@@ -60,7 +60,13 @@ const FilteredLayerPage = () => {
         },
       });
     }
-  }, [dispatch, viewFilterValue, date]);
+  }, [
+    dispatch,
+    viewFilterValue,
+    formValue.daily_start_date,
+    formValue.start_date,
+    formValue.end_date,
+  ]);
 
   const dataSource = useMemo(
     () =>
