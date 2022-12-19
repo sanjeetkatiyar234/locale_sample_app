@@ -3,10 +3,11 @@ export const groupRangeSelectorDataByHours = (data = []) => {
 
   for (const element of data) {
     const vehicle_count = +element.vehicle_count || 0;
-    const date = new Date(element.start_time);
-    const hours =
-      date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
-    const dateString = `${date.toISOString().split("T")[0]}T${hours}:00:00`;
+    // const date = new Date(element.start_time);
+    // const hours =
+    //   date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+    // const dateString = `${date.toISOString().split("T")[0]}T${hours}:00:00`;
+    const dateString = new Date(element.start_time).toLocaleString();
 
     if (newData[dateString]) {
       newData[dateString] = newData[dateString] + vehicle_count;
@@ -28,7 +29,8 @@ export const groupRangeSelectorDataByDaily = (data = []) => {
 
   for (const element of data) {
     const vehicle_count = +element.vehicle_count || 0;
-    const date = new Date(element.start_time).toISOString().split("T")[0];
+    // const date = new Date(element.start_time).toISOString().split("T")[0];
+    const date = new Date(element.start_time).toLocaleDateString();
     if (newData[date]) {
       newData[date] = newData[date] + vehicle_count;
     } else {

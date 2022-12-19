@@ -24,14 +24,14 @@ const RangeSlider = ({ filterTypeValue, dataSource = [], ...props }) => {
   return filterTypeValue === "daily" ? (
     <Suspense fallback={<RangeLoader />}>
       <RangeSliderWithoutPeriodSelector
-        dataSource={groupRangeSelectorDataByDaily(dataSource)}
+        dataSource={groupRangeSelectorDataByHours(dataSource)}
         {...props}
       />
     </Suspense>
   ) : (
     <Suspense fallback={<RangeLoader />}>
       <RangeSliderWithPeriodSelector
-        dataSource={groupRangeSelectorDataByHours(dataSource)}
+        dataSource={groupRangeSelectorDataByDaily(dataSource)}
         {...props}
       />
     </Suspense>
