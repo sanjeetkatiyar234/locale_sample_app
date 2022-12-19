@@ -101,6 +101,7 @@ const FilteredLayerPage = () => {
       </PageLeftSidePanel>
       <div className="mapContent">
         <TimeRangeSlider
+          filterTypeValue={viewFilterValue}
           selectedDateRange={dateRange}
           dataSource={dataSource}
           setDateRange={setDateRange}

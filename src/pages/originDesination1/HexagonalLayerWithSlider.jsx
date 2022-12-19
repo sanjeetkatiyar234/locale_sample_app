@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import moment from "moment";
+import { useSelector } from "react-redux";
 import TimeRangeSlider from "components/TimeRangeSlider";
 import CustomHexagonLayer from "components/hexagonLayer/CustomHexagonLayer";
 
 const HexagonalLayerWithSlider = ({ className, sampleData }) => {
   const [dateRange, setDateRange] = useState({});
+  const filterTypeValue = useSelector((state) => state.filterType.value);
   const { start, end } = dateRange;
   const filterData = useMemo(
     () =>
@@ -18,6 +20,7 @@ const HexagonalLayerWithSlider = ({ className, sampleData }) => {
   return (
     <div className={className}>
       <TimeRangeSlider
+        filterTypeValue={filterTypeValue}
         selectedDateRange={dateRange}
         dataSource={sampleData}
         setDateRange={setDateRange}

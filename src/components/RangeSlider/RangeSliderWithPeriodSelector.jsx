@@ -40,8 +40,8 @@ const RangeSliderWithPeriodSelector = ({
         setDateRange(value);
       }}
       periodSelectorSettings={periodSelectorSettings}
-      intervalType="Hours"
-      groupBy="Hours"
+      intervalType="Days"
+      groupBy="Days"
       allowIntervalData={false}
       interval={1}
       enableDeferredUpdate

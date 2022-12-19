@@ -9,6 +9,7 @@ const H3HexagonLayerWithSlider = ({ className, sampleData }) => {
   const { start, end } = dateRange;
   const { primaryColor, secondaryColor } =
     useSelector((state) => state.pages.originDestination.selectedColor) || {};
+  const filterTypeValue = useSelector((state) => state.filterType.value);
 
   const filterData = useMemo(() => {
     const filterData = sampleData.filter(
@@ -25,6 +26,7 @@ const H3HexagonLayerWithSlider = ({ className, sampleData }) => {
   return (
     <div className={className}>
       <TimeRangeSlider
+        filterTypeValue={filterTypeValue}
         selectedDateRange={dateRange}
         dataSource={sampleData}
         setDateRange={setDateRange}
