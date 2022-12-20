@@ -18,12 +18,13 @@ const ArcLayerPage = () => {
   const sampleData = useSelector((state) =>
     arcLayerDataSelector(state, !!search)
   );
+  const filterTypeValue = useSelector((state) => state.filterType.value);
   const loading = useSelector((state) => state.app.loading?.global);
 
   useEffect(() => {
     const action = search
       ? fetchH3ToArcLayerData(search)
-      : fetchQueryHiveData();
+      : fetchQueryHiveData(filterTypeValue);
     dispatch({
       ...action,
       statusCodeMap: {
@@ -31,7 +32,7 @@ const ArcLayerPage = () => {
         error: () => toast.error("failed data load"),
       },
     });
-  }, [dispatch, search]);
+  }, [dispatch, search, filterTypeValue]);
   if (loading) return <PageLoader />;
   return (
     <div className="arcLayerContainer">

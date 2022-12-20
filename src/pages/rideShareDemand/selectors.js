@@ -1,30 +1,23 @@
-import moment from "moment";
 import { createSelector } from "reselect";
 
 // state selectors
 const queryHiveDataSelector = (state) => state.data.queryHive;
 const selectedArcLayerSelector = (state) =>
   state.pages.rideShareDemand.selectedArcLayer;
-const filterTypeValueSelector = (state) => state.filterType.value;
 const searchSelector = (state, isSearch) => isSearch;
 
 export const arcLayerDataSelector = createSelector(
-  [
-    queryHiveDataSelector,
-    selectedArcLayerSelector,
-    filterTypeValueSelector,
-    searchSelector,
-  ],
-  (sampleData = [], selectedArcLayerData = [], filterTypeValue, isSearch) => {
+  [queryHiveDataSelector, selectedArcLayerSelector, searchSelector],
+  (sampleData = [], selectedArcLayerData = [], isSearch) => {
     const data = isSearch ? selectedArcLayerData : sampleData;
 
-    const todayDate = moment().subtract(10, "M");
-    const filterData =
-      filterTypeValue === "daily"
-        ? data.filter((d) => moment(d.start_time).isSameOrAfter(todayDate))
-        : data;
+    // const todayDate = moment().subtract(10, "M");
+    // const filterData =
+    //   filterTypeValue === "daily"
+    //     ? data.filter((d) => moment(d.start_time).isSameOrAfter(todayDate))
+    //     : data;
 
-    return filterData?.filter((d) =>
+    return data?.filter((d) =>
       isSearch
         ? d.start_hex != null && d.end_hex != null
         : d.start_loc[0] != null &&
