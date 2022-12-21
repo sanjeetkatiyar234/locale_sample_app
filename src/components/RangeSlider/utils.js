@@ -1,13 +1,12 @@
+import moment from "moment";
 export const groupRangeSelectorDataByHours = (data = []) => {
   let newData = {};
 
   for (const element of data) {
     const vehicle_count = +element.vehicle_count || 0;
-    const date = new Date(element.start_time);
-    const hours =
-      date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
-    const dateString = `${date.toISOString().split("T")[0]}T${hours}:00:00`;
-    // const dateString = new Date(element.start_time).toLocaleString();
+    const dateString = `${moment(element.start_time).format(
+      "YYYY-MM-DD HH"
+    )}:00:00`;
 
     if (newData[dateString]) {
       newData[dateString] = newData[dateString] + vehicle_count;
@@ -29,8 +28,7 @@ export const groupRangeSelectorDataByDaily = (data = []) => {
 
   for (const element of data) {
     const vehicle_count = +element.vehicle_count || 0;
-    const date = new Date(element.start_time).toISOString().split("T")[0];
-    // const date = new Date(element.start_time).toLocaleDateString().toString();
+    const date = moment(element.start_time).format("YYYY-MM-DD");
 
     if (newData[date]) {
       newData[date] = newData[date] + vehicle_count;
@@ -44,5 +42,5 @@ export const groupRangeSelectorDataByDaily = (data = []) => {
       start_time,
       vehicle_count,
     }))
-    .sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
+    .sort((a, b) => moment(a.start_time) - moment(b.start_time));
 };
