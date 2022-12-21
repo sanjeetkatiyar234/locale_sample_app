@@ -46,10 +46,11 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
     /* props from H3HexagonLayer class */
     // centerHexagon: null,
     // coverage: 1,
-    elevationScale: 20,
+    elevationScale: 5,
     extruded: true,
     filled: true,
-    getElevation: (d) => 10 * +d.vehicle_count,
+    getElevation: (d) =>
+      +d.vehicle_count < 500 ? 10 * +d.vehicle_count : +d.vehicle_count,
     getFillColor: (d) => d.color,
     getHexagon: (d) => d.hex_id,
     wireframe: false,
