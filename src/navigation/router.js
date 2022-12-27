@@ -20,6 +20,9 @@ const PredictionLayerPage = React.lazy(() =>
 const FilteredLayerPage = React.lazy(() =>
   import("pages/filteredLayer/FilteredLayerPage")
 );
+const GeoJsonLayer = React.lazy(() =>
+  import("pages/geoJsonLayer/GeoJsonLayer")
+);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -69,6 +72,14 @@ const router = createBrowserRouter(
         element={
           <React.Suspense fallback={<PageLoader />}>
             <FilteredLayerPage />
+          </React.Suspense>
+        }
+      />
+      <Route
+        path="geojson-layer"
+        element={
+          <React.Suspense fallback={<PageLoader />}>
+            <GeoJsonLayer />
           </React.Suspense>
         }
       />

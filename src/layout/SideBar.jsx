@@ -5,6 +5,7 @@ import MapIcon from "@mui/icons-material/Map";
 import RouteIcon from "@mui/icons-material/Route";
 import BatchPredictionIcon from "@mui/icons-material/BatchPrediction";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import EmergencyShareIcon from "@mui/icons-material/EmergencyShare";
 import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
@@ -296,6 +297,42 @@ const SideBar = ({ open, handleDrawerClose }) => {
                 </ListItemIcon>
                 <ListItemText
                   primary="Filtered Layer"
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                />
+              </ListItemButton>
+            </CustomTooltip>
+          </ListItem>
+        </NavLink>
+        <NavLink to="/geojson-layer">
+          <ListItem disablePadding sx={{ display: "block" }}>
+            <CustomTooltip
+              disable={open}
+              title="GeoJson Layer"
+              placement="right"
+              arrow
+            >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <EmergencyShareIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="GeoJson Layer"
                   sx={{
                     opacity: open ? 1 : 0,
                     textDecoration: "none",
