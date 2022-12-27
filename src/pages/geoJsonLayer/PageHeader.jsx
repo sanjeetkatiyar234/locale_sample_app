@@ -19,7 +19,7 @@ const PageHeader = () => {
   const dispatch = useDispatch();
   const onResetClick = () => {
     // dispatch(resetFilterType());
-    // dispatch(resetMapPosition(true));
+    dispatch(resetMapPosition(true));
   };
   return (
     <SubHeader>
