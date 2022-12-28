@@ -14,9 +14,9 @@ import { handleChange } from "./rightSidePanelFormSlice";
 import "./FilteredLayerRightSidePanel.css";
 
 const CountKeyOptions = [
-  { value: "-1", label: "-1" },
-  { value: "6", label: "6" },
-  { value: "8", label: "8" },
+  { value: "-1", label: "All" },
+  { value: "6", label: "Accidents" },
+  { value: "8", label: "Road Blocks" },
 ];
 const FilteredLayerRightSidePanel = () => {
   const dispatch = useDispatch();

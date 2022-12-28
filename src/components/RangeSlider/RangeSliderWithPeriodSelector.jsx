@@ -39,7 +39,6 @@ const RangeSliderWithPeriodSelector = ({
       changed={(value) => {
         setDateRange(value);
       }}
-      periodSelectorSettings={periodSelectorSettings}
       intervalType="Days"
       groupBy="Days"
       allowIntervalData={false}

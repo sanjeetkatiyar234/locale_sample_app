@@ -19,6 +19,30 @@ const INITIAL_VIEW_STATE = {
 };
 
 const CustomGeoJsonLayer = ({ data = [] }) => {
+  // let geodata = GeoJsondata.features.map((d) => {
+  //   console.log('d.geometry', d);
+  //   if (d.geometry) {
+  //     return d
+  //   }
+  //   // return {
+  //   //   "type": "Feature",
+  //   //   "properties": {
+  //   //     "name": "Van Dorn Street",
+  //   //     "marker-color": "#0000ff",
+  //   //     "marker-symbol": "rail-metro",
+  //   //     "line": "blue"
+  //   //   },
+  //   //   "geometry": {
+  //   //     "type": "LineString",
+  //   //     "coordinates": [
+  //   //       -77.12911152370515,
+  //   //       38.79930767201779
+  //   //     ]
+  //   //   }
+  //   // };
+  // })
+  let geodata = GeoJsondata.features.shift();
+  console.log('GeoJsondata', GeoJsondata.features);
   const dispatch = useDispatch();
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
   const resetMap = useSelector((state) => state.app.appState.resetMapPosition);
@@ -36,28 +60,28 @@ const CustomGeoJsonLayer = ({ data = [] }) => {
 
   const layer = new GeoJsonLayer({
     id: "GeoJsonLayer",
-    data: GeoJsondata,
+    data: GeoJsondata.features,
     /* props from GeoJsonLayer class */
 
     // elevationScale: 1,
     extruded: true,
     filled: true,
     getElevation: 30,
-    getFillColor: [160, 160, 180, 200],
+    // getFillColor: [160, 160, 180, 200],
     // getIconAngle: 0,
     // getIconColor: [0, 0, 0, 255],
     // getIconPixelOffset: [0, 0],
     // getIconSize: 1,
     getLineColor: (f) => {
-      const hex = f.properties.color;
+      const hex = f.properties.color || "#ffe800";
       // convert to RGB
       return hex
         ? hex.match(/[0-9a-f]{2}/g).map((x) => parseInt(x, 16))
         : [0, 0, 0];
     },
-    getLineWidth: 20,
+    getLineWidth: 5,
     getPointRadius: 4,
-    getText: (f) => f.properties.name,
+    getText: (f) => f.properties.streetName,
     // getTextAlignmentBaseline: 'center',
     // getTextAnchor: 'middle',
     // getTextAngle: 0,
