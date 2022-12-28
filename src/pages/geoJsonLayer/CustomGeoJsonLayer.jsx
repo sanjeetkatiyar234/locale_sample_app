@@ -7,23 +7,21 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetMapPosition } from "app/actions";
 
-import GeoJsondata from "./data.json";
-
 const INITIAL_VIEW_STATE = {
   longitude: 54.4,
   latitude: 24.49,
-  zoom: 8,
+  zoom: 11,
   maxZoom: 20,
   pitch: 30,
   bearing: 30,
 };
 
 const CustomGeoJsonLayer = ({ data = [] }) => {
-  // let geodata = GeoJsondata.features.map((d) => {
-  //   console.log('d.geometry', d);
-  //   if (d.geometry) {
-  //     return d
-  //   }
+  //   // let geodata = GeoJsondata.features.map((d) => {
+  //   //   console.log('d.geometry', d);
+  //   //   if (d.geometry) {
+  //   //     return d
+  //   //   }
   //   // return {
   //   //   "type": "Feature",
   //   //   "properties": {
@@ -40,9 +38,7 @@ const CustomGeoJsonLayer = ({ data = [] }) => {
   //   //     ]
   //   //   }
   //   // };
-  // })
-  let geodata = GeoJsondata.features.shift();
-  console.log('GeoJsondata', GeoJsondata.features);
+
   const dispatch = useDispatch();
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
   const resetMap = useSelector((state) => state.app.appState.resetMapPosition);
@@ -60,7 +56,7 @@ const CustomGeoJsonLayer = ({ data = [] }) => {
 
   const layer = new GeoJsonLayer({
     id: "GeoJsonLayer",
-    data: GeoJsondata.features,
+    data,
     /* props from GeoJsonLayer class */
 
     // elevationScale: 1,
