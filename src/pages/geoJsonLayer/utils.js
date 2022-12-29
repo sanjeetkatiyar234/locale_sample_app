@@ -50,13 +50,20 @@ export const filtergeoJsonData = (
     .map((d) => d?.["@id"]);
 
   return featureGeoJsonData.map((data) => {
-    const { segmentTimeResults, ...rest } = data.properties;
+    const { segmentTimeResults, speedLimit, ...rest } = data.properties;
     const filterSegmentTimeResults = segmentTimeResults.filter((d) =>
       filterIds.includes(d.timeSet)
     );
+    const avg = filterSegmentTimeResults.reduce((a, b) => a + b?.medianSpeed, 0);
+    let color = '';
+    if (avg < speedLimit) {
+      color = [255,0,0];
+    } else {
+      color = [255,255,0];
+    }
     return {
       ...data,
-      properties: { ...rest, segmentTimeResults: filterSegmentTimeResults },
+      properties: { ...rest, avg:avg/filterSegmentTimeResults.length, color:color, segmentTimeResults: filterSegmentTimeResults },
     };
   });
 };

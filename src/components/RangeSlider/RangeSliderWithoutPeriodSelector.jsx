@@ -14,6 +14,8 @@ const RangeSliderWithoutPeriodSelector = ({
   setDateRange,
   xName,
   yName = "y",
+  intervalType = "Hours",
+  interval = 1
 }) => {
   if (!dataSource.length) {
     return null;
@@ -29,9 +31,9 @@ const RangeSliderWithoutPeriodSelector = ({
         setDateRange(value);
       }}
       allowIntervalData={false}
-      intervalType="Hours"
-      groupBy="Hours"
-      interval={1}
+      intervalType={intervalType}
+      groupBy={intervalType}
+      interval={interval}
       allowSnapping
       enableDeferredUpdate
       navigatorStyleSettings={{

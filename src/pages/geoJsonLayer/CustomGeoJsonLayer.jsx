@@ -69,11 +69,12 @@ const CustomGeoJsonLayer = ({ data = [] }) => {
     // getIconPixelOffset: [0, 0],
     // getIconSize: 1,
     getLineColor: (f) => {
-      const hex = f.properties.color || "#ffe800";
+      // const hex = f.properties.color || "#ffe800";
+      return f.properties.color;
       // convert to RGB
-      return hex
-        ? hex.match(/[0-9a-f]{2}/g).map((x) => parseInt(x, 16))
-        : [0, 0, 0];
+      // return hex
+      //   ? hex.match(/[0-9a-f]{2}/g).map((x) => parseInt(x, 16))
+      //   : [0, 0, 0];
     },
     getLineWidth: 5,
     getPointRadius: 4,

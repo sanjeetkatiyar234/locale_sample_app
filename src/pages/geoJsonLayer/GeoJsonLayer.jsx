@@ -33,6 +33,8 @@ const GeoJsonLayer = () => {
           dataSource={dataSourceForTimeRangeSlider}
           setDateRange={setDateRange}
           xName="start_time"
+          intervalType="Minutes"
+          interval={15}
         />
         <CustomGeoJsonLayer data={filterData} />
       </div>
