@@ -23,6 +23,7 @@ import moment from "moment";
 
 //     }
 // }
+
 export const getTimeRangeForSlider = (obj) => {
   const date = obj.properties?.dateRanges?.[0]?.from || new Date();
   const timeSets = obj.properties?.timeSets || [];
@@ -33,6 +34,19 @@ export const getTimeRangeForSlider = (obj) => {
       start_time: `${moment(date).format("YYYY-MM-DD")} ${startTime}:00`,
     };
   });
+};
+
+const getMedianSpeed = (values) => {
+  const sorted = Array.from(values).sort(
+    (a, b) => a?.medianSpeed - b?.medianSpeed
+  );
+  const middle = Math.floor(sorted.length / 2);
+
+  if (sorted.length % 2 === 0) {
+    return (sorted[middle - 1]?.medianSpeed + sorted[middle]?.medianSpeed) / 2;
+  }
+
+  return sorted[middle]?.medianSpeed;
 };
 
 export const filtergeoJsonData = (
@@ -54,23 +68,32 @@ export const filtergeoJsonData = (
     const filterSegmentTimeResults = segmentTimeResults.filter((d) =>
       filterIds.includes(d.timeSet)
     );
-    const avg = filterSegmentTimeResults.reduce((a, b) => a + b?.medianSpeed, 0);
+    // const avg = filterSegmentTimeResults.reduce(
+    //   (a, b) => a + b?.medianSpeed,
+    //   0
+    // );
+    const median = getMedianSpeed(filterSegmentTimeResults);
     const tenPct = (speedLimit / 100) * 20;
-    let color = '';
-    if (speedLimit < avg) {
+    let color = "";
+    if (speedLimit < median) {
       color = [11, 102, 35];
-    } else if (speedLimit > avg && avg > (speedLimit - tenPct)) {
-      color = [255,255,0];
-    } else if(avg < (speedLimit - tenPct)) {
-      color = [255,0,0];
+    } else if (speedLimit > median && median > speedLimit - tenPct) {
+      color = [255, 255, 0];
+    } else if (median < speedLimit - tenPct) {
+      color = [255, 0, 0];
     }
-    if (avg === 0) {
-      color = [44,44,43];
+    if (median === 0) {
+      color = [44, 44, 43];
     }
-    console.log('harsh', avg/filterSegmentTimeResults.length, speedLimit, (speedLimit - tenPct))
+    console.log("harsh", median, speedLimit, speedLimit - tenPct);
     return {
       ...data,
-      properties: { ...rest, avg:avg/filterSegmentTimeResults.length, color:color, segmentTimeResults: filterSegmentTimeResults },
+      properties: {
+        ...rest,
+        median: median,
+        color: color,
+        segmentTimeResults: filterSegmentTimeResults,
+      },
     };
   });
 };
