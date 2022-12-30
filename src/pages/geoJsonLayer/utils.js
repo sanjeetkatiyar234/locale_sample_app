@@ -55,12 +55,19 @@ export const filtergeoJsonData = (
       filterIds.includes(d.timeSet)
     );
     const avg = filterSegmentTimeResults.reduce((a, b) => a + b?.medianSpeed, 0);
+    const tenPct = (speedLimit / 100) * 20;
     let color = '';
-    if (avg < speedLimit) {
-      color = [255,0,0];
-    } else {
+    if (speedLimit < avg) {
+      color = [11, 102, 35];
+    } else if (speedLimit > avg && avg > (speedLimit - tenPct)) {
       color = [255,255,0];
+    } else if(avg < (speedLimit - tenPct)) {
+      color = [255,0,0];
     }
+    if (avg === 0) {
+      color = [44,44,43];
+    }
+    console.log('harsh', avg/filterSegmentTimeResults.length, speedLimit, (speedLimit - tenPct))
     return {
       ...data,
       properties: { ...rest, avg:avg/filterSegmentTimeResults.length, color:color, segmentTimeResults: filterSegmentTimeResults },

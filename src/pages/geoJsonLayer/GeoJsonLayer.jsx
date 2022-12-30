@@ -21,7 +21,7 @@ const GeoJsonLayer = () => {
     dateRange
   );
   // console.log("firstGeodata", firstGeodata);
-  console.log("GeoJsondata", GeoJsondata.features);
+  // console.log("GeoJsondata", GeoJsondata.features);
   console.log("filterData", filterData);
   return (
     <div className="geo-json-layer">
