@@ -275,7 +275,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
           <ListItem disablePadding sx={{ display: "block" }}>
             <CustomTooltip
               disable={open}
-              title="Filtered Layer"
+              title="Incident Prediction"
               placement="right"
               arrow
             >
@@ -296,7 +296,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
                   <FilterAltIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Filtered Layer"
+                  primary="Incident Prediction"
                   sx={{
                     opacity: open ? 1 : 0,
                     textDecoration: "none",
@@ -311,7 +311,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
           <ListItem disablePadding sx={{ display: "block" }}>
             <CustomTooltip
               disable={open}
-              title="GeoJson Layer"
+              title="Traffic Trends"
               placement="right"
               arrow
             >
@@ -332,7 +332,7 @@ const SideBar = ({ open, handleDrawerClose }) => {
                   <EmergencyShareIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="GeoJson Layer"
+                  primary="Traffic Trends"
                   sx={{
                     opacity: open ? 1 : 0,
                     textDecoration: "none",

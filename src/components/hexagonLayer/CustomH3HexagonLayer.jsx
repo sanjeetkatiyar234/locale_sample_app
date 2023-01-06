@@ -70,7 +70,7 @@ const CustomH3HexagonLayer = ({ data = [] }) => {
           // navigate(`/ride-share-demand?hex_id=${object.hex_id}&start_time=${object.start_time}`);
           navigate({
             pathname: "/ride-share-demand",
-            search: `start_hex=${object.hex_id}&start_time=${object.start_time}`,
+            search: `start_hex=${object.hex_id}&start_time=${object.start_time.split(" ").length > 1 ? object.start_time : `${object.start_time} 00:01:01`}&end_time=${object.end_time.split(" ").length > 1 ? object.end_time : `${object.end_time} 23:59:59` }`,
           });
         }
       }}

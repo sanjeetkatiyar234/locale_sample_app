@@ -98,7 +98,6 @@ const FilteredLayerRightSidePanel = () => {
               <>
                 <DatePicker
                   label="Start Date"
-                  maxDate={formValue.end_date}
                   value={formValue.start_date}
                   onChange={(value) =>
                     dispatch(handleChange({ start_date: value }))

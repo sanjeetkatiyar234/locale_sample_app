@@ -7,9 +7,9 @@ export const rightSidePanelFormSlice = createSlice({
   initialState: {
     value: {
       countKey: "-1",
-      daily_start_date: new moment(new Date("2022-12-06")),
-      start_date: new moment(new Date("2022-12-01")),
-      end_date: new moment(new Date("2022-12-31")),
+      daily_start_date: new moment(new Date("2023-01-02")),
+      start_date: new moment(new Date("2023-01-02")),
+      end_date: new moment(new Date("2023-01-30")),
     },
   },
   reducers: {
@@ -19,9 +19,9 @@ export const rightSidePanelFormSlice = createSlice({
     resetValue: (state) => {
       state.value = {
         countKey: "-1",
-        daily_start_date: new moment(new Date("2022-12-06")),
-        start_date: new moment(new Date("2022-12-01")),
-        end_date: new moment(new Date("2022-12-31")),
+        daily_start_date: new moment(new Date("2023-01-02")),
+        start_date: new moment(new Date("2023-01-02")),
+        end_date: new moment(new Date("2023-01-30")),
       };
     },
   },

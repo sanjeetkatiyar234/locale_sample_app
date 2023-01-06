@@ -36,6 +36,8 @@ const ArcLayerWithSlider = ({ sampleData }) => {
         dataSource={arcData ?? sampleData}
         setDateRange={setDateRange}
         xName="start_time"
+        intervalType = "Hours"
+        interval={1}
       />
       <CustomArcLayer data={filterData} />
     </div>

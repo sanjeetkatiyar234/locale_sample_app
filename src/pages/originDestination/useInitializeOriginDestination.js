@@ -9,8 +9,8 @@ import {
 } from "./actions";
 
 const FIRST_DATA = {
-  start_time: "2022-01-1 00:00:00",
-  end_time: "2022-01-10 00:00:00",
+  start_time: "2022-01-03 00:00:00",
+  end_time: "2022-01-03 23:59:59",
 };
 const SECOND_DATA =
   "?start_time=2022-01-11 00:00:00&end_time=2022-01-20 00:00:00";

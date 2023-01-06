@@ -74,7 +74,7 @@ export const filtergeoJsonData = (
     // );
     const median = getMedianSpeed(filterSegmentTimeResults);
     const tenPct = (speedLimit / 100) * 20;
-    let color = "";
+    let color = [64, 64, 64];
     if (speedLimit < median) {
       color = [11, 102, 35];
     } else if (speedLimit > median && median > speedLimit - tenPct) {
@@ -83,7 +83,7 @@ export const filtergeoJsonData = (
       color = [255, 0, 0];
     }
     if (median === 0) {
-      color = [44, 44, 43];
+      color = [64, 64, 64];
     }
     console.log("harsh", median, speedLimit, speedLimit - tenPct);
     return {
