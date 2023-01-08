@@ -11,6 +11,7 @@ import "./PageHeader.css";
 import { resetFilteredLayerView } from "./actions";
 import { resetValue } from "./rightSidePanelFormSlice";
 import { resetFilterView, handleChange } from "./viewFilterSlice";
+import getFetchDataTimeValue from "utils/getFetchDataTimeValue";
 
 const options = [
   { value: "daily", label: "Daily" },
@@ -20,6 +21,9 @@ const PageHeader = () => {
   const dispatch = useDispatch();
   const viewFilterValue = useSelector(
     (state) => state.pages.filteredLayer.viewFilter.value
+  );
+  const formValue = useSelector(
+    (state) => state.pages.filteredLayer.rightSidePanelForm.value
   );
   const resetViewClick = () => {
     dispatch(resetFilteredLayerView());
@@ -39,6 +43,12 @@ const PageHeader = () => {
           </NavLink>
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>
+          <Box sx={{ mr: 1, display: "flex", alignItems: "center" }}>
+            <Typography>
+              Selected Date :{" "}
+              {getFetchDataTimeValue(viewFilterValue, formValue)}
+            </Typography>
+          </Box>
           <Button
             sx={{ mr: 0.5, px: 1, minWidth: "auto" }}
             variant="outlined"

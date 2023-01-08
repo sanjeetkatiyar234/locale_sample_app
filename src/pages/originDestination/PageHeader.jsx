@@ -6,7 +6,7 @@ import {
   Link as MuiLink,
   Typography,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import SubHeader from "layout/SubHeader";
 import FilterTypeDropDown from "components/dropDown/FilterTypeDropDown";
@@ -16,9 +16,15 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { resetOriginDestinationView } from "./actions";
 import { resetValue } from "./rightSidePanelFormSlice";
 import { resetMapPosition } from "app/actions";
+import { get } from "lodash";
+import getFetchDataTimeValue from "utils/getFetchDataTimeValue";
 
 const PageHeader = () => {
   const dispatch = useDispatch();
+  const filterTypeValue = useSelector((state) => state.filterType.value);
+  const formValue = useSelector(
+    (state) => state.pages.originDestination.rightSidePanelForm.value
+  );
   const resetViewClick = () => {
     dispatch(resetOriginDestinationView());
     dispatch(resetFilterType());
@@ -40,6 +46,12 @@ const PageHeader = () => {
           </NavLink> */}
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>
+          <Box sx={{ mr: 1, display: "flex", alignItems: "center" }}>
+            <Typography>
+              Selected Date :{" "}
+              {getFetchDataTimeValue(filterTypeValue, formValue)}
+            </Typography>
+          </Box>
           <Button
             sx={{ mr: 0.5, px: 1, minWidth: "auto" }}
             variant="outlined"
