@@ -1,8 +1,8 @@
-import { ArcLayer, DeckGL } from "deck.gl";
+import { ArcLayer, DeckGL, ScatterplotLayer } from "deck.gl";
 import React from "react";
 import MapGL from "react-map-gl";
 import { cellToLatLng } from "h3-js";
-import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
+import { MAP_BOX_TOKEN, MAP_STYLE } from "utils/constants";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,7 +55,7 @@ const CustomArcLayer = ({ data = [] }) => {
    * ]
    */
 
-  const layer = new ArcLayer({
+  const arclayer = new ArcLayer({
     id: "arc-layer",
     data,
     pickable: true,
@@ -68,9 +68,47 @@ const CustomArcLayer = ({ data = [] }) => {
     getTargetColor: (d) => [d.id % 255, 140, 0],
   });
 
+  const scatterplotLayerlayer = new ScatterplotLayer({
+    id: "ScatterplotLayer",
+    data,
+
+    /* props from ScatterplotLayer class */
+
+    // antialiasing: true,
+    // billboard: false,
+    filled: true,
+    getFillColor: [255, 140, 0],
+    getLineColor: [0, 0, 0],
+    getLineWidth: 5,
+    getPosition: (d) =>
+      d.end_hex ? cellToLatLng(d.end_hex)?.reverse() : d.end_loc,
+    getRadius: (d) => 10 * d.vehicle_count || 0,
+    lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
+    lineWidthMinPixels: 1,
+    lineWidthScale: 10,
+    // lineWidthUnits: 'meters',
+    radiusMaxPixels: 1000,
+    radiusMinPixels: 1,
+    radiusScale: 50,
+    // radiusUnits: 'meters',
+    stroked: true,
+
+    /* props inherited from Layer class */
+
+    // autoHighlight: false,
+    // coordinateOrigin: [0, 0, 0],
+    // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
+    // highlightColor: [0, 0, 128, 128],
+    // modelMatrix: null,
+    opacity: 0.8,
+    pickable: true,
+    // visible: true,
+    // wrapLongitude: false,
+  });
+
   return (
     <DeckGL
-      layers={[layer]}
+      layers={[arclayer, scatterplotLayerlayer]}
       initialViewState={viewState}
       controller={true}
       getTooltip={({ object }) =>

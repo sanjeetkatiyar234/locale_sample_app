@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import CustomArcLayer from "components/arcLayer/CustomArcLayer";
+import CustomArcLayer from "pages/rideShareDemand/arcLayer/CustomArcLayer";
 import TimeRangeSlider from "components/TimeRangeSlider";
 
 const ArcLayerWithSlider = ({ sampleData }) => {
