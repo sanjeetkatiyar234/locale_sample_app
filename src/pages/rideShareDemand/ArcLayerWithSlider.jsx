@@ -6,31 +6,31 @@ import CustomArcLayer from "components/arcLayer/CustomArcLayer";
 import TimeRangeSlider from "components/TimeRangeSlider";
 
 const ArcLayerWithSlider = ({ sampleData }) => {
-  const [dateRange, setDateRange] = useState({});
+  // const [dateRange, setDateRange] = useState({});
   const { state } = useLocation();
   const { hexagonLayerData } = state || {};
-  const filterTypeValue = useSelector((state) => state.filterType.value);
+  // const filterTypeValue = useSelector((state) => state.filterType.value);
   const arcData = useMemo(() => {
     if (hexagonLayerData?.points) {
       return hexagonLayerData.points.map((d) => d.source);
     } else return null;
   }, [hexagonLayerData]);
 
-  const { start, end } = dateRange;
+  // const { start, end } = dateRange;
 
-  const filterData = useMemo(
-    () =>
-      (arcData ?? sampleData).filter(
-        (d) =>
-          moment(d.start_time).isSameOrAfter(start) &&
-          moment(d.start_time).isSameOrBefore(end)
-      ),
-    [arcData, sampleData, start, end]
-  );
+  // const filterData = useMemo(
+  //   () =>
+  //     (arcData ?? sampleData).filter(
+  //       (d) =>
+  //         moment(d.start_time).isSameOrAfter(start) &&
+  //         moment(d.start_time).isSameOrBefore(end)
+  //     ),
+  //   [arcData, sampleData, start, end]
+  // );
 
   return (
     <div style={{ position: "relative", flex: 1 }}>
-      <TimeRangeSlider
+      {/* <TimeRangeSlider
         filterTypeValue={filterTypeValue}
         selectedDateRange={dateRange}
         dataSource={arcData ?? sampleData}
@@ -38,8 +38,8 @@ const ArcLayerWithSlider = ({ sampleData }) => {
         xName="start_time"
         intervalType = "Hours"
         interval={1}
-      />
-      <CustomArcLayer data={filterData} />
+      /> */}
+      <CustomArcLayer data={arcData ?? sampleData} />
     </div>
   );
 };

@@ -77,7 +77,8 @@ const CustomArcLayer = ({ data = [] }) => {
         object &&
         `${
           object.start_hex ? object.start_hex : object.start_loc.join(",")
-        } to ${object.end_hex ? object.end_hex : object.end_loc.join(",")}`
+        } to ${object.end_hex ? object.end_hex : object.end_loc.join(",")}
+        Vehicle Count: ${object.vehicle_count ? object.vehicle_count : 0}`
       }
     >
       <MapGL
