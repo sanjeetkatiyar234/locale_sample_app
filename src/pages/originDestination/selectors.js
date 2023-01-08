@@ -1,12 +1,13 @@
-import moment from "moment";
 import { createSelector } from "reselect";
+import { combineDuplicateDataVehicleCount } from "./utils";
 
 // state selectors
-const sateDataSelector = (state) => state.pages.originDestination.data.combine;
+const sateDataSelector = (state) => state.pages.originDestination.data;
 
 export const h3HexDataSelector = createSelector(
   [sateDataSelector],
   (sampleData = []) => {
-    return sampleData?.filter((d) => !!d.hex_id);
+    const reduceData = combineDuplicateDataVehicleCount(sampleData);
+    return reduceData?.filter((d) => !!d.hex_id);
   }
 );

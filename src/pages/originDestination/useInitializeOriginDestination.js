@@ -1,85 +1,53 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useToast from "hooks/useToast";
-import {
-  combineH3SampleData3,
-  fetchH3SampleData1,
-  fetchH3SampleData2,
-  fetchH3SampleData3,
-} from "./actions";
+import { fetchH3SampleData1 } from "./actions";
 
-const FIRST_DATA = {
-  start_time: "2022-01-03 00:00:00",
-  end_time: "2022-01-03 23:59:59",
+// const FIRST_DATA = {
+//   start_time: "2022-01-03 00:00:00",
+//   end_time: "2022-01-03 23:59:59",
+// };
+
+const normalizeRequest = (formValue = {}, viewFilterValue) => {
+  const start_time =
+    viewFilterValue === "daily"
+      ? formValue.daily_start_date?.startOf("day").format("YYYY-MM-DD HH:mm:ss")
+      : formValue.start_date?.startOf("day").format("YYYY-MM-DD HH:mm:ss");
+  const end_time =
+    viewFilterValue === "daily"
+      ? formValue.daily_start_date?.endOf("day").format("YYYY-MM-DD HH:mm:ss")
+      : formValue.end_date?.startOf("day").format("YYYY-MM-DD HH:mm:ss");
+  return {
+    start_time: start_time,
+    end_time: end_time,
+    view_type: viewFilterValue,
+  };
 };
-const SECOND_DATA =
-  "?start_time=2022-01-11 00:00:00&end_time=2022-01-20 00:00:00";
-const THIRD_DATA =
-  "?start_time=2022-01-21 00:00:00&end_time=2022-01-30 00:00:00";
 
 const useInitializeOriginDestination = () => {
   const toast = useToast();
   const dispatch = useDispatch();
   const filterTypeValue = useSelector((state) => state.filterType.value);
-  const data1 = useSelector(
-    (state) => state.pages.originDestination.data.first
+  const formValue = useSelector(
+    (state) => state.pages.originDestination.rightSidePanelForm.value
   );
-  // const data2 = useSelector(
-  //   (state) => state.pages.originDestination.data.second
-  // );
-  // const data3 = useSelector(
-  //   (state) => state.pages.originDestination.data.third
-  // );
-
   useEffect(() => {
     dispatch({
-      ...fetchH3SampleData1({ ...FIRST_DATA, view_type: filterTypeValue }),
+      ...fetchH3SampleData1({
+        ...normalizeRequest(formValue, filterTypeValue),
+      }),
       statusCodeMap: {
-        success: () => toast.success("1st data loaded"),
-        error: () => toast.error("failed 1st data load"),
+        success: () => toast.success("data loaded"),
+        error: () => toast.error("failed data load"),
       },
     });
-    // dispatch({
-    //   ...fetchH3SampleData2(SECOND_DATA),
-    //   statusCodeMap: {
-    //     success: () => toast.success("2nd data loaded"),
-    //     error: () => toast.error("failed 2nd data load"),
-    //   },
-    // });
-    // dispatch({
-    //   ...fetchH3SampleData3(THIRD_DATA),
-    //   statusCodeMap: {
-    //     success: () => toast.success("data 3rd loaded"),
-    //     error: () => toast.error("failed 3rd data load"),
-    //   },
-    // });
-  }, [dispatch, filterTypeValue]);
-
-  useEffect(() => {
-    const combineData = [...data1];
-
-    const filteredArr = Object.values(
-      combineData.reduce((accObj, current) => {
-        const key = `${current.hex_id}${current.start_time}`;
-        const alreadyPresent = accObj[key];
-        if (alreadyPresent) {
-          return {
-            ...accObj,
-            [key]: {
-              ...alreadyPresent,
-              vehicle_count:
-                alreadyPresent.vehicle_count + current.vehicle_count,
-            },
-          };
-        } else {
-          return { ...accObj, [key]: current };
-        }
-      }, {})
-    );
-    if (filteredArr) {
-      dispatch(combineH3SampleData3(filteredArr));
-    }
-  }, [data1]);
+  }, [
+    dispatch,
+    filterTypeValue,
+    formValue.daily_start_date,
+    formValue.start_date,
+    formValue.end_date,
+  ]);
 };
 
 export default useInitializeOriginDestination;

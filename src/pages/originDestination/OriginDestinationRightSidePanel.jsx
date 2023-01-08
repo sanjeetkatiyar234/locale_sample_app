@@ -1,13 +1,23 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import RightSidePanel from "layout/RightSidePanel";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, TextField } from "@mui/material";
 import { Box, Fab, IconButton } from "@mui/material";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { DatePicker } from "@mui/x-date-pickers";
+import { handleChange } from "./rightSidePanelFormSlice";
 import "./OriginDestinationRightSidePanel.css";
 
 const OriginDestinationRightSidePanel = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const viewFilterValue = useSelector((state) => state.filterType.value);
+
+  const formValue = useSelector(
+    (state) => state.pages.originDestination.rightSidePanelForm.value
+  );
+
   return (
     <RightSidePanel>
       <div className={`activatebutton ${open ? "inActive" : "active"}`}>
@@ -34,11 +44,42 @@ const OriginDestinationRightSidePanel = () => {
         </div>
         <Card>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Overview Summary
-            </Typography>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Consequatur laborum non perferendis asperiores qui. Earum, esse?
+            {viewFilterValue === "daily" ? (
+              <DatePicker
+                label="Date"
+                value={formValue.daily_start_date}
+                onChange={(value) =>
+                  dispatch(handleChange({ daily_start_date: value }))
+                }
+                renderInput={(params) => (
+                  <TextField size="small" sx={{ mt: "15px" }} {...params} />
+                )}
+              />
+            ) : (
+              <>
+                <DatePicker
+                  label="Start Date"
+                  value={formValue.start_date}
+                  onChange={(value) =>
+                    dispatch(handleChange({ start_date: value }))
+                  }
+                  renderInput={(params) => (
+                    <TextField size="small" sx={{ mt: "15px" }} {...params} />
+                  )}
+                />
+                <DatePicker
+                  minDate={formValue.start_date}
+                  label="End Date"
+                  value={formValue.end_date}
+                  onChange={(value) =>
+                    dispatch(handleChange({ end_date: value }))
+                  }
+                  renderInput={(params) => (
+                    <TextField size="small" sx={{ mt: "15px" }} {...params} />
+                  )}
+                />
+              </>
+            )}
           </CardContent>
         </Card>
       </div>

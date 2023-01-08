@@ -14,6 +14,7 @@ import { resetFilterType } from "components/dropDown/filterTypeSlice";
 import "./PageHeader.css";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { resetOriginDestinationView } from "./actions";
+import { resetValue } from "./rightSidePanelFormSlice";
 import { resetMapPosition } from "app/actions";
 
 const PageHeader = () => {
@@ -21,6 +22,7 @@ const PageHeader = () => {
   const resetViewClick = () => {
     dispatch(resetOriginDestinationView());
     dispatch(resetFilterType());
+    dispatch(resetValue());
     dispatch(resetMapPosition(true));
   };
   return (

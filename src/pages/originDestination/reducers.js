@@ -7,6 +7,7 @@ import {
   THIRD_FETCH_H3HEX_LAYER_DATA_RECEIVED,
   RESET_ORIGIN_DESTINATION_VIEW,
 } from "app/actionConstants";
+import rightSidePanelFormReducer from "./rightSidePanelFormSlice";
 
 const defaultSate = {
   primaryColor: [170, 255, 0, 255],
@@ -27,23 +28,12 @@ function selectedColorReducer(state = defaultSate, action) {
   }
 }
 
-const defaultState = {
-  first: [],
-  second: [],
-  third: [],
-  combine: [],
-};
+const defaultState = [];
 
 function h3SampleDataReducer(state = defaultState, action) {
   switch (action.type) {
     case FIRST_FETCH_H3HEX_LAYER_DATA_RECEIVED:
-      return { ...state, first: action.response.data?.body?.data };
-    case SECOND_FETCH_H3HEX_LAYER_DATA_RECEIVED:
-      return { ...state, second: action.response.data?.body?.data };
-    case THIRD_FETCH_H3HEX_LAYER_DATA_RECEIVED:
-      return { ...state, third: action.response.data?.body?.data };
-    case COMBINE_H3HEX_LAYER_DATA:
-      return { ...state, combine: action.payload };
+      return action.response.data?.body?.data || [];
     default:
       return state;
   }
@@ -52,4 +42,5 @@ function h3SampleDataReducer(state = defaultState, action) {
 export default combineReducers({
   selectedColor: selectedColorReducer,
   data: h3SampleDataReducer,
+  rightSidePanelForm: rightSidePanelFormReducer,
 });
