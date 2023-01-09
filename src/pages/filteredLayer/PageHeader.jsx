@@ -39,7 +39,7 @@ const PageHeader = () => {
           sx={{ display: "flex", alignItems: "center" }}
         >
           <NavLink to="/filtered-layer">
-            <Typography color="text.primary">Filtered Layer</Typography>
+            <Typography color="text.primary">Incident Prediction</Typography>
           </NavLink>
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>

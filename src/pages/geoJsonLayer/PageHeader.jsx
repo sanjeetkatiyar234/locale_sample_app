@@ -29,7 +29,7 @@ const PageHeader = () => {
           sx={{ display: "flex", alignItems: "center" }}
         >
           <NavLink to="/geojson-layer">
-            <Typography color="text.primary">GeoJson Layer</Typography>
+            <Typography color="text.primary">Traffic Trends</Typography>
           </NavLink>
         </Breadcrumbs>
         <Box sx={{ display: "flex" }}>

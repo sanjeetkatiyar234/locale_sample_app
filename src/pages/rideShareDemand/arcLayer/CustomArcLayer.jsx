@@ -1,4 +1,4 @@
-import { ArcLayer, DeckGL, ScatterplotLayer } from "deck.gl";
+import { ArcLayer, DeckGL, ScatterplotLayer, TextLayer } from "deck.gl";
 import React from "react";
 import MapGL from "react-map-gl";
 import { cellToLatLng } from "h3-js";
@@ -15,7 +15,7 @@ import { resetMapPosition } from "app/actions";
 const INITIAL_VIEW_STATE = {
   longitude: 54.4,
   latitude: 24.49,
-  zoom: 8,
+  zoom: 10,
   maxZoom: 20,
   pitch: 30,
   bearing: 30,
@@ -67,56 +67,83 @@ const CustomArcLayer = ({ data = [] }) => {
     getSourceColor: (d) => [d.id % 255, 140, 0],
     getTargetColor: (d) => [d.id % 255, 140, 0],
   });
-
   const scatterplotLayerlayer = new ScatterplotLayer({
     id: "ScatterplotLayer",
-    data,
-
+    data: [...new Map(data.map(item => [item['end_hex'], item])).values()],
     /* props from ScatterplotLayer class */
-
     // antialiasing: true,
     // billboard: false,
     filled: true,
-    getFillColor: [255, 140, 0],
-    getLineColor: [0, 0, 0],
-    getLineWidth: 5,
-    getPosition: (d) =>
-      d.end_hex ? cellToLatLng(d.end_hex)?.reverse() : d.end_loc,
-    getRadius: (d) => 10 * d.vehicle_count || 0,
-    lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
+    getFillColor: (d) => [d.id % 255, 140, 0],
+    getLineColor: (d) => [d.id % 255, 140, 0],
+    getLineWidth: 1,
+    getPosition: (d) => {
+      return d.end_hex ? cellToLatLng(d.end_hex)?.reverse() : d.end_loc;
+    },
+    getRadius: (d) => d.vehicle_count || 0,
+    // lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
     lineWidthMinPixels: 1,
-    lineWidthScale: 10,
+    lineWidthScale: 1,
     // lineWidthUnits: 'meters',
     radiusMaxPixels: 1000,
     radiusMinPixels: 1,
-    radiusScale: 50,
+    radiusScale: 100,
     // radiusUnits: 'meters',
     stroked: true,
 
     /* props inherited from Layer class */
-
     // autoHighlight: false,
     // coordinateOrigin: [0, 0, 0],
     // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
     // highlightColor: [0, 0, 128, 128],
     // modelMatrix: null,
     opacity: 0.8,
-    pickable: true,
+    // pickable: true,
     // visible: true,
-    // wrapLongitude: false,
+    // wrapLongitude: true,
+  });
+  const textLayer = new TextLayer({
+    id: 'TextLayer',
+    // data: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/bart-stations.json',
+    data,
+    /* props from TextLayer class */
+    
+    // background: false,
+    // backgroundPadding: [0, 0, 0, 0],
+    // billboard: true,
+    // characterSet: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+    // fontFamily: 'Monaco, monospace',
+    // fontSettings: {},
+    // fontWeight: 'normal',
+    getAlignmentBaseline: 'center',
+    getAngle: 0,
+    // getBackgroundColor: [255, 255, 255, 255],
+    // getBorderColor: [0, 0, 0, 255],
+    // getBorderWidth: 0,
+    // getColor: [0, 0, 0, 255],
+    // getPixelOffset: [0, 0],
+    getPosition: (d) => {
+      // console.log('d.end_hex', d.end_hex)
+      return d.end_hex ? cellToLatLng(d.end_hex) : d.end_loc;
+    },
+    getSize: 18,
+    getText: d => d.vehicle_count,
+    getTextAnchor: 'middle',
+    getColor: [255, 255, 255],
+    sizeScale: 2,
+    opacity: 1,
+    pickable: true,
+    visible: true,
   });
 
   return (
     <DeckGL
-      layers={[arclayer, scatterplotLayerlayer]}
+      layers={[arclayer ,textLayer, scatterplotLayerlayer]}
       initialViewState={viewState}
       controller={true}
       getTooltip={({ object }) =>
         object &&
-        `${
-          object.start_hex ? object.start_hex : object.start_loc.join(",")
-        } to ${object.end_hex ? object.end_hex : object.end_loc.join(",")}
-        Vehicle Count: ${object.vehicle_count ? object.vehicle_count : 0}`
+        `Vehicle Count: ${object.vehicle_count ? object.vehicle_count : 0}`
       }
     >
       <MapGL
