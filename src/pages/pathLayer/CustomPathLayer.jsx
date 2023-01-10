@@ -1,4 +1,4 @@
-import { DeckGL, GeoJsonLayer } from "deck.gl";
+import { DeckGL, PathLayer } from "deck.gl";
 import React from "react";
 import MapGL from "react-map-gl";
 import { MAP_BOX_TOKEN, MAP_STYLE } from "../../utils/constants";
@@ -46,7 +46,13 @@ const CustomPathLayer = ({ data = [] }) => {
       // convert to RGB
       return hex.match(/[0-9a-f]{2}/g).map((x) => parseInt(x, 16));
     },
-    getPath: (d) => d.path,
+    getPath: (d) =>
+      (d.shape &&
+        d.shape.map((coordinate) => [
+          coordinate.longitude,
+          coordinate.latitude,
+        ])) ||
+      [],
     getWidth: (d) => 5,
     // jointRounded: false,
     // miterLimit: 4,

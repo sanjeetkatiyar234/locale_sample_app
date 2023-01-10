@@ -24,9 +24,9 @@ import moment from "moment";
 //     }
 // }
 
-export const getTimeRangeForSlider = (obj) => {
-  const date = obj.properties?.dateRanges?.[0]?.from || new Date();
-  const timeSets = obj.properties?.timeSets || [];
+export const getTimeRangeForSlider = (dateRanges, timeSets = []) => {
+  const date = dateRanges?.[0]?.from || new Date();
+
   return timeSets.map((data) => {
     const startTime = data.name.split("-")[0];
     return {
@@ -50,7 +50,7 @@ const getMedianSpeed = (values) => {
 };
 
 export const filtergeoJsonData = (
-  featureGeoJsonData = [],
+  pathLayerData = [],
   dataSource = [],
   dateRanges = {}
 ) => {
@@ -63,37 +63,39 @@ export const filtergeoJsonData = (
     )
     .map((d) => d?.["@id"]);
 
-  return featureGeoJsonData.map((data) => {
-    const { segmentTimeResults, speedLimit, ...rest } = data.properties;
-    const filterSegmentTimeResults = segmentTimeResults.filter((d) =>
-      filterIds.includes(d.timeSet)
-    );
-    // const avg = filterSegmentTimeResults.reduce(
-    //   (a, b) => a + b?.medianSpeed,
-    //   0
-    // );
-    const median = getMedianSpeed(filterSegmentTimeResults);
-    const tenPct = (speedLimit / 100) * 20;
-    let color = [64, 64, 64];
-    if (speedLimit < median) {
-      color = [11, 102, 35];
-    } else if (speedLimit > median && median > speedLimit - tenPct) {
-      color = [255, 255, 0];
-    } else if (median < speedLimit - tenPct) {
-      color = [255, 0, 0];
-    }
-    if (median === 0) {
-      color = [64, 64, 64];
-    }
-    console.log("harsh", median, speedLimit, speedLimit - tenPct);
-    return {
-      ...data,
-      properties: {
-        ...rest,
-        median: median,
-        color: color,
-        segmentTimeResults: filterSegmentTimeResults,
-      },
-    };
-  });
+  return pathLayerData;
+
+  // return pathLayerData.map((data) => {
+  //   const { segmentTimeResults, speedLimit, ...rest } = data.properties;
+  //   const filterSegmentTimeResults = segmentTimeResults.filter((d) =>
+  //     filterIds.includes(d.timeSet)
+  //   );
+  //   // const avg = filterSegmentTimeResults.reduce(
+  //   //   (a, b) => a + b?.medianSpeed,
+  //   //   0
+  //   // );
+  //   const median = getMedianSpeed(filterSegmentTimeResults);
+  //   const tenPct = (speedLimit / 100) * 20;
+  //   let color = [64, 64, 64];
+  //   if (speedLimit < median) {
+  //     color = [11, 102, 35];
+  //   } else if (speedLimit > median && median > speedLimit - tenPct) {
+  //     color = [255, 255, 0];
+  //   } else if (median < speedLimit - tenPct) {
+  //     color = [255, 0, 0];
+  //   }
+  //   if (median === 0) {
+  //     color = [64, 64, 64];
+  //   }
+  //   console.log("harsh", median, speedLimit, speedLimit - tenPct);
+  //   return {
+  //     ...data,
+  //     properties: {
+  //       ...rest,
+  //       median: median,
+  //       color: color,
+  //       segmentTimeResults: filterSegmentTimeResults,
+  //     },
+  //   };
+  // });
 };
