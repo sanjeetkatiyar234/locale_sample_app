@@ -69,7 +69,7 @@ const CustomArcLayer = ({ data = [] }) => {
   });
   const scatterplotLayerlayer = new ScatterplotLayer({
     id: "ScatterplotLayer",
-    data: [...new Map(data.map(item => [item['end_hex'], item])).values()],
+    data: [...new Map(data.map((item) => [item["end_hex"], item])).values()],
     /* props from ScatterplotLayer class */
     // antialiasing: true,
     // billboard: false,
@@ -103,32 +103,29 @@ const CustomArcLayer = ({ data = [] }) => {
     // wrapLongitude: true,
   });
   const textLayer = new TextLayer({
-    id: 'TextLayer',
-    // data: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/bart-stations.json',
+    id: "TextLayer",
     data,
     /* props from TextLayer class */
-    
+
     // background: false,
     // backgroundPadding: [0, 0, 0, 0],
-    // billboard: true,
+    billboard: true,
     // characterSet: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~",
     // fontFamily: 'Monaco, monospace',
     // fontSettings: {},
-    // fontWeight: 'normal',
-    getAlignmentBaseline: 'center',
+    // fontWeight: "normal",
+    getAlignmentBaseline: "center",
     getAngle: 0,
     // getBackgroundColor: [255, 255, 255, 255],
     // getBorderColor: [0, 0, 0, 255],
     // getBorderWidth: 0,
     // getColor: [0, 0, 0, 255],
-    // getPixelOffset: [0, 0],
-    getPosition: (d) => {
-      // console.log('d.end_hex', d.end_hex)
-      return d.end_hex ? cellToLatLng(d.end_hex) : d.end_loc;
-    },
-    getSize: 18,
-    getText: d => d.vehicle_count,
-    getTextAnchor: 'middle',
+    getPixelOffset: [15, 5],
+    getPosition: (d) =>
+      d.end_hex ? cellToLatLng(d.end_hex)?.reverse() : d.end_loc,
+    getSize: 14,
+    getText: (d) => `${d.vehicle_count}`,
+    getTextAnchor: "middle",
     getColor: [255, 255, 255],
     sizeScale: 2,
     opacity: 1,
@@ -138,7 +135,7 @@ const CustomArcLayer = ({ data = [] }) => {
 
   return (
     <DeckGL
-      layers={[arclayer ,textLayer, scatterplotLayerlayer]}
+      layers={[textLayer, arclayer, scatterplotLayerlayer]}
       initialViewState={viewState}
       controller={true}
       getTooltip={({ object }) =>
